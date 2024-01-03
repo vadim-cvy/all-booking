@@ -21,13 +21,6 @@ Cvy\WP\Env\Env::set_is_grid_pane( true );
 
 
 /**
- * Resolve Astra/BB conflicts + sync some of their settings.
- * @see https://github.com/vadim-cvy/util-wp-beaver-builder-astra-compatibility/
- */
-\Cvy\WP\BBAstrCompat\Main::get_instance();
-
-
-/**
  * Reduce WP All In One Migration export file size.
  * @see https://github.com/vadim-cvy/util-wp-all-in-one-migration/
  */
@@ -47,8 +40,3 @@ Cvy\WP\AllInOneMigration\Main::get_instance()
  * @see https://github.com/vadim-cvy/util-wp-assets
  */
 Cvy\WP\Assets\Main::set_app_namespace( 'jbk' );
-
-if ( ! is_admin() )
-{
-  (new Cvy\WP\Assets\CSS( 'global.css', [ 'astra-theme-css' ] ))->enqueue();
-}
