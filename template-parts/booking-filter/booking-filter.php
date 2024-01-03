@@ -17,7 +17,7 @@
     <?php
     require_once jbk_get_template_path( 'booking-filter/controls-secondary.php' );
 
-    require_once jbk_get_template_path( 'booking-filter/items.php' );
+    require_once jbk_get_template_path( 'booking-filter/results/results.php' );
 
     require_once jbk_get_template_path( 'booking-filter/popups.php' );
     ?>
