@@ -1,5 +1,5 @@
 <?php
-namespace JBK;
+namespace JBK\Core;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
