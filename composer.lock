@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f2f4e8e3d48451e090c7d9867396f46",
+    "content-hash": "d206160979c1bdcf75c7d29c62a393f0",
     "packages": [
         {
             "name": "cvy/util-design-patterns",
@@ -86,35 +86,6 @@
                 "issues": "https://github.com/vadim-cvy/util-wp-assets/issues"
             },
             "time": "2023-11-16T15:28:59+00:00"
-        },
-        {
-            "name": "cvy/util-wp-beaver-builder-astra-compatibility",
-            "version": "v2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vadim-cvy/util-wp-beaver-builder-astra-compatibility.git",
-                "reference": "37b570eb32ba2c449e13377ea033a584f0b00b5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vadim-cvy/util-wp-beaver-builder-astra-compatibility/zipball/37b570eb32ba2c449e13377ea033a584f0b00b5b",
-                "reference": "37b570eb32ba2c449e13377ea033a584f0b00b5b",
-                "shasum": ""
-            },
-            "require": {
-                "cvy/util-design-patterns": "^1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Cvy\\WP\\BBAstrCompat\\": "src/"
-                }
-            },
-            "support": {
-                "source": "https://github.com/vadim-cvy/util-wp-beaver-builder-astra-compatibility/tree/v2.1.0",
-                "issues": "https://github.com/vadim-cvy/util-wp-beaver-builder-astra-compatibility/issues"
-            },
-            "time": "2023-11-27T13:33:20+00:00"
         },
         {
             "name": "cvy/util-wp-env",
