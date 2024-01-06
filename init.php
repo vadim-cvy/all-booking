@@ -40,3 +40,5 @@ Cvy\WP\AllInOneMigration\Main::get_instance()
  * @see https://github.com/vadim-cvy/util-wp-assets
  */
 Cvy\WP\Assets\Main::set_app_namespace( 'jbk' );
+
+require_once __DIR__ . '/core-functions.php';
