@@ -8,7 +8,8 @@
     "cvy/util-wp-env": "^1.0",
     "cvy/util-wp-all-in-one-migration": "^1.0",
     "cvy/util-wp-assets": "^2.0",
-    "cvy/util-wp-site-pages": "^1.1"
+    "cvy/util-wp-site-pages": "^1.1",
+    "cvy/util-wp-post-types": "^2.0"
   },
   "repositories": [
     {
@@ -53,11 +54,11 @@
     },
     {
       "type": "vcs",
-      "url": "https://github.com/vadim-cvy/util-wp-custom-taxonomy.git"
+      "url": "https://github.com/vadim-cvy/util-wp-taxonomies.git"
     },
     {
       "type": "vcs",
-      "url": "https://github.com/vadim-cvy/util-wp-custom-post-type.git"
+      "url": "https://github.com/vadim-cvy/util-wp-post-types.git"
     },
     {
       "type": "vcs",
