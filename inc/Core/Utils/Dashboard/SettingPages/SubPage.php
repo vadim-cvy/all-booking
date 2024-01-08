@@ -1,9 +1,9 @@
 <?php
-namespace JBK\Core;
+namespace JBK\Core\Utils\Dashboard\SettingPages;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class DashboardSubPage extends DashboardPage
+abstract class SubPage extends Page
 {
   final protected function register() : void
   {

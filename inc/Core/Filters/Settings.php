@@ -22,7 +22,7 @@ abstract class Settings
   //   return static::get_option( 'max_future_days', 180 );
   // }
 
-  // static final protected function get_option( string $name, $default_value = null )
+  // static protected function get_option( string $name, $default_value = null )
   // {
   //   $post_type_slug = static::get_post_type()->get_slug();
 

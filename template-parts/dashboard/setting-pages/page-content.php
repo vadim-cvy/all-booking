@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-settings_errors( 'wporg_messages' ); ?>
+settings_errors( $this->get_notices_slug() ); ?>
 
 <div class="wrap">
   <h1>
