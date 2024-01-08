@@ -19,7 +19,7 @@ abstract class ComplexOption
 		return $value;
 	}
 
-	final public function get_all() : array
+	public function get_all() : array
 	{
 		$all = get_option( static::get_name() );
 

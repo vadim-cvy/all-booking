@@ -37,10 +37,10 @@ class PostTypes
 
   static public function get_connections( string $slug ) : array | null
   {
-    return $all_connections[ $slug ] ?? null;
+    return static::get_all_connections()[ $slug ] ?? null;
   }
 
-  static public function get_connection_type( string $slug_1, string $slug_2 ) : string | null
+  static public function get_connection( string $slug_1, string $slug_2 ) : string | null
   {
     if ( ! static::is_bookable( $slug_1 ) || ! static::is_bookable( $slug_2 ) )
     {
@@ -52,7 +52,7 @@ class PostTypes
 
   static public function have_connection( string $slug_1, string $slug_2 ) : bool
   {
-    return !! static::get_connection_type( $slug_1, $slug_2 );
+    return !! static::get_connection( $slug_1, $slug_2 );
   }
 
   static public function is_bookable( string $slug ) : bool

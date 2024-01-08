@@ -21,4 +21,18 @@ class Settings extends ComplexOption
 	{
 		return 'jbk_global_settings';
 	}
+
+	public function get_all() : array
+	{
+		$all = parent::get_all();
+
+		foreach ( $all['connections'] as $key => $connections )
+		{
+			$all['connections'][ $key ] = array_filter( $connections );
+		}
+
+		$all['connections'] = array_filter( $all['connections'] );
+
+		return $all;
+	}
 }

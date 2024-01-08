@@ -68,17 +68,15 @@ switch ( $setting_name )
               <div>
                 Connection with <?php echo esc_html( $sub_pt->label ); ?>:
 
-                <select name="<?php echo esc_attr( $input_name . '[' . $sub_pt->name . ']' ); ?>">
-                  <option>
+                <select name="<?php echo esc_attr( "{$input_name}[$pt->name][$sub_pt->name]" ); ?>">
+                  <option value="">
                     No connection
                   </option>
 
                   <?php
                   foreach ( $connection_types as $connection_type => $connection_type_label )
                   {
-                    $is_selected =
-                      PostTypes::have_connection( $pt->name, $sub_pt->name )
-                      && PostTypes::get_connection( $pt->name, $sub_pt->name ) === $connection_type;
+                    $is_selected = PostTypes::get_connection( $pt->name, $sub_pt->name ) === $connection_type;
                     ?>
 
                     <option
