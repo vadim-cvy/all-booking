@@ -1,11 +1,27 @@
 <?php
 namespace JBK\Core\Entities;
 
+use \JBK\Core\Entities\Settings\Settings;
+use \JBK\Core\Entities\Settings\SettingsPage;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 abstract class PostType extends \Cvy\WP\PostTypes\CustomPostType
 {
-  final static public function get_slug() : string
+  private Settings $settings;
+
+  private SettingsPage $settings_page;
+
+  protected function __construct()
+  {
+    parent::__construct();
+
+    $this->settings = new Settings( $this );
+
+    $this->settings_page = new SettingsPage( $this );
+  }
+
+  static public function get_slug() : string
   {
     return 'jbk_' . static::get_slug_base();
   }
@@ -21,5 +37,15 @@ abstract class PostType extends \Cvy\WP\PostTypes\CustomPostType
     ];
 
     return $args;
+  }
+
+  public function get_settings_page() : SettingsPage
+  {
+    return $this->settings_page;
+  }
+
+  public function get_settings() : Settings
+  {
+    return $this->settings;
   }
 }
