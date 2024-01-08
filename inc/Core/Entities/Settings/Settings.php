@@ -2,10 +2,11 @@
 namespace JBK\Core\Entities\Settings;
 
 use \JBK\Core\Entities\PostType;
+use \JBK\Core\Utils\ComplexOption;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Settings extends \JBK\Core\Utils\Settings
+class Settings extends ComplexOption
 {
 	private PostType $post_type;
 
@@ -27,7 +28,7 @@ class Settings extends \JBK\Core\Utils\Settings
 		];
 	}
 
-	public function get_slug() : string
+	public function get_name() : string
 	{
 		return $this->post_type->get_slug() . '_booking_settings';
 	}

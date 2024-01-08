@@ -1,7 +1,7 @@
 <?php
 namespace JBK\Core\Utils\Dashboard\SettingPages;
 
-use \JBK\Core\Utils\Settings;
+use \JBK\Core\Utils\ComplexOption;
 use \Cvy\DesignPatterns\Singleton;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -40,7 +40,8 @@ abstract class Page
 
   private function register_settings() : void
   {
-    register_setting( $this->get_settings()->get_slug(), $this->get_settings()->get_slug() );
+    $option_name = $this->get_settings()->get_name();
+    register_setting( $option_name, $option_name );
 
     $this->register_sections();
 
@@ -98,7 +99,7 @@ abstract class Page
 		require JBK_TEMPLATES_PATH . "dashboard/setting-pages/field.php";
   }
 
-  abstract protected function get_settings() : Settings;
+  abstract protected function get_settings() : ComplexOption;
 
 	private function maybe_handle_submission() : void
 	{

@@ -1,9 +1,11 @@
 <?php
 namespace JBK\Core\Filters;
 
+use \JBK\Core\Utils\ComplexOption;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class Settings
+abstract class Settings extends ComplexOption
 {
   // static abstract protected function get_post_type() : ItemsPostType;
 

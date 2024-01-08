@@ -2,21 +2,22 @@
 namespace JBK\Core\GlobalSettings;
 
 use \Cvy\DesignPatterns\tSingleton;
+use \JBK\Core\Utils\ComplexOption;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Settings extends \JBK\Core\Utils\Settings
+class Settings extends ComplexOption
 {
-  use tSingleton;
+	use tSingleton;
 
   protected function get_defaults() : array
 	{
-    // todo
 		return [
+			'connections' => [],
 		];
 	}
 
-	public function get_slug() : string
+	public function get_name() : string
 	{
 		return 'jbk_global_settings';
 	}

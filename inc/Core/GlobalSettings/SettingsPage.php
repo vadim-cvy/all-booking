@@ -37,7 +37,7 @@ class SettingsPage extends ParentPage
         'label' => 'Common',
         'fields' => [
           'which' => 'Which of the post types will be involved into booking process?',
-          'db_connections' => 'Post Type Connections',
+          'connections' => 'Post Type Connections',
         ],
       ]
     ];
