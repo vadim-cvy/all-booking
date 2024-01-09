@@ -3,6 +3,8 @@ use \JBK\Core\Entities\PostTypes;
 
 switch ( $setting_name )
 {
+  // todo: this will save post types with no connections as well
+  // todo: post types that must be bookable but have no connections won't be saved this way
   case 'which':
   case 'connections':
     $post_types = array_values(get_post_types([
