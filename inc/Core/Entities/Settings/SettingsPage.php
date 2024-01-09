@@ -60,6 +60,7 @@ class SettingsPage extends SubPage
 					'has_seasons' => 'Has Seasons',
 					'has_timeslots' => 'Has Timeslots',
 					'is_blockable' => 'Is Time Blockable',
+					'max_future_days' => 'Maximum days from today the booking can be made',
 				],
 			],
 

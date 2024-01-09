@@ -15,6 +15,7 @@ switch ( $setting_name )
     break;
 
   case 'items_per_filter_page':
+  case 'max_future_days':
     printf( '<input id="%s" name="%s" type="number" value="%s" min="1" step="1">',
       esc_attr( $input_id ),
       esc_attr( $input_name ),

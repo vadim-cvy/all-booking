@@ -25,6 +25,7 @@ class Settings extends ComplexOption
 			'is_blockable' => true,
 			'has_filter' => true,
 			'items_per_filter_page' => 12,
+			'max_future_days' => 180,
 		];
 	}
 
