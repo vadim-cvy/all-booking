@@ -3,6 +3,7 @@ namespace JBK\Core\GlobalSettings;
 
 use \Cvy\DesignPatterns\tSingleton;
 use \JBK\Core\Utils\Dashboard\SettingPages\ParentPage;
+use \JBK\Core\Entities\PostTypes;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -42,6 +43,13 @@ class SettingsPage extends ParentPage
       ]
     ];
   }
+
+  protected function get_field_template_args( string $setting_name ) : array
+	{
+		return array_merge( parent::get_field_template_args( $setting_name ), [
+      'public_pts' => PostTypes::get_public(),
+    ]);
+	}
 
   // todo
   // protected function handle_submission() : array

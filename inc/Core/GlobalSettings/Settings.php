@@ -25,7 +25,16 @@ class Settings extends ComplexOption
 
 	protected function sanitize( array $value ) : array
 	{
-		// todo
+		foreach ( $value['entity_connections'] as $pt_slug => $connections )
+		{
+			if ( ! in_array( $pt_slug, $value['bookable_entities'] ) )
+			{
+				unset( $value['entity_connections'][ $pt_slug ] );
+			}
+
+			$value['entity_connections'][ $pt_slug ] = array_filter( $connections );
+		}
+
 		return $value;
 	}
 }

@@ -1,15 +1,14 @@
 <?php
-use \JBK\Core\Entities\PostTypes;
 
-switch ( $setting_name )
+switch ( $template_args['setting_name'] )
 {
   case 'bookable_entities':
-    foreach ( PostTypes::get_public() as $pt )
+    foreach ( $template_args['public_pts'] as $pt )
     {
       $pt_slug = $pt->get_slug();
 
-      $pt_input_id = $input_id . '_' . $pt_slug;
-      $pt_input_name = $input_name . '[]'; ?>
+      $pt_input_id = $template_args['input_id'] . '_' . $pt_slug;
+      $pt_input_name = $template_args['input_name'] . '[]'; ?>
 
       <div>
         <label for="<?php echo esc_attr( $pt_input_id ); ?>">
@@ -28,9 +27,8 @@ switch ( $setting_name )
     }
     break;
 
-  // todo: this will save post types with no connections as well
   case 'entity_connections':
-    foreach ( PostTypes::get_public() as $i => $pt )
+    foreach ( $template_args['public_pts'] as $i => $pt )
     {
       if ( $i === 0 )
       {
@@ -43,7 +41,7 @@ switch ( $setting_name )
         </strong>
 
         <?php
-        foreach ( PostTypes::get_public() as $k => $sub_pt )
+        foreach ( $template_args['public_pts'] as $k => $sub_pt )
         {
           if ( $k >= $i )
           {
@@ -69,12 +67,14 @@ switch ( $setting_name )
             'many_to_many' =>
               "1 $pt_label_single may be connected to 1 OR MORE $sub_pt_label_multiple"
               . " AND 1 $sub_pt_label_single may be connected to 1 OR MORE $pt_label_multiple",
-          ]; ?>
+          ];
+
+          $connection_input_name = $template_args['input_name'] . '[' . $pt->get_slug() . '][' . $sub_pt->get_slug() . ']'; ?>
 
           <div>
             Connection with <strong><?php echo esc_html( $sub_pt->get_label_single() ); ?></strong>:
 
-            <select name="<?php echo esc_attr( $input_name . '[' . $pt->get_slug() . '][' . $sub_pt->get_slug() . ']' ); ?>">
+            <select name="<?php echo esc_attr( $connection_input_name ); ?>">
               <option value="">
                 No connection
               </option>
@@ -85,6 +85,7 @@ switch ( $setting_name )
                 $is_selected =
                   $pt->is_bookable()
                   && $sub_pt->is_bookable()
+                  && $pt->has_connection( $sub_pt->get_slug() )
                   && $pt->get_connection_type( $sub_pt->get_slug() ) === $connection_type;
                 ?>
 

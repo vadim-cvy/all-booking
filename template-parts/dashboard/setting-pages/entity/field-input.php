@@ -1,5 +1,5 @@
 <?php
-switch ( $setting_name )
+switch ( $template_args['setting_name'] )
 {
   case 'has_seasons':
   case 'has_timeslots':
@@ -8,27 +8,25 @@ switch ( $setting_name )
   case 'has_price':
   case 'has_filter':
     printf( '<input id="%s" name="%s" type="checkbox" value="1" %s>',
-      esc_attr( $input_id ),
-      esc_attr( $input_name ),
-      checked( true, $value, false )
+      esc_attr( $template_args['input_id'] ),
+      esc_attr( $template_args['input_name'] ),
+      checked( true, $template_args['value'], false )
     );
     break;
 
   case 'items_per_filter_page':
   case 'max_future_days':
     printf( '<input id="%s" name="%s" type="number" value="%s" min="1" step="1">',
-      esc_attr( $input_id ),
-      esc_attr( $input_name ),
-      esc_attr( $value )
+      esc_attr( $template_args['input_id'] ),
+      esc_attr( $template_args['input_name'] ),
+      esc_attr( $template_args['value'] )
     );
     break;
 
   case 'connections':
-    $global_settings_page = \JBK\Core\GlobalSettings\SettingsPage::get_instance();
-
     printf( 'You can see and setup %s connections on <a href="%s">%s</a> page.',
-      esc_html( $this->pt->get_label_single() ),
-      esc_url( $global_settings_page->get_url() ),
-      esc_html( $global_settings_page->get_page_title() )
+      esc_html( $template_args['pt']->get_label_single() ),
+      esc_url( $template_args['global_settings_page']->get_url() ),
+      esc_html( $template_args['global_settings_page']->get_page_title() )
     );
 }

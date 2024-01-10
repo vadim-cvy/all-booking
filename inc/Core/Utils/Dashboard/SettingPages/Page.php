@@ -90,12 +90,19 @@ abstract class Page
 
 	private function render_field( string $setting_name ) : void
   {
-		$value = $this->settings->get_one( $setting_name );
-
-		$input_id = $setting_name;
-		$input_name = sprintf( '%s[%s]', $this->get_slug(), $setting_name );
+    $template_args = $this->get_field_template_args( $setting_name );
 
 		require JBK_TEMPLATES_PATH . "dashboard/setting-pages/field.php";
+  }
+
+  protected function get_field_template_args( string $setting_name ) : array
+  {
+    return [
+      'value' => $this->settings->get_one( $setting_name ),
+      'input_id' => $setting_name,
+      'input_name' => sprintf( '%s[%s]', $this->get_slug(), $setting_name ),
+      'setting_name' => $setting_name,
+    ];
   }
 
   // todo

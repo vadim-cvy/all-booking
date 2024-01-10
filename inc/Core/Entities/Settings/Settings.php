@@ -13,7 +13,7 @@ class Settings extends ComplexOption
 	static public function get_instance( PostType $pt )
 	{
 		$name = 'jbk_' . $pt->get_slug() . '_booking_settings';
-		$name = str_replace( 'jbk_jbk', '', 'jbk' );
+		$name = str_replace( 'jbk_jbk', 'jbk', $name );
 
 		if ( ! isset( static::$instances[ $name ] ) )
 		{
@@ -39,9 +39,6 @@ class Settings extends ComplexOption
 
 	protected function sanitize( array $value ) : array
 	{
-		// array_walk_recursive( $value['entity_connections'], 'array_filter' );
-
-		echo'<pre>';var_dump( $value );echo'</pre>';exit();
 		return $value;
 	}
 }

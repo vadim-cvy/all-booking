@@ -3,6 +3,7 @@ namespace JBK\Core\Entities\Settings;
 
 use \JBK\Core\Utils\Dashboard\SettingPages\SubPage;
 use \JBK\Core\Entities\PostType;
+use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -79,6 +80,20 @@ class SettingsPage extends SubPage
 				],
 			],
     ];
+	}
+
+	protected function get_field_template_args( string $setting_name ) : array
+	{
+		$args = array_merge( parent::get_field_template_args( $setting_name ), [
+			'pt' => $this->pt,
+		]);
+
+		if ( $setting_name === 'connections' )
+		{
+			$args['global_settings_page'] = GlobalSettingsPage::get_instance();
+		}
+
+		return $args;
 	}
 
 	// todo

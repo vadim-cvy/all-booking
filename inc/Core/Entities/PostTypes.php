@@ -23,7 +23,6 @@ class PostTypes
 
   static public function get_bookable() : array
   {
-    // echo'<pre>';var_dump( GlobalSettings::get_instance()->get_all() );echo'</pre>';exit();
     return array_map(
       fn( $slug ) => PostType::get_instance( $slug ),
       GlobalSettings::get_instance()->get_one( 'bookable_entities' )
@@ -38,7 +37,7 @@ class PostTypes
     {
       $connections = [];
 
-      foreach ( GlobalSettings::get_instance()->get_one( 'connections' ) as $pt_slug )
+      foreach ( GlobalSettings::get_instance()->get_one( 'entity_connections' ) as $pt_slug => $connected_pts )
       {
         $connections[ $pt_slug ] = $connected_pts;
 
