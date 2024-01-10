@@ -19,7 +19,7 @@ else
 
 <p>
   <?php
-  printf( 'You can setup %s connections on <a href="%s">%s</a> page.',
+  printf( 'You can setup %s connections on <a href="%s" target="_blank">%s</a> page.',
     esc_html( strtolower( $template_args['pt']->get_label_single() ) ),
     esc_url( $template_args['global_settings_page']->get_url() ),
     esc_html( $template_args['global_settings_page']->get_page_title() )

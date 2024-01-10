@@ -23,7 +23,7 @@ foreach ( $template_args['public_pts'] as $i => $pt )
         foreach ( $template_args['connection_types'] as $connection_type => $connection_type_label )
         {
           $connection_input_name =
-            $template_args['input_name'] . '[' . $pt->get_slug() . '][' . $sub_pt->get_slug() . ']';
+            $template_args['input_name'] . '[' . $pt->get_slug() . '/' . $sub_pt->get_slug() . ']';
 
           $connection_input_id =
             $template_args['input_id'] . '_' . $pt->get_slug() . '-' . $sub_pt->get_slug() . '_' . $connection_type;

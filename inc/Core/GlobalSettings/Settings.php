@@ -25,14 +25,19 @@ class Settings extends ComplexOption
 
 	protected function sanitize( array $value ) : array
 	{
-		foreach ( $value['entity_connections'] as $pt_slug => $connections )
-		{
-			if ( ! in_array( $pt_slug, $value['bookable_entities'] ) )
-			{
-				unset( $value['entity_connections'][ $pt_slug ] );
-			}
+		$value['entity_connections'] = array_filter( $value['entity_connections'] );
 
-			$value['entity_connections'][ $pt_slug ] = array_filter( $connections );
+		foreach ( $value['entity_connections'] as $connection_key => $connection_type )
+		{
+			$pt_slugs = explode( '/', $connection_key );
+
+			foreach ( $pt_slugs as $pt_slug )
+			{
+				if ( ! in_array( $pt_slug, $value['bookable_entities'] ) )
+				{
+					unset( $value['entity_connections'][ $connection_key ] );
+				}
+			}
 		}
 
 		return $value;

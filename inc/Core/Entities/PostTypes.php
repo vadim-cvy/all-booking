@@ -37,26 +37,29 @@ class PostTypes
     {
       $connections = [];
 
-      foreach ( GlobalSettings::get_instance()->get_entity_connections() as $pt_slug => $pt_connections )
+      foreach ( GlobalSettings::get_instance()->get_entity_connections() as $connection_key => $connection_type )
       {
-        $connections[ $pt_slug ] = $pt_connections;
+        $pt_slugs = explode( '/', $connection_key );
 
-        foreach ( $pt_connections as $connected_pt_slug => $connection_type )
+        if ( ! isset( $connections[ $pt_slugs[0] ] ) )
         {
-          $connections[ $connected_pt_slug ][ $pt_slug ] =
-            implode( '_', array_reverse( explode( '_', $connection_type ) ) );
+          $connections[ $pt_slugs[0] ] = [];
         }
-      }
 
-      foreach ( $connections as $pt_slug => $pt_connections )
-      {
-        foreach ( $pt_connections as $connected_pt_slug => $connection_type )
+        if ( ! isset( $connections[ $pt_slugs[1] ] ) )
         {
-          $connections[ $pt_slug ][ $connected_pt_slug ] = [
-            'pt' => PostType::get_instance( $connected_pt_slug ),
-            'type' => $connection_type,
-          ];
+          $connections[ $pt_slugs[1] ] = [];
         }
+
+        $connections[ $pt_slugs[0] ][ $pt_slugs[1] ] = [
+          'pt' => PostType::get_instance( $pt_slugs[1] ),
+          'type' => $connection_type,
+        ];
+
+        $connections[ $pt_slugs[1] ][ $pt_slugs[0] ] = [
+          'pt' => PostType::get_instance( $pt_slugs[0] ),
+          'type' => implode( '_', array_reverse( explode( '_', $connection_type ) ) ),
+        ];
       }
     }
 
