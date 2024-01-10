@@ -37,14 +37,25 @@ class PostTypes
     {
       $connections = [];
 
-      foreach ( GlobalSettings::get_instance()->get_entity_connections() as $pt_slug => $connected_pts )
+      foreach ( GlobalSettings::get_instance()->get_entity_connections() as $pt_slug => $pt_connections )
       {
-        $connections[ $pt_slug ] = $connected_pts;
+        $connections[ $pt_slug ] = $pt_connections;
 
-        foreach ( $connected_pts as $connected_pt_slug => $connection_type )
+        foreach ( $pt_connections as $connected_pt_slug => $connection_type )
         {
           $connections[ $connected_pt_slug ][ $pt_slug ] =
             implode( '_', array_reverse( explode( '_', $connection_type ) ) );
+        }
+      }
+
+      foreach ( $connections as $pt_slug => $pt_connections )
+      {
+        foreach ( $pt_connections as $connected_pt_slug => $connection_type )
+        {
+          $connections[ $pt_slug ][ $connected_pt_slug ] = [
+            'pt' => PostType::get_instance( $connected_pt_slug ),
+            'type' => $connection_type,
+          ];
         }
       }
     }

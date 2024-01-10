@@ -91,6 +91,26 @@ class SettingsPage extends SubPage
 		if ( $setting_name === 'connections' )
 		{
 			$args['global_settings_page'] = GlobalSettingsPage::get_instance();
+
+			$args['connections'] = [];
+
+			foreach ( $this->pt->get_connections() as $connection )
+			{
+				$connection_type_label = GlobalSettingsPage::get_connection_type_options()[ $connection['type'] ];
+
+				$label_placeholders = [
+					'%pt_label_single%' => strtolower( $this->pt->get_label_single() ),
+					'%pt_label_multiple%' => strtolower( $this->pt->get_label_multiple() ),
+					'%sub_pt_label_single%' => strtolower( $connection['pt']->get_label_single() ),
+					'%sub_pt_label_multiple%' => strtolower( $connection['pt']->get_label_multiple() ),
+				];
+
+				$args['connections'][] = str_replace(
+					array_keys( $label_placeholders ),
+					array_values( $label_placeholders ),
+					$connection_type_label
+				);
+			}
 		}
 
 		return $args;

@@ -14,17 +14,26 @@ class PostType extends \Cvy\WP\PostTypes\PostType
   {
     PostTypes::validate_is_bookable( $this->get_slug() );
 
-    return PostTypes::get_connections()[ $this->get_slug() ] ?? [];
+    return PostTypes::get_connections()[ $this->get_slug() ];
   }
 
   public function has_connection( string $slug ) : bool
   {
-    return $this->get_connections()[ $slug ] ?? false;
+    return in_array( $slug, array_map(
+      fn( $connection ) => $connection['pt']->get_slug(),
+      $this->get_connections()
+    ));
   }
 
   public function get_connection_type( string $slug ) : string
   {
-    return $this->get_connections()[ $slug ];
+    foreach ( $this->get_connections() as $connection )
+    {
+      if ( $connection['pt']->get_slug() === $slug )
+      {
+        return $connection['type'];
+      }
+    }
   }
 
   public function is_bookable() : bool

@@ -22,11 +22,4 @@ switch ( $template_args['setting_name'] )
       esc_attr( $template_args['setting_value'] )
     );
     break;
-
-  case 'connections':
-    printf( 'You can see and setup %s connections on <a href="%s">%s</a> page.',
-      esc_html( $template_args['pt']->get_label_single() ),
-      esc_url( $template_args['global_settings_page']->get_url() ),
-      esc_html( $template_args['global_settings_page']->get_page_title() )
-    );
 }

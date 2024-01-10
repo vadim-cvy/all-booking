@@ -52,35 +52,40 @@ class SettingsPage extends ParentPage
 
     if ( $setting_name === 'entity_connections' )
     {
-      $one = '<strong>ONE</strong>';
-      $only_one = '<strong>ONLY ONE</strong>';
-      $one_or_more = '<strong>ONE OR MORE</strong>';
-
-      $pt_label_single = '%pt_label_single%';
-      $pt_label_multiple = '%pt_label_multiple%';
-
-      $sub_pt_label_single = '%sub_pt_label_single%';
-      $sub_pt_label_multiple = '%sub_pt_label_multiple%';
-
-      $args['connection_types'] = [
-        'no_connection' => 'No connection',
-        'one_to_one' =>
-          "$one $pt_label_single may be connected to $only_one $sub_pt_label_single"
-          . " <i>and</i> $one $sub_pt_label_single may be connected to $only_one $pt_label_single",
-        'one_to_many' =>
-          "$one $pt_label_single may be connected to $one_or_more $sub_pt_label_multiple"
-          . " <i>but</i> $one $sub_pt_label_single may be connected to $only_one $pt_label_single",
-        'many_to_one' =>
-          "$one $pt_label_single may be connected to $only_one $sub_pt_label_single"
-          . " <i>but</i> $one $sub_pt_label_single may be connected to $one_or_more $pt_label_multiple",
-        'many_to_many' =>
-          "$one $pt_label_single may be connected to $one_or_more $sub_pt_label_multiple"
-          . " <i>and</i> $one $sub_pt_label_single may be connected to $one_or_more $pt_label_multiple",
-      ];
+      $args['connection_types'] = $this->get_connection_type_options();
     }
 
     return $args;
 	}
+
+  public static function get_connection_type_options() : array
+  {
+    $one = '<strong>ONE</strong>';
+    $only_one = '<strong>ONLY ONE</strong>';
+    $one_or_more = '<strong>ONE OR MORE</strong>';
+
+    $pt_label_single = '%pt_label_single%';
+    $pt_label_multiple = '%pt_label_multiple%';
+
+    $sub_pt_label_single = '%sub_pt_label_single%';
+    $sub_pt_label_multiple = '%sub_pt_label_multiple%';
+
+    return [
+      'no_connection' => 'No connection',
+      'one_to_one' =>
+        "$one $pt_label_single may be connected to $only_one $sub_pt_label_single"
+        . " <i>and</i> $one $sub_pt_label_single may be connected to $only_one $pt_label_single",
+      'one_to_many' =>
+        "$one $pt_label_single may be connected to $one_or_more $sub_pt_label_multiple"
+        . " <i>but</i> $one $sub_pt_label_single may be connected to $only_one $pt_label_single",
+      'many_to_one' =>
+        "$one $pt_label_single may be connected to $only_one $sub_pt_label_single"
+        . " <i>but</i> $one $sub_pt_label_single may be connected to $one_or_more $pt_label_multiple",
+      'many_to_many' =>
+        "$one $pt_label_single may be connected to $one_or_more $sub_pt_label_multiple"
+        . " <i>and</i> $one $sub_pt_label_single may be connected to $one_or_more $pt_label_multiple",
+    ];
+  }
 
   // todo
   // protected function handle_submission() : array
