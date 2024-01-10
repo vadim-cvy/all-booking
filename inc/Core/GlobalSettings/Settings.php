@@ -37,4 +37,14 @@ class Settings extends ComplexOption
 
 		return $value;
 	}
+
+	public function get_bookable_entities() : array
+	{
+		return $this->get_one( 'bookable_entities' );
+	}
+
+	public function get_entity_connections() : array
+	{
+		return $this->get_one( 'entity_connections' );
+	}
 }

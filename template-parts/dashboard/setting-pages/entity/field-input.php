@@ -10,7 +10,7 @@ switch ( $template_args['setting_name'] )
     printf( '<input id="%s" name="%s" type="checkbox" value="1" %s>',
       esc_attr( $template_args['input_id'] ),
       esc_attr( $template_args['input_name'] ),
-      checked( true, $template_args['value'], false )
+      checked( true, $template_args['setting_value'], false )
     );
     break;
 
@@ -19,7 +19,7 @@ switch ( $template_args['setting_name'] )
     printf( '<input id="%s" name="%s" type="number" value="%s" min="1" step="1">',
       esc_attr( $template_args['input_id'] ),
       esc_attr( $template_args['input_name'] ),
-      esc_attr( $template_args['value'] )
+      esc_attr( $template_args['setting_value'] )
     );
     break;
 

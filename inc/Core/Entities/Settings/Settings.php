@@ -41,4 +41,44 @@ class Settings extends ComplexOption
 	{
 		return $value;
 	}
+
+	public function has_limit() : bool
+	{
+		return $this->get_one( 'has_limit' );
+	}
+
+	public function has_price() : bool
+	{
+		return $this->get_one( 'has_price' );
+	}
+
+	public function has_seasons() : bool
+	{
+		return $this->get_one( 'has_seasons' );
+	}
+
+	public function has_timeslots() : bool
+	{
+		return $this->get_one( 'has_timeslots' );
+	}
+
+	public function is_blockable() : bool
+	{
+		return $this->get_one( 'is_blockable' );
+	}
+
+	public function has_filter() : bool
+	{
+		return $this->get_one( 'has_filter' );
+	}
+
+	public function get_items_per_filter_page() : int
+	{
+		return $this->get_one( 'items_per_filter_page' );
+	}
+
+	public function get_max_future_days() : int
+	{
+		return $this->get_one( 'max_future_days' );
+	}
 }

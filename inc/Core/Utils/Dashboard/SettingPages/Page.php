@@ -97,11 +97,21 @@ abstract class Page
 
   protected function get_field_template_args( string $setting_name ) : array
   {
+    $setting_value_getter_name =
+      preg_match( '/^is_|has_/', $setting_name ) ?
+      $setting_name :
+      'get_' . $setting_name;
+
+    $setting_value =
+      method_exists( $this->settings, $setting_value_getter_name ) ?
+      $this->settings->$setting_value_getter_name() :
+      null;
+
     return [
-      'value' => $this->settings->get_one( $setting_name ),
       'input_id' => $setting_name,
       'input_name' => sprintf( '%s[%s]', $this->get_slug(), $setting_name ),
       'setting_name' => $setting_name,
+      'setting_value' => $setting_value,
     ];
   }
 
