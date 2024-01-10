@@ -27,7 +27,7 @@ switch ( $setting_name )
     $global_settings_page = \JBK\Core\GlobalSettings\SettingsPage::get_instance();
 
     printf( 'You can see and setup %s connections on <a href="%s">%s</a> page.',
-      esc_html( $this->get_post_type()->get_label_single() ),
+      esc_html( $this->pt->get_label_single() ),
       esc_url( $global_settings_page->get_url() ),
       esc_html( $global_settings_page->get_page_title() )
     );

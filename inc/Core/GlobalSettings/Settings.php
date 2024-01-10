@@ -10,29 +10,22 @@ class Settings extends ComplexOption
 {
 	use tSingleton;
 
+	protected function __construct()
+	{
+		parent::__construct( 'jbk_global_settings' );
+	}
+
   protected function get_defaults() : array
 	{
 		return [
-			'connections' => [],
+			'bookable_entities' => [],
+			'entity_connections' => [],
 		];
 	}
 
-	public function get_name() : string
+	protected function sanitize( array $value ) : array
 	{
-		return 'jbk_global_settings';
-	}
-
-	public function get_all() : array
-	{
-		$all = parent::get_all();
-
-		foreach ( $all['connections'] as $key => $connections )
-		{
-			$all['connections'][ $key ] = array_filter( $connections );
-		}
-
-		$all['connections'] = array_filter( $all['connections'] );
-
-		return $all;
+		// todo
+		return $value;
 	}
 }

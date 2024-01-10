@@ -1,51 +1,41 @@
 <?php
 namespace JBK\Core\Entities;
 
+use \Exception;
 use \JBK\Core\Entities\Settings\Settings;
-use \JBK\Core\Entities\Settings\SettingsPage;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class PostType extends \Cvy\WP\PostTypes\CustomPostType
+class PostType extends \Cvy\WP\PostTypes\PostType
 {
   private Settings $settings;
 
-  private SettingsPage $settings_page;
-
-  protected function __construct()
+  public function get_connections() : array
   {
-    parent::__construct();
+    PostTypes::validate_is_bookable( $this->get_slug() );
 
-    $this->settings = new Settings( $this );
-
-    $this->settings_page = new SettingsPage( $this );
+    return PostTypes::get_connections()[ $this->get_slug() ] ?? [];
   }
 
-  static public function get_slug() : string
+  public function has_connection( string $slug ) : bool
   {
-    return 'jbk_' . static::get_slug_base();
+    return $this->get_connections()[ $slug ] ?? false;
   }
 
-  abstract static protected function get_slug_base() : string;
-
-  protected function get_register_args() : array
+  public function get_connection_type( string $slug ) : string
   {
-    $args = parent::get_register_args();
-
-    $args['rewrite'] = [
-      'slug' => str_replace( '_', '-', $this->get_slug_base() ),
-    ];
-
-    return $args;
+    return $this->get_connections()[ $slug ];
   }
 
-  public function get_settings_page() : SettingsPage
+  public function is_bookable() : bool
   {
-    return $this->settings_page;
+    return PostTypes::is_bookable( $this->get_slug() );
   }
 
   public function get_settings() : Settings
   {
-    return $this->settings;
+    PostTypes::validate_is_bookable( $this->get_slug() );
+
+    return Settings::get_instance( $this );
   }
 }

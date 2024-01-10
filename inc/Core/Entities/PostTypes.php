@@ -1,62 +1,76 @@
 <?php
 namespace JBK\Core\Entities;
 
-use \JBK\Core\GlobalSettings\Settings;
+use \Exception;
+use \JBK\Core\GlobalSettings\Settings as GlobalSettings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class PostTypes
 {
-  static public function get_bookable_post_types() : array
+  static public function get_public() : array
   {
-    return array_keys( static::get_all_connections() );
+    $slugs = array_values(get_post_types([
+      'public' => true,
+      '_builtin' => false,
+    ]));
+
+    return array_map(
+      fn( $slug ) => PostType::get_instance( $slug ),
+      $slugs
+    );
   }
 
-  static private function get_all_connections() : array
+  static public function get_bookable() : array
   {
-    static $all_connections;
+    // echo'<pre>';var_dump( GlobalSettings::get_instance()->get_all() );echo'</pre>';exit();
+    return array_map(
+      fn( $slug ) => PostType::get_instance( $slug ),
+      GlobalSettings::get_instance()->get_one( 'bookable_entities' )
+    );
+  }
 
-    if ( ! isset( $all_connections ) )
+  static public function get_connections() : array
+  {
+    static $connections;
+
+    if ( ! isset( $connections ) )
     {
-      $all_connections = [];
+      $connections = [];
 
-      foreach ( Settings::get_instance()->get_one( 'connections' ) as $post_type_slug => $connected_post_types )
+      foreach ( GlobalSettings::get_instance()->get_one( 'connections' ) as $pt_slug )
       {
-        $all_connections[ $post_type_slug ] = $connected_post_types;
+        $connections[ $pt_slug ] = $connected_pts;
 
-        foreach ( $connected_post_types as $connected_post_type_slug => $connection_type )
+        foreach ( $connected_pts as $connected_pt_slug => $connection_type )
         {
-          $all_connections[ $connected_post_type_slug ][ $post_type_slug ] =
+          $connections[ $connected_pt_slug ][ $pt_slug ] =
             implode( '_', array_reverse( explode( '_', $connection_type ) ) );
         }
       }
     }
 
-    return $all_connections;
+    return $connections;
   }
 
-  static public function get_connections( string $slug ) : array | null
+  static public function validate_is_bookable( string $slug ) : void
   {
-    return static::get_all_connections()[ $slug ] ?? null;
-  }
-
-  static public function get_connection( string $slug_1, string $slug_2 ) : string | null
-  {
-    if ( ! static::is_bookable( $slug_1 ) || ! static::is_bookable( $slug_2 ) )
+    if ( ! static::is_bookable( $slug ) )
     {
-      return null;
+      throw new Exception( $slug . ' is not bookable!' );
     }
-
-    return static::get_connections( $slug_1 )[ $slug_2 ] ?? null;
-  }
-
-  static public function have_connection( string $slug_1, string $slug_2 ) : bool
-  {
-    return !! static::get_connection( $slug_1, $slug_2 );
   }
 
   static public function is_bookable( string $slug ) : bool
   {
-    return in_array( $slug, static::get_bookable_post_types() );
+    foreach ( static::get_bookable() as $pt )
+    {
+      if ( $pt->get_slug() === $slug )
+      {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

@@ -8,28 +8,35 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class SettingsPage extends SubPage
 {
-  private PostType $post_type;
+	static private array $instances = [];
 
-  public function __construct( PostType $post_type )
+  private PostType $pt;
+
+	static public function get_instance( PostType $pt )
+	{
+		if ( ! isset( static::$instances[ $pt->get_slug() ] ) )
+		{
+			static::$instances[ $pt->get_slug() ] = new static( $pt );
+		}
+
+		return static::$instances[ $pt->get_slug() ];
+	}
+
+  protected function __construct( PostType $pt )
   {
-		parent::__construct();
+    $this->pt = $pt;
 
-    $this->post_type = $post_type;
-  }
-
-  public function get_post_type() : PostType
-  {
-    return $this->post_type;
+		parent::__construct( $pt->get_settings() );
   }
 
   public function get_slug() : string
   {
-    return $this->get_post_type()->get_slug();
+    return $this->settings->get_name();
   }
 
 	protected function get_parent_page_slug() : string
 	{
-		return 'edit.php?post_type=' . $this->get_post_type()->get_slug();
+		return 'edit.php?post_type=' . $this->pt->get_slug();
 	}
 
   protected function get_menu_label() : string
@@ -39,7 +46,7 @@ class SettingsPage extends SubPage
 
   public function get_page_title() : string
 	{
-		return $this->get_post_type()->get_label_multiple() . ' Booking Settings';
+		return $this->pt->get_label_multiple() . ' Booking Settings';
 	}
 
 	protected function get_sections_structure() : array
@@ -68,28 +75,24 @@ class SettingsPage extends SubPage
 				'label' => 'Filter',
 				'fields' => [
 					'has_filter' => 'Has Filter',
-					'items_per_filter_page' => $this->get_post_type()->get_label_multiple() . ' per Page',
+					'items_per_filter_page' => $this->pt->get_label_multiple() . ' per Page',
 				],
 			],
     ];
 	}
 
-	protected function handle_submission() : array
-	{
-		$notices = [];
+	// todo
+	// protected function handle_submission() : array
+	// {
+	// 	$notices = [];
 
-		// todo
+	// 	// todo
 
-		if ( empty( $notices ) )
-		{
-			$notices[] = $this->get_success_notice();
-		}
+	// 	if ( empty( $notices ) )
+	// 	{
+	// 		$notices[] = $this->get_success_notice();
+	// 	}
 
-		return $notices;
-	}
-
-	protected function get_settings() : Settings
-	{
-		return $this->get_post_type()->get_settings();
-	}
+	// 	return $notices;
+	// }
 }

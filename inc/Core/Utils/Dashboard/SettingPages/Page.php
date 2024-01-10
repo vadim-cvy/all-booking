@@ -8,11 +8,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 abstract class Page
 {
-  protected function __construct()
+  protected ComplexOption $settings;
+
+  protected function __construct( ComplexOption $settings )
   {
+    $this->settings = $settings;
+
     add_action( 'admin_menu', fn() => $this->register() );
 
-    add_action( 'admin_init', fn() => $this->register_settings() );
+    add_action( 'admin_init', fn() => $this->register_ui_elements() );
   }
 
   abstract protected function register() : void;
@@ -38,16 +42,11 @@ abstract class Page
 		require_once JBK_TEMPLATES_PATH . 'dashboard/setting-pages/page-content.php';
 	}
 
-  private function register_settings() : void
+  private function register_ui_elements() : void
   {
-    $option_name = $this->get_settings()->get_name();
-    register_setting( $option_name, $option_name );
-
     $this->register_sections();
 
     $this->register_fields();
-
-		$this->maybe_handle_submission();
   }
 
   private function register_sections() : void
@@ -91,7 +90,7 @@ abstract class Page
 
 	private function render_field( string $setting_name ) : void
   {
-		$value = $this->get_settings()->get_one( $setting_name );
+		$value = $this->settings->get_one( $setting_name );
 
 		$input_id = $setting_name;
 		$input_name = sprintf( '%s[%s]', $this->get_slug(), $setting_name );
@@ -99,34 +98,33 @@ abstract class Page
 		require JBK_TEMPLATES_PATH . "dashboard/setting-pages/field.php";
   }
 
-  abstract protected function get_settings() : ComplexOption;
+  // todo
+	// private function maybe_handle_submission() : void
+	// {
+	// 	if ( ! current_user_can( $this->get_user_capability() ) )
+	// 	{
+	// 		return;
+	// 	}
 
-	private function maybe_handle_submission() : void
-	{
-		if ( ! current_user_can( $this->get_user_capability() ) )
-		{
-			return;
-		}
+	// 	// todo: check is on the page (or is settings update page)
 
-		// todo: check is on the page (or is settings update page)
+  //   // todo
+	// 	// if ( ! isset( $_GET['settings-updated'] ) )
+	// 	// {
+  //   // }
 
-    // todo
-		// if ( ! isset( $_GET['settings-updated'] ) )
-		// {
-    // }
+  //   $notices = $this->handle_submission();
 
-    $notices = $this->handle_submission();
-
-    foreach ( $notices as $notice )
-    {
-      add_settings_error(
-        $this->get_notices_slug(),
-        $notice['slug_base'],
-        $notice['message'],
-        $notice['type'],
-      );
-    }
-  }
+  //   foreach ( $notices as $notice )
+  //   {
+  //     add_settings_error(
+  //       $this->get_notices_slug(),
+  //       $notice['slug_base'],
+  //       $notice['message'],
+  //       $notice['type'],
+  //     );
+  //   }
+  // }
 
   final protected function get_success_notice() : array
   {
@@ -136,8 +134,6 @@ abstract class Page
       'type' => 'updated',
     ];
   }
-
-  abstract protected function handle_submission() : array;
 
   private function get_notices_slug() : string
   {

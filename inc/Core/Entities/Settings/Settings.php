@@ -8,12 +8,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Settings extends ComplexOption
 {
-	private PostType $post_type;
+	static private array $instances = [];
 
-  public function __construct( PostType $post_type )
-  {
-    $this->post_type = $post_type;
-  }
+	static public function get_instance( PostType $pt )
+	{
+		$name = 'jbk_' . $pt->get_slug() . '_booking_settings';
+		$name = str_replace( 'jbk_jbk', '', 'jbk' );
+
+		if ( ! isset( static::$instances[ $name ] ) )
+		{
+			static::$instances[ $name ] = new static( $name, $pt );
+		}
+
+		return static::$instances[ $name ];
+	}
 
 	protected function get_defaults() : array
 	{
@@ -29,8 +37,11 @@ class Settings extends ComplexOption
 		];
 	}
 
-	public function get_name() : string
+	protected function sanitize( array $value ) : array
 	{
-		return $this->post_type->get_slug() . '_booking_settings';
+		// array_walk_recursive( $value['entity_connections'], 'array_filter' );
+
+		echo'<pre>';var_dump( $value );echo'</pre>';exit();
+		return $value;
 	}
 }

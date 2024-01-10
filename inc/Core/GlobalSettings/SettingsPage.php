@@ -12,7 +12,7 @@ class SettingsPage extends ParentPage
 
   protected function __construct()
   {
-    parent::__construct();
+    parent::__construct( Settings::get_instance() );
   }
 
   protected function get_menu_label() : string
@@ -36,29 +36,25 @@ class SettingsPage extends ParentPage
       'common' => [
         'label' => 'Common',
         'fields' => [
-          'which' => 'Which of the post types will be involved into booking process?',
-          'connections' => 'Post Type Connections',
+          'bookable_entities' => 'Which of the post types will be involved into booking process?',
+          'entity_connections' => 'Post Type Connections',
         ],
       ]
     ];
   }
 
-  protected function handle_submission() : array
-  {
-    $notices = [];
+  // todo
+  // protected function handle_submission() : array
+  // {
+  //   $notices = [];
 
-		// todo
+	// 	// todo
 
-		if ( empty( $notices ) )
-		{
-			$notices[] = $this->get_success_notice();
-		}
+	// 	if ( empty( $notices ) )
+	// 	{
+	// 		$notices[] = $this->get_success_notice();
+	// 	}
 
-		return $notices;
-  }
-
-  protected function get_settings() : Settings
-  {
-    return Settings::get_instance();
-  }
+	// 	return $notices;
+  // }
 }

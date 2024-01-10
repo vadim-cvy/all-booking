@@ -5,11 +5,26 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 abstract class ComplexOption
 {
+	private string $name;
+
+	protected function __construct( string $name )
+	{
+		$this->name = $name;
+
+		register_setting( $this->name, $this->name, [
+      'sanitize_callback' => fn( $value ) => $this->sanitize( $value ),
+			'default' => $this->get_defaults(),
+			'type' => 'object',
+    ]);
+	}
+
 	abstract protected function get_defaults() : array;
+
+	abstract protected function sanitize( array $value ) : array;
 
 	final public function get_one( string $setting_name, $default = null )
 	{
-		$value = static::get_all()[ $setting_name ] ?? null;
+		$value = $this->get_all()[ $setting_name ] ?? null;
 
 		if ( ! isset( $value ) && isset( $default ) )
 		{
@@ -21,15 +36,11 @@ abstract class ComplexOption
 
 	public function get_all() : array
 	{
-		$all = get_option( static::get_name() );
-
-		if ( empty( $all ) )
-		{
-			$all = [];
-		}
-
-		return array_merge( static::get_defaults(), $all );
+		return get_option( $this->get_name() );
 	}
 
-	abstract public function get_name() : string;
+	public function get_name() : string
+	{
+		return $this->name;
+	}
 }
