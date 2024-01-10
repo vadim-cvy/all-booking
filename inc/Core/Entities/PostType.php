@@ -14,7 +14,7 @@ class PostType extends \Cvy\WP\PostTypes\PostType
   {
     PostTypes::validate_is_bookable( $this->get_slug() );
 
-    return PostTypes::get_connections()[ $this->get_slug() ];
+    return PostTypes::get_connections()[ $this->get_slug() ] ?? [];
   }
 
   public function has_connection( string $slug ) : bool

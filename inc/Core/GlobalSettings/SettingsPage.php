@@ -4,6 +4,7 @@ namespace JBK\Core\GlobalSettings;
 use \Cvy\DesignPatterns\tSingleton;
 use \JBK\Core\Utils\Dashboard\SettingPages\ParentPage;
 use \JBK\Core\Entities\PostTypes;
+use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -14,6 +15,8 @@ class SettingsPage extends ParentPage
   protected function __construct()
   {
     parent::__construct( Settings::get_instance() );
+
+    (new JS( 'dashboard-page-global-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
   }
 
   protected function get_menu_label() : string
