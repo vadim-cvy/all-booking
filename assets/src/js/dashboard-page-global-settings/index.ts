@@ -1,16 +1,18 @@
 ($ =>
 {
-  const bookablePtInputs = $( '.jbk-field_bookable_entities input[type="checkbox"]' );
+  const bookablePtInputs = $( '.jbk-field_bookable-entities input[type="checkbox"]' )
+
+  const entityConnectionsFildWrapper = $( '.jbk-field_entity-connections' )
 
   bookablePtInputs.on( 'change', function()
   {
-    const entityConnectionsFieldRow = $( '.jbk-field_entity_connections' ).closest( 'tr' )
+    const entityConnectionsFieldRow = entityConnectionsFildWrapper.closest( 'tr' )
 
     const bookablePtCheckedInputs = bookablePtInputs.filter( ':checked' )
 
     bookablePtCheckedInputs.length >= 2 ? entityConnectionsFieldRow.show() : entityConnectionsFieldRow.hide()
 
-    $( '.jbk-field_entity_connections .jbk-field__value > div' ).each(function()
+    entityConnectionsFildWrapper.find( '.jbk-connection' ).each(function()
     {
       const div = $( this )
 

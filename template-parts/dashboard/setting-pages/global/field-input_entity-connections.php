@@ -13,7 +13,10 @@ foreach ( $template_args['public_pts'] as $i => $pt )
       continue;
     } ?>
 
-    <div data-pts="<?php echo esc_attr( json_encode( [ $pt->get_slug(), $sub_pt->get_slug() ] ) ); ?>">
+    <div
+      class="jbk-connection"
+      data-pts="<?php echo esc_attr( json_encode( [ $pt->get_slug(), $sub_pt->get_slug() ] ) ); ?>"
+    >
       <strong>
         <?php echo esc_html( $pt->get_label_single() . ' / ' . $sub_pt->get_label_single()  ); ?>
       </strong>

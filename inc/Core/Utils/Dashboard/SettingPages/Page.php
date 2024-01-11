@@ -107,11 +107,14 @@ abstract class Page
       $this->settings->$setting_value_getter_name() :
       null;
 
+    $setting_name_dashed = str_replace( '_', '-', $setting_name );
+
     return [
-      'input_id' => $setting_name,
+      'input_id' => 'jbk-input_' . $setting_name_dashed,
       'input_name' => sprintf( '%s[%s]', $this->get_slug(), $setting_name ),
       'setting_name' => $setting_name,
       'setting_value' => $setting_value,
+      'setting_name_dashed' => $setting_name_dashed,
     ];
   }
 
