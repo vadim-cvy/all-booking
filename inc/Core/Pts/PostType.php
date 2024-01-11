@@ -50,7 +50,7 @@ final class PostType extends \Cvy\WP\PostTypes\PostType
 
   private function validate_is_bookable() : void
   {
-    if ( ! PostTypes::is_bookable( $this->slug ) )
+    if ( ! PostTypes::is_bookable( $this->get_slug() ) )
     {
       throw new Exception( 'This post type is not bookable!' );
     }
