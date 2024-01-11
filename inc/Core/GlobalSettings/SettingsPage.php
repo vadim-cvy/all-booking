@@ -8,7 +8,7 @@ use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class SettingsPage extends TopPage
+final class SettingsPage extends TopPage
 {
   use tSingleton;
 
@@ -79,7 +79,7 @@ class SettingsPage extends TopPage
     return $args;
 	}
 
-  public static function get_connection_type_options() : array
+  static public function get_connection_type_options() : array
   {
     $one = '<strong>ONE</strong>';
     $only_one = '<strong>ONLY ONE</strong>';

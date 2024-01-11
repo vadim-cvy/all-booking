@@ -10,7 +10,7 @@ use \JBK\Core\Pts\Settings\SettingsPage as PostTypeSettingsPage;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Main extends Singleton
+final class Main extends Singleton
 {
   protected function __construct()
   {

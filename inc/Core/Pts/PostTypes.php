@@ -6,7 +6,7 @@ use \JBK\Core\GlobalSettings\Settings as GlobalSettings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class PostTypes
+final class PostTypes
 {
   static public function get_public() : array
   {
@@ -64,14 +64,6 @@ class PostTypes
     }
 
     return $connections;
-  }
-
-  static public function validate_is_bookable( string $slug ) : void
-  {
-    if ( ! static::is_bookable( $slug ) )
-    {
-      throw new Exception( $slug . ' is not bookable!' );
-    }
   }
 
   static public function is_bookable( string $slug ) : bool

@@ -6,13 +6,13 @@ use \JBK\Core\Pts\Settings\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class PostType extends \Cvy\WP\PostTypes\PostType
+final class PostType extends \Cvy\WP\PostTypes\PostType
 {
   private Settings $settings;
 
   public function get_connections() : array
   {
-    PostTypes::validate_is_bookable( $this->get_slug() );
+    $this->validate_is_bookable();
 
     return PostTypes::get_connections()[ $this->get_slug() ] ?? [];
   }
@@ -43,8 +43,16 @@ class PostType extends \Cvy\WP\PostTypes\PostType
 
   public function get_settings() : Settings
   {
-    PostTypes::validate_is_bookable( $this->get_slug() );
+    $this->validate_is_bookable();
 
     return Settings::get_instance( $this );
+  }
+
+  private function validate_is_bookable() : void
+  {
+    if ( ! PostTypes::is_bookable( $this->slug ) )
+    {
+      throw new Exception( 'This post type is not bookable!' );
+    }
   }
 }

@@ -68,7 +68,7 @@ abstract class Page
 
 	abstract protected function get_sections_structure() : array;
 
-	public final function get_section_slug( string $name ) : string
+	final public function get_section_slug( string $name ) : string
 	{
 		return $this->get_slug() . '_section_' . $name;
 	}

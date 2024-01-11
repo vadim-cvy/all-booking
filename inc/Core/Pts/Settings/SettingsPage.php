@@ -8,7 +8,7 @@ use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class SettingsPage extends SubPage
+final class SettingsPage extends SubPage
 {
 	static private array $instances = [];
 

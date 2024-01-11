@@ -6,7 +6,7 @@ use \JBK\Core\Utils\ComplexOption;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Settings extends ComplexOption
+final class Settings extends ComplexOption
 {
 	use tSingleton;
 

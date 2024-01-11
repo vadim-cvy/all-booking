@@ -34,12 +34,12 @@ abstract class ComplexOption
 		return $value;
 	}
 
-	public function get_all() : array
+	final public function get_all() : array
 	{
 		return get_option( $this->get_name() );
 	}
 
-	public function get_name() : string
+	final public function get_name() : string
 	{
 		return $this->name;
 	}
