@@ -3,7 +3,7 @@ namespace JBK\Core\Utils\Dashboard\SettingPages;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class ParentPage extends Page
+abstract class TopPage extends Page
 {
   final protected function register() : void
   {

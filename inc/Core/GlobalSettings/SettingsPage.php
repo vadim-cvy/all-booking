@@ -2,13 +2,13 @@
 namespace JBK\Core\GlobalSettings;
 
 use \Cvy\DesignPatterns\tSingleton;
-use \JBK\Core\Utils\Dashboard\SettingPages\ParentPage;
+use \JBK\Core\Utils\Dashboard\SettingPages\TopPage;
 use \JBK\Core\Entities\PostTypes;
 use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class SettingsPage extends ParentPage
+class SettingsPage extends TopPage
 {
   use tSingleton;
 
