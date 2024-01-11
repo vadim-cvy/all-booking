@@ -56,12 +56,12 @@ class SettingsPage extends SubPage
 	protected function get_sections_structure() : array
 	{
 		return [
-      'global' => [
-				'label' => 'Global',
+			'filter' => [
+				'label' => 'Filter',
 				'fields' => [
-					'has_limit' => 'Has Limit',
-					'has_price' => 'Has Price',
-					'connections' => 'Connections',
+					'has_filter' => 'Has Filter',
+					'filter_shortcode' => 'Shortcode',
+					'items_per_filter_page' => $this->pt->get_label_multiple() . ' per Page',
 				],
 			],
 
@@ -75,12 +75,12 @@ class SettingsPage extends SubPage
 				],
 			],
 
-			'filter' => [
-				'label' => 'Filter',
+      'global' => [
+				'label' => 'Global',
 				'fields' => [
-					'has_filter' => 'Has Filter',
-					'filter_shortcode' => 'Shortcode',
-					'items_per_filter_page' => $this->pt->get_label_multiple() . ' per Page',
+					'has_limit' => 'Has Limit',
+					'has_price' => 'Has Price',
+					'connections' => 'Connections',
 				],
 			],
     ];
