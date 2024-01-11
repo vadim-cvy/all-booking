@@ -69,7 +69,7 @@ class Settings extends ComplexOption
 
 	public function has_filter() : bool
 	{
-		return $this->get_one( 'has_filter' );
+		return $this->get_one( 'has_filter', false );
 	}
 
 	public function get_items_per_filter_page() : int

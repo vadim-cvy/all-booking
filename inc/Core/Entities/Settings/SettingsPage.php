@@ -4,6 +4,7 @@ namespace JBK\Core\Entities\Settings;
 use \JBK\Core\Utils\Dashboard\SettingPages\SubPage;
 use \JBK\Core\Entities\PostType;
 use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
+use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -28,6 +29,8 @@ class SettingsPage extends SubPage
     $this->pt = $pt;
 
 		parent::__construct( $pt->get_settings() );
+
+		(new JS( 'dashboard-page-entity-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
   }
 
   public function get_slug() : string
