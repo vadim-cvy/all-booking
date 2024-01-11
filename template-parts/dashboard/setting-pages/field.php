@@ -5,9 +5,9 @@
     <?php
     $field_input_dir_path = 'dashboard/setting-pages/';
 
-    if ( is_a( $this, '\JBK\Core\Entities\Settings\SettingsPage' ) )
+    if ( is_a( $this, '\JBK\Core\Pts\Settings\SettingsPage' ) )
     {
-      $field_input_dir_path .= 'entity/';
+      $field_input_dir_path .= 'pt/';
     }
     else if ( is_a( $this, '\JBK\Core\GlobalSettings\SettingsPage' ) )
     {

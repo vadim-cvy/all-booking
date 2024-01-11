@@ -49,10 +49,10 @@ abstract class Popup extends Sinleton
       return;
     }
 
-    if ( $field_type !== 'connected_entity' )
+    if ( $field_type !== 'connected_pt' )
     {
       $this->throw_field_structure_validation_error__prop_unappropirate( $field_structure, 'sub_fields',
-        'Only fields of type "connected_entity" may have "sub_fields" prop.' );
+        'Only fields of type "connected_pt" may have "sub_fields" prop.' );
     }
 
     $this->validate_fields_structure( $sub_fields, $field_structure );
@@ -60,36 +60,36 @@ abstract class Popup extends Sinleton
 
   private function validate_field_structure__type( array $field_structure ) : void
   {
-    $entity = $field_structure['entity'] ?? null;
+    $pt = $field_structure['pt'] ?? null;
 
     switch ( $field_structure['type'] )
     {
-      case 'connected_entity':
-        if ( ! isset( $entity ) )
+      case 'connected_pt':
+        if ( ! isset( $pt ) )
         {
-          $this->throw_field_structure_validation_error__prop_missed( $field_structure, 'entity' );
+          $this->throw_field_structure_validation_error__prop_missed( $field_structure, 'pt' );
         }
 
-        if ( ! in_array( $entity, Structure::get_defined_post_types() ) )
+        if ( ! in_array( $pt, Structure::get_defined_post_types() ) )
         {
-          $this->throw_field_structure_validation_error__prop_unexpected_value( $field_structure, 'entity',
+          $this->throw_field_structure_validation_error__prop_unexpected_value( $field_structure, 'pt',
             'Post type is not defined.' );
         }
 
         if (
           isset( $parent_field_structure )
-          && ! Structure::connection_exists( $entity, $parent_field_structure['entity'] )
+          && ! Structure::connection_exists( $pt, $parent_field_structure['pt'] )
         )
         {
-          $this->throw_field_structure_validation_error__prop_unexpected_value( $field_structure, 'entity',
-            "\"$entity\" and \"{$parent_field_structure['entity']}\" post types are not connected." );
+          $this->throw_field_structure_validation_error__prop_unexpected_value( $field_structure, 'pt',
+            "\"$pt\" and \"{$parent_field_structure['pt']}\" post types are not connected." );
         }
         break;
 
       case 'custom':
-        if ( isset( $entity ) )
+        if ( isset( $pt ) )
         {
-          $this->throw_field_structure_validation_error__prop_unappropirate( $field_structure, 'entity' );
+          $this->throw_field_structure_validation_error__prop_unappropirate( $field_structure, 'pt' );
         }
         break;
 
@@ -138,7 +138,7 @@ abstract class Popup extends Sinleton
     {
       $field_structure['hint'] = $field_structure['hint'] ?? '';
 
-      $has_connected_entity = $field_structure['type'] === 'connected_entity';
+      $has_connected_pt = $field_structure['type'] === 'connected_pt';
 
       $input_structure = $field_structure['input'];
 
@@ -148,7 +148,7 @@ abstract class Popup extends Sinleton
         'sub_fields' => null,
       ];
 
-      if ( $has_connected_entity )
+      if ( $has_connected_pt )
       {
         $input_structure_defaults['psc'] = 1;
         $input_structure_defaults['allow_psc_update'] = false;
@@ -166,7 +166,7 @@ abstract class Popup extends Sinleton
 
       $input_structure = array_merge( $input_structure_defaults, $input_structure );
 
-      if ( $has_connected_entity )
+      if ( $has_connected_pt )
       {
         if ( ! isset( $input_structure['min_psc'] ) )
         {

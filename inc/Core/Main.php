@@ -4,9 +4,9 @@ namespace JBK\Core;
 use \Cvy\DesignPatterns\Singleton;
 use \JBK\Core\GlobalSettings\Settings as GlobalSettings;
 use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
-use \JBK\Core\Entities\PostTypes as PostTypes;
-use \JBK\Core\Entities\Settings\Settings as PostTypeSettings;
-use \JBK\Core\Entities\Settings\SettingsPage as PostTypeSettingsPage;
+use \JBK\Core\Pts\PostTypes as PostTypes;
+use \JBK\Core\Pts\Settings\Settings as PostTypeSettings;
+use \JBK\Core\Pts\Settings\SettingsPage as PostTypeSettingsPage;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

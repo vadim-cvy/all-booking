@@ -1,5 +1,5 @@
 <?php
-namespace JBK\Core\Entities;
+namespace JBK\Core\Pts;
 
 use \Exception;
 use \JBK\Core\GlobalSettings\Settings as GlobalSettings;
@@ -25,7 +25,7 @@ class PostTypes
   {
     return array_map(
       fn( $slug ) => PostType::get_instance( $slug ),
-      GlobalSettings::get_instance()->get_bookable_entities()
+      GlobalSettings::get_instance()->get_bookable_pts()
     );
   }
 
@@ -37,7 +37,7 @@ class PostTypes
     {
       $connections = [];
 
-      foreach ( GlobalSettings::get_instance()->get_entity_connections() as $connection_key => $connection_type )
+      foreach ( GlobalSettings::get_instance()->get_pt_connections() as $connection_key => $connection_type )
       {
         $pt_slugs = explode( '/', $connection_key );
 

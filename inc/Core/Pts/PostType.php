@@ -1,8 +1,8 @@
 <?php
-namespace JBK\Core\Entities;
+namespace JBK\Core\Pts;
 
 use \Exception;
-use \JBK\Core\Entities\Settings\Settings;
+use \JBK\Core\Pts\Settings\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

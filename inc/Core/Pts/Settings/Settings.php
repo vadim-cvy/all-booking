@@ -1,7 +1,7 @@
 <?php
-namespace JBK\Core\Entities\Settings;
+namespace JBK\Core\Pts\Settings;
 
-use \JBK\Core\Entities\PostType;
+use \JBK\Core\Pts\PostType;
 use \JBK\Core\Utils\ComplexOption;
 
 if ( ! defined( 'ABSPATH' ) ) exit;

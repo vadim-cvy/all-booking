@@ -1,8 +1,8 @@
 <?php
-namespace JBK\Core\Entities\Settings;
+namespace JBK\Core\Pts\Settings;
 
 use \JBK\Core\Utils\Dashboard\SettingPages\SubPage;
-use \JBK\Core\Entities\PostType;
+use \JBK\Core\Pts\PostType;
 use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
 use \Cvy\WP\Assets\JS;
 
@@ -30,7 +30,7 @@ class SettingsPage extends SubPage
 
 		parent::__construct( $pt->get_settings() );
 
-		(new JS( 'dashboard-page-entity-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
+		(new JS( 'dashboard-page-pt-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
   }
 
   public function get_slug() : string

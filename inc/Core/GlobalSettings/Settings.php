@@ -18,24 +18,24 @@ class Settings extends ComplexOption
   protected function get_defaults() : array
 	{
 		return [
-			'bookable_entities' => [],
-			'entity_connections' => [],
+			'bookable_pts' => [],
+			'pt_connections' => [],
 		];
 	}
 
 	protected function sanitize( array $value ) : array
 	{
-		$value['entity_connections'] = array_filter( $value['entity_connections'] );
+		$value['pt_connections'] = array_filter( $value['pt_connections'] );
 
-		foreach ( $value['entity_connections'] as $connection_key => $connection_type )
+		foreach ( $value['pt_connections'] as $connection_key => $connection_type )
 		{
 			$pt_slugs = explode( '/', $connection_key );
 
 			foreach ( $pt_slugs as $pt_slug )
 			{
-				if ( ! in_array( $pt_slug, $value['bookable_entities'] ) )
+				if ( ! in_array( $pt_slug, $value['bookable_pts'] ) )
 				{
-					unset( $value['entity_connections'][ $connection_key ] );
+					unset( $value['pt_connections'][ $connection_key ] );
 				}
 			}
 		}
@@ -43,13 +43,13 @@ class Settings extends ComplexOption
 		return $value;
 	}
 
-	public function get_bookable_entities() : array
+	public function get_bookable_pts() : array
 	{
-		return $this->get_one( 'bookable_entities' );
+		return $this->get_one( 'bookable_pts' );
 	}
 
-	public function get_entity_connections() : array
+	public function get_pt_connections() : array
 	{
-		return $this->get_one( 'entity_connections' );
+		return $this->get_one( 'pt_connections' );
 	}
 }

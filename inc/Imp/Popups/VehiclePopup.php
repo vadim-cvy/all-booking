@@ -2,7 +2,7 @@
 namespace JBK;
 
 use \JBK\Core\Popups\Popup;
-use \JBK\Imp\Entities\VehiclePostType;
+use \JBK\Imp\Pts\VehiclePostType;
 use \JBK\Imp\Popups\CustomFields\Waiver;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -15,8 +15,8 @@ class VehiclePopup extends Popup
       [
         'name' => 'vehicles',
         'label' => 'Vehicles',
-        'type' => 'connected_entity',
-        'entity' => VehiclePostType::get_slug(),
+        'type' => 'connected_pt',
+        'pt' => VehiclePostType::get_slug(),
         'input' => [
           'type' => 'select',
           'allow_psc_update' => true,

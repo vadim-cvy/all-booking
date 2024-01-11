@@ -3,7 +3,7 @@ namespace JBK\Core\GlobalSettings;
 
 use \Cvy\DesignPatterns\tSingleton;
 use \JBK\Core\Utils\Dashboard\SettingPages\TopPage;
-use \JBK\Core\Entities\PostTypes;
+use \JBK\Core\Pts\PostTypes;
 use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -45,13 +45,13 @@ class SettingsPage extends TopPage
       'common' => [
         'label' => 'Common',
         'fields' => [
-          'bookable-entities' => [
+          'bookable-pts' => [
             'label' => 'Which of the post types will be involved into booking process?',
-            'setting_name' => 'bookable_entities',
+            'setting_name' => 'bookable_pts',
           ],
-          'entity-connections' => [
+          'pt-connections' => [
             'label' => 'Post Type Connections',
-            'setting_name' => 'entity_connections',
+            'setting_name' => 'pt_connections',
           ],
         ],
       ]
@@ -68,7 +68,7 @@ class SettingsPage extends TopPage
 
 		$args['public_pts'] = PostTypes::get_public();
 
-    if ( $field_name === 'entity-connections' )
+    if ( $field_name === 'pt-connections' )
     {
       $args['connection_types'] = $this->get_connection_type_options();
     }
