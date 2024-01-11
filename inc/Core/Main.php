@@ -2,11 +2,7 @@
 namespace JBK\Core;
 
 use \Cvy\DesignPatterns\Singleton;
-use \JBK\Core\GlobalSettings\Settings as GlobalSettings;
-use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
-use \JBK\Core\Pts\PostTypes as PostTypes;
-use \JBK\Core\Pts\Settings\Settings as PostTypeSettings;
-use \JBK\Core\Pts\Settings\SettingsPage as PostTypeSettingsPage;
+use \JBK\Core\Pts\PostTypes;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -21,15 +17,16 @@ final class Main extends Singleton
 
   private function init_global_settings()
   {
-    GlobalSettings::get_instance();
-    GlobalSettingsPage::get_instance();
+    \JBK\Core\GlobalSettings\Settings::get_instance();
+    \JBK\Core\GlobalSettings\SettingsPage::get_instance();
   }
 
   private function init_post_type_settings()
   {
     foreach ( PostTypes::get_bookable() as $pt )
     {
-      PostTypeSettingsPage::get_instance( $pt );
+      \JBK\Core\Pts\Settings\SettingsPage::get_instance( $pt );
+      \JBK\Core\Pts\SinglePost\SettingsMetabox::get_instance( $pt );
     }
   }
 }
