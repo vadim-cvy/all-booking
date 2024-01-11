@@ -12,7 +12,19 @@ abstract class ParentPage extends Page
 			$this->get_menu_label(),
 			$this->get_user_capability(),
 			$this->get_slug(),
-			fn() => $this->render_content()
+			fn() => $this->render_content(),
+			$this->get_menu_icon(),
+			$this->get_menu_position(),
 		);
+  }
+
+	protected function get_menu_icon() : string
+  {
+    return '';
+  }
+
+	protected function get_menu_position() : int | null
+  {
+    return null;
   }
 }

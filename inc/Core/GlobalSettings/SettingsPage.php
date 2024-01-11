@@ -34,6 +34,11 @@ class SettingsPage extends ParentPage
     return 'jbk_global_settings';
   }
 
+  protected function get_menu_position() : int | null
+  {
+    return 25;
+  }
+
   protected function get_sections_structure() : array
   {
     return [
