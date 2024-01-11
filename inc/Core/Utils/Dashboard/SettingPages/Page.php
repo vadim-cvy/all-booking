@@ -40,7 +40,11 @@ abstract class Page
   final protected function render_content() : void
 	{
 		require_once JBK_TEMPLATES_PATH . 'dashboard/setting-pages/page-content.php';
+
+    $this->enqueue_footer_js();
 	}
+
+  abstract protected function enqueue_footer_js() : void;
 
   private function register_ui_elements() : void
   {

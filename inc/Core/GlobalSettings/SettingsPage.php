@@ -15,8 +15,6 @@ class SettingsPage extends TopPage
   protected function __construct()
   {
     parent::__construct( Settings::get_instance() );
-
-    (new JS( 'dashboard-page-global-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
   }
 
   protected function get_menu_label() : string
@@ -37,6 +35,11 @@ class SettingsPage extends TopPage
   protected function get_menu_position() : int | null
   {
     return 25;
+  }
+
+  protected function enqueue_footer_js() : void
+  {
+    (new JS( 'dashboard-page-global-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
   }
 
   protected function get_sections_structure() : array

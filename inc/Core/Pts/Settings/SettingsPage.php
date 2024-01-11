@@ -29,8 +29,6 @@ class SettingsPage extends SubPage
     $this->pt = $pt;
 
 		parent::__construct( $pt->get_settings() );
-
-		(new JS( 'dashboard-page-pt-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
   }
 
   public function get_slug() : string
@@ -52,6 +50,11 @@ class SettingsPage extends SubPage
 	{
 		return $this->pt->get_label_multiple() . ' Booking Settings';
 	}
+
+	protected function enqueue_footer_js() : void
+  {
+    (new JS( 'dashboard-page-pt-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
+  }
 
 	protected function get_sections_structure() : array
 	{
