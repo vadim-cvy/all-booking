@@ -79,19 +79,20 @@ class SettingsPage extends SubPage
 				'label' => 'Filter',
 				'fields' => [
 					'has_filter' => 'Has Filter',
+					'filter_shortcode' => 'Shortcode',
 					'items_per_filter_page' => $this->pt->get_label_multiple() . ' per Page',
 				],
 			],
     ];
 	}
 
-	protected function get_field_template_args( string $setting_name ) : array
+	protected function get_field_template_args( string $field_name ) : array
 	{
-		$args = array_merge( parent::get_field_template_args( $setting_name ), [
+		$args = array_merge( parent::get_field_template_args( $field_name ), [
 			'pt' => $this->pt,
 		]);
 
-		if ( $setting_name === 'connections' )
+		if ( $field_name === 'connections' )
 		{
 			$args['global_settings_page'] = GlobalSettingsPage::get_instance();
 
@@ -114,6 +115,10 @@ class SettingsPage extends SubPage
 					$connection_type_label
 				);
 			}
+		}
+		else if ( $field_name === 'filter_shortcode' )
+		{
+			$args['shortcode'] = sprintf( '[%s_filter]', $args['pt']->get_slug() );
 		}
 
 		return $args;

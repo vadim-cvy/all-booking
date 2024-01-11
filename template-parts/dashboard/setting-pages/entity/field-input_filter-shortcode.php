@@ -1,0 +1,1 @@
+Use the following shortcode to insert filter into any page: <pre><?php echo esc_html( $template_args['shortcode'] ); ?></pre>
