@@ -1,8 +1,8 @@
 ($ =>
 {
-  const bookablePtInputs = $( '.jbk-field_bookable-entities input[type="checkbox"]' )
+  const bookablePtInputs = $( '.jbk-field_common__bookable-entities input[type="checkbox"]' )
 
-  const entityConnectionsFildWrapper = $( '.jbk-field_entity-connections' )
+  const entityConnectionsFildWrapper = $( '.jbk-field_common__entity-connections' )
 
   bookablePtInputs.on( 'change', function()
   {

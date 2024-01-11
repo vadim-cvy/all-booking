@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
-<div class="jbk-field jbk-field_<?php echo esc_attr( $template_args['setting_name_dashed'] ); ?>">
+<div class="jbk-field jbk-field_<?php echo esc_attr( $template_args['section_name'] . '__' . $template_args['field_name']  ); ?>">
   <div class="jbk-field__value">
     <?php
     $field_input_dir_path = 'dashboard/setting-pages/';
@@ -16,7 +16,7 @@
 
     $field_input_own_template_path = jbk_get_template_path(
       $field_input_dir_path
-      . 'field-input_' . $template_args['setting_name_dashed'] . '.php'
+      . 'field-input_' . $template_args['field_name'] . '.php'
     );
 
     if ( file_exists( $field_input_own_template_path ) )
@@ -34,7 +34,7 @@
   /*
   if ( ! empty( $description ) )
   { ?>
-    <label class="jbk-field__description" for="<?php echo esc_attr( $setting_name ); ?>">
+    <label class="jbk-field__description" for="<?php echo esc_attr( $input_id ); ?>">
       <?php echo $description; ?>
     </label>
   <?php

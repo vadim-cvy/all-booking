@@ -45,20 +45,30 @@ class SettingsPage extends TopPage
       'common' => [
         'label' => 'Common',
         'fields' => [
-          'bookable_entities' => 'Which of the post types will be involved into booking process?',
-          'entity_connections' => 'Post Type Connections',
+          'bookable-entities' => [
+            'label' => 'Which of the post types will be involved into booking process?',
+            'setting_name' => 'bookable_entities',
+          ],
+          'entity-connections' => [
+            'label' => 'Post Type Connections',
+            'setting_name' => 'entity_connections',
+          ],
         ],
       ]
     ];
   }
 
-  protected function get_field_template_args( string $setting_name ) : array
+  protected function get_field_template_args(
+		string $field_name,
+		string|null $setting_name,
+		string $section_name
+	) : array
 	{
-		$args = array_merge( parent::get_field_template_args( $setting_name ), [
-      'public_pts' => PostTypes::get_public(),
-    ]);
+    $args = parent::get_field_template_args( $field_name, $setting_name, $section_name );
 
-    if ( $setting_name === 'entity_connections' )
+		$args['public_pts'] = PostTypes::get_public();
+
+    if ( $field_name === 'entity-connections' )
     {
       $args['connection_types'] = $this->get_connection_type_options();
     }

@@ -1,6 +1,6 @@
 ($ =>
 {
-  $( '#jbk-input_has-filter' )
+  $( '#jbk-input_filter__has-filter' )
     .on( 'change', function()
     {
       const input = $( this )

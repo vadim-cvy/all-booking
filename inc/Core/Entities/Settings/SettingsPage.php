@@ -59,38 +59,72 @@ class SettingsPage extends SubPage
 			'filter' => [
 				'label' => 'Filter',
 				'fields' => [
-					'has_filter' => 'Has Filter',
-					'filter_shortcode' => 'Shortcode',
-					'items_per_filter_page' => $this->pt->get_label_multiple() . ' per Page',
+					'has-filter' => [
+						'label' => 'Has Filter',
+						'setting_name' => 'has_filter',
+					],
+					'filter-shortcode' => [
+						'label' => 'Shortcode',
+						'setting_name' => null,
+					],
+					'items-per-filter-page' => [
+						'label' => $this->pt->get_label_multiple() . ' per Page',
+						'setting_name' => 'items_per_filter_page',
+					],
 				],
 			],
 
 			'time' => [
 				'label' => 'Time',
 				'fields' => [
-					'has_seasons' => 'Has Seasons',
-					'has_timeslots' => 'Has Timeslots',
-					'is_blockable' => 'Is Time Blockable',
-					'max_future_days' => 'Maximum days from today the booking can be made',
+					'has-seasons' => [
+						'label' => 'Has Seasons',
+						'setting_name' => 'has_seasons',
+					],
+					'has-timeslots' => [
+						'label' => 'Has Timeslots',
+						'setting_name' => 'has_timeslots',
+					],
+					'is-blockable' => [
+						'label' => 'Is Time Blockable',
+						'setting_name' => 'is_blockable',
+					],
+					'max-future-days' => [
+						'label' => 'Maximum days from today the booking can be made',
+						'setting_name' => 'max_future_days',
+					],
 				],
 			],
 
       'global' => [
 				'label' => 'Global',
 				'fields' => [
-					'has_limit' => 'Has Limit',
-					'has_price' => 'Has Price',
-					'connections' => 'Connections',
+					'has-limit' => [
+						'label' => 'Has Limit',
+						'setting_name' => 'has_limit'
+					],
+					'has-price' => [
+						'label' => 'Has Price',
+						'setting_name' => 'has_price'
+					],
+					'connections' => [
+						'label' => 'Connections',
+						'setting_name' => 'connections'
+					],
 				],
 			],
     ];
 	}
 
-	protected function get_field_template_args( string $field_name ) : array
+	protected function get_field_template_args(
+		string $field_name,
+		string|null $setting_name,
+		string $section_name
+	) : array
 	{
-		$args = array_merge( parent::get_field_template_args( $field_name ), [
-			'pt' => $this->pt,
-		]);
+		$args = parent::get_field_template_args( $field_name, $setting_name, $section_name );
+
+		$args['pt'] = $this->pt;
 
 		if ( $field_name === 'connections' )
 		{
@@ -116,7 +150,7 @@ class SettingsPage extends SubPage
 				);
 			}
 		}
-		else if ( $field_name === 'filter_shortcode' )
+		else if ( $field_name === 'filter-shortcode' )
 		{
 			$args['shortcode'] = sprintf( '[%s_filter]', $args['pt']->get_slug() );
 		}
