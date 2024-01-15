@@ -1,0 +1,69 @@
+.jbk-field {
+  margin-bottom: 1em;
+}
+.jbk-field:last-child {
+  margin-bottom: 0;
+}
+.jbk-field__label {
+  display: inline-block;
+  margin-bottom: 0.2em;
+  font-weight: 600;
+}
+.jbk-field__label:not([for]) {
+  cursor: default;
+}
+
+.jbk-filters__filter {
+  display: grid;
+  grid-template-columns: auto 30em;
+  column-gap: 2em;
+  margin-bottom: 2em;
+}
+.jbk-filters__filter__settings, .jbk-filters__filter__preview {
+  padding: 1em;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.jbk-filters__filter__settings__section, .jbk-filters__filter__preview__section {
+  margin-bottom: 2em;
+}
+.jbk-filters__filter__settings__section:last-child, .jbk-filters__filter__preview__section:last-child {
+  margin: 0;
+}
+.jbk-filters__filter__settings__section__title, .jbk-filters__filter__preview__section__title {
+  display: block;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+}
+.jbk-filters__filter__settings__popup-fields__actions {
+  text-align: right;
+}
+.jbk-filters__filter__settings__popup-field {
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid rgb(192, 192, 192);
+  border-right: none;
+  border-left: none;
+}
+.jbk-filters__filter__settings__popup-field:last-child {
+  margin-bottom: 0;
+}
+.jbk-filters__filter__settings__popup-field__settings {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 8em;
+}
+.jbk-filters__filter__preview__section__title {
+  text-align: center;
+}
+.jbk-filters__actions {
+  text-align: right;
+}
+.jbk-filters button {
+  cursor: pointer;
+}
+.jbk-filters button.jbk-button_delete {
+  color: red;
+  border-color: currentColor;
+}

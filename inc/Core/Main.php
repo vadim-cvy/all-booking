@@ -10,19 +10,17 @@ final class Main extends Singleton
 {
   protected function __construct()
   {
-    $this->init_global_settings();
-
-    $this->init_post_type_settings();
+    $this->init_settings();
   }
 
-  private function init_global_settings()
+  private function init_settings()
   {
     \JBK\Core\GlobalSettings\Settings::get_instance();
     \JBK\Core\GlobalSettings\SettingsPage::get_instance();
-  }
 
-  private function init_post_type_settings()
-  {
+    \JBK\Core\Filters\Settings\Settings::get_instance();
+    \JBK\Core\Filters\Settings\SettingsPage::get_instance();
+
     foreach ( PostTypes::get_bookable() as $pt )
     {
       \JBK\Core\Pts\Settings\SettingsPage::get_instance( $pt );

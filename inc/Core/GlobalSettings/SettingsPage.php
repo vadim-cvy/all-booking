@@ -31,7 +31,7 @@ final class SettingsPage extends TopPage
 
   public function get_sub_menu_label() : string
   {
-    return 'Global Settings';
+    return 'Global';
   }
 
   public function get_slug() : string

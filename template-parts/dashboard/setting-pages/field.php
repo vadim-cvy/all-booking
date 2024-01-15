@@ -13,6 +13,10 @@
     {
       $field_input_dir_path .= 'global/';
     }
+    else if ( is_a( $this, '\JBK\Core\Filters\Settings\SettingsPage' ) )
+    {
+      $field_input_dir_path .= 'filters/';
+    }
 
     $field_input_own_template_path = jbk_get_template_path(
       $field_input_dir_path

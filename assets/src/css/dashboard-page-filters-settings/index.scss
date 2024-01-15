@@ -1,0 +1,117 @@
+.jbk-field
+{
+  margin-bottom: 1em;
+
+  &:last-child
+  {
+    margin-bottom: 0;
+  }
+
+  &__label
+  {
+    display: inline-block;
+    margin-bottom: .2em;
+    font-weight: 600;
+
+    &:not([for])
+    {
+      cursor: default;
+    }
+  }
+}
+
+.jbk-filters
+{
+  &__filter
+  {
+    display: grid;
+    grid-template-columns: auto 30em;
+    column-gap: 2em;
+    margin-bottom: 2em;
+
+    &__settings,
+    &__preview
+    {
+      padding: 1em;
+      border: 1px solid #000;
+      border-radius: 5px;
+      background-color: #fff;
+
+      &__section
+      {
+        margin-bottom: 2em;
+
+        &:last-child
+        {
+          margin: 0;
+        }
+
+        &__title
+        {
+          display: block;
+          margin-bottom: 1em;
+          font-size: 1.2em;
+        }
+      }
+    }
+
+    &__settings
+    {
+      &__popup-fields
+      {
+        &__actions
+        {
+          text-align: right;
+        }
+      }
+
+      &__popup-field
+      {
+        margin-bottom: 1em;
+        padding: 1em;
+        border: 1px solid rgb(192, 192, 192);
+        border-right: none;
+        border-left: none;
+
+        &:last-child
+        {
+          margin-bottom: 0;
+        }
+
+        &__settings
+        {
+          display: grid;
+          grid-template-columns: max-content auto;
+          column-gap: 8em;
+        }
+      }
+    }
+
+    &__preview
+    {
+      &__section
+      {
+        &__title
+        {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  &__actions
+  {
+    text-align: right;
+  }
+
+  button
+  {
+    cursor: pointer;
+
+    &.jbk-button_delete
+    {
+      color: red;
+      border-color: currentColor;
+    }
+  }
+}

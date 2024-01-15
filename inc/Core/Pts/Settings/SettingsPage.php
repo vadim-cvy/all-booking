@@ -4,7 +4,6 @@ namespace JBK\Core\Pts\Settings;
 use \JBK\Core\Utils\Dashboard\SettingPages\SubPage;
 use \JBK\Core\Pts\PostType;
 use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
-use \Cvy\WP\Assets\JS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -51,32 +50,25 @@ final class SettingsPage extends SubPage
 		return $this->pt->get_label_multiple() . ' Booking Settings';
 	}
 
-	protected function enqueue_footer_js() : void
-  {
-    (new JS( 'dashboard-page-pt-settings/index.dev.js', [ 'jquery' ] ))->enqueue();
-  }
+	protected function enqueue_footer_js() : void {}
 
 	protected function get_sections_structure() : array
 	{
 		return [
-			'filter' => [
-				'label' => 'Filter',
+			'common' => [
+				'label' => 'Common',
 				'fields' => [
-					'has-filter' => [
-						'label' => 'Has Filter',
-						'setting_name' => 'has_filter',
+					'has-limit' => [
+						'label' => 'Has Limit',
+						'setting_name' => 'has_limit'
 					],
-					'filter-shortcode' => [
-						'label' => 'Shortcode',
-						'setting_name' => null,
+					'has-price' => [
+						'label' => 'Has Price',
+						'setting_name' => 'has_price'
 					],
-					'popup-structure' => [
-						'label' => 'Popup Structure',
-						'setting_name' => 'popup_structure',
-					],
-					'items-per-filter-page' => [
-						'label' => $this->pt->get_label_multiple() . ' per Page',
-						'setting_name' => 'items_per_filter_page',
+					'connections' => [
+						'label' => 'Connections',
+						'setting_name' => 'connections'
 					],
 				],
 			],
@@ -99,24 +91,6 @@ final class SettingsPage extends SubPage
 					'max-future-days' => [
 						'label' => 'Maximum days from today the booking can be made',
 						'setting_name' => 'max_future_days',
-					],
-				],
-			],
-
-      'global' => [
-				'label' => 'Global',
-				'fields' => [
-					'has-limit' => [
-						'label' => 'Has Limit',
-						'setting_name' => 'has_limit'
-					],
-					'has-price' => [
-						'label' => 'Has Price',
-						'setting_name' => 'has_price'
-					],
-					'connections' => [
-						'label' => 'Connections',
-						'setting_name' => 'connections'
 					],
 				],
 			],
