@@ -21,12 +21,12 @@ final class SettingsPage extends TopPage
 
   protected function get_menu_label() : string
   {
-    return 'Booking Settings';
+    return 'All Booking';
   }
 
   public function get_page_title() : string
   {
-    return 'Booking Global Settings';
+    return 'All Booking Global Settings';
   }
 
   public function get_sub_menu_label() : string
