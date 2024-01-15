@@ -15,16 +15,23 @@ final class SettingsPage extends TopPage
   protected function __construct()
   {
     parent::__construct( Settings::get_instance() );
+
+    add_action( 'admin_menu', fn() => $this->customize_sub_menu_label(), 11 );
   }
 
   protected function get_menu_label() : string
   {
-    return 'Booking Global Settings';
+    return 'Booking Settings';
   }
 
   public function get_page_title() : string
   {
-    return $this->get_menu_label();
+    return 'Booking Global Settings';
+  }
+
+  public function get_sub_menu_label() : string
+  {
+    return 'Global Settings';
   }
 
   public function get_slug() : string
@@ -36,6 +43,13 @@ final class SettingsPage extends TopPage
   {
     return 25;
   }
+
+  private function customize_sub_menu_label() : void
+  {
+    global $submenu;
+
+    $submenu[ $this->get_slug() ][0][0] = $this->get_sub_menu_label();
+}
 
   protected function enqueue_footer_js() : void
   {

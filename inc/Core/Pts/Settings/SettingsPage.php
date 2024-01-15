@@ -38,12 +38,12 @@ final class SettingsPage extends SubPage
 
 	protected function get_parent_page_slug() : string
 	{
-		return 'edit.php?post_type=' . $this->pt->get_slug();
+		return GlobalSettingsPage::get_instance()->get_slug();
 	}
 
   protected function get_menu_label() : string
 	{
-		return 'Booking Settings';
+		return $this->pt->get_label_multiple() . ' Settings';
 	}
 
   public function get_page_title() : string
@@ -69,6 +69,10 @@ final class SettingsPage extends SubPage
 					'filter-shortcode' => [
 						'label' => 'Shortcode',
 						'setting_name' => null,
+					],
+					'popup-structure' => [
+						'label' => 'Popup Structure',
+						'setting_name' => 'popup_structure',
 					],
 					'items-per-filter-page' => [
 						'label' => $this->pt->get_label_multiple() . ' per Page',
