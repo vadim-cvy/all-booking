@@ -3,34 +3,24 @@
 <div class="jbk-field jbk-field_<?php echo esc_attr( $template_args['section_name'] . '__' . $template_args['field_name']  ); ?>">
   <div class="jbk-field__value">
     <?php
-    $field_input_dir_path = 'dashboard/setting-pages/';
+    $field_input_template_path = __DIR__ . '/';
 
     if ( is_a( $this, '\JBK\Core\Pts\Settings\SettingsPage' ) )
     {
-      $field_input_dir_path .= 'pt/';
+      $field_input_template_path .= 'pt/';
     }
     else if ( is_a( $this, '\JBK\Core\GlobalSettings\SettingsPage' ) )
     {
-      $field_input_dir_path .= 'global/';
+      $field_input_template_path .= 'global/';
     }
     else if ( is_a( $this, '\JBK\Core\Filters\Settings\SettingsPage' ) )
     {
-      $field_input_dir_path .= 'filters/';
+      $field_input_template_path .= 'filters/field-input_filters/';
     }
 
-    $field_input_own_template_path = jbk_get_template_path(
-      $field_input_dir_path
-      . 'field-input_' . $template_args['field_name'] . '.php'
-    );
+    $field_input_template_path .= 'field-input_' . $template_args['field_name'] . '.php';
 
-    if ( file_exists( $field_input_own_template_path ) )
-    {
-      require_once $field_input_own_template_path;
-    }
-    else
-    {
-      require jbk_get_template_path( $field_input_dir_path . 'field-input.php' );
-    } ?>
+    require jbk_get_template_path( $field_input_template_path ); ?>
   </div>
 
   <?php

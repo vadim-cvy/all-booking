@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function jbk_get_template_path( string $rel_path ) : string
+function jbk_get_template_path( string $original_path ) : string
 {
-  $original_path = JBK_TEMPLATES_PATH . $rel_path;
+  $rel_path = str_replace( JBK_TEMPLATES_PATH, '', $original_path );
 
   $theme_path = get_theme_file_path( $rel_path );
 
