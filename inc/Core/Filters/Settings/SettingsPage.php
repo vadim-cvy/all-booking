@@ -5,6 +5,7 @@ use \Cvy\DesignPatterns\tSingleton;
 use \JBK\Core\Utils\Dashboard\SettingPages\SubPage;
 use \JBK\Core\Pts\PostTypes;
 use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
+use \Cvy\WP\Assets\JS;
 use \Cvy\WP\Assets\CSS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -56,7 +57,12 @@ final class SettingsPage extends SubPage
     ];
   }
 
-  protected function enqueue_footer_js() : void {}
+  protected function enqueue_footer_js() : void
+  {
+    wp_enqueue_script( 'jbk-vue', 'https://unpkg.com/vue@3/dist/vue.global.js' );
+
+    (new JS( 'dashboard-page-filters-settings/index.dev.js', [ 'jbk-vue' ] ))->enqueue();
+  }
 
   private function enqueue_css() : void
   {
