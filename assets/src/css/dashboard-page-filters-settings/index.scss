@@ -1,6 +1,6 @@
 .jbk-field
 {
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
 
   &:last-child
   {
@@ -18,9 +18,29 @@
       cursor: default;
     }
   }
+
+  &__value
+  {
+    & > input:not([type="checkbox"]),
+    & > select
+    {
+      width: 100%;
+    }
+  }
 }
 
-.jbk-filters
+h2,
+th
+{
+  display: none;
+}
+
+td
+{
+  padding: 0 !important;
+}
+
+.jbk-filters-setting
 {
   &__filter
   {
@@ -32,7 +52,7 @@
     &__settings,
     &__preview
     {
-      padding: 1em;
+      padding: 1.5em;
       border: 1px solid #000;
       border-radius: 5px;
       background-color: #fff;
@@ -49,7 +69,7 @@
         &__title
         {
           display: block;
-          margin-bottom: 1em;
+          margin-bottom: 1.5em;
           font-size: 1.2em;
         }
       }
@@ -61,28 +81,41 @@
       {
         &__actions
         {
+          margin-top: 1.5em;
           text-align: right;
         }
       }
 
       &__popup-field
       {
-        margin-bottom: 1em;
-        padding: 1em;
+        margin-top: -1px;
+        padding: 1.5em;
         border: 1px solid rgb(192, 192, 192);
         border-right: none;
         border-left: none;
 
-        &:last-child
-        {
-          margin-bottom: 0;
-        }
-
         &__settings
         {
           display: grid;
-          grid-template-columns: max-content auto;
-          column-gap: 8em;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 3em;
+          row-gap: 1.5em;
+        }
+
+        &__actions
+        {
+          text-align: right;
+          margin-top: 1.5em;
+
+          .button
+          {
+            margin-right: 1.5em;
+
+            &:last-child
+            {
+              margin-right: 0;
+            }
+          }
         }
       }
     }
