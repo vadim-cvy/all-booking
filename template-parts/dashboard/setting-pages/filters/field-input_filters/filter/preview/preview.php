@@ -6,7 +6,7 @@
   <div class="jbk-filter__settings__section__content">
     <div class="jbk-field">
       <label class="jbk-field__label">
-        {{ filter.bookingCustomFields[0].label }} (this is a main target object)
+        {{ filter.bookingFields[0].label }} (this is a main target object)
       </label>
 
       <div class="jbk-field__value">

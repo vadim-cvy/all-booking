@@ -1,5 +1,5 @@
 <label class="jbk-field__label">
-  Custom Fields
+  Popup Fields
 </label>
 
 <div class="jbk-field__value">
@@ -7,14 +7,14 @@
     <div class="jbk-items-list__items">
       <div
         class="jbk-items-list__item"
-        v-for="(bookingCustomField, bookingCustomFieldIndex) in filter.booking.customFields"
-        :key="bookingCustomFieldIndex"
+        v-for="(bookingField, bookingFieldIndex) in filter.booking.fields"
+        :key="bookingFieldIndex"
       >
         <div class="jbk-items-list__item__content">
           <?php
-          foreach ( [ 'label', 'type', 'pt', 'price' ] as $custom_field_name )
+          foreach ( [ 'label', 'numeric-parent-relation', 'type', 'pt', 'numeric', 'price' ] as $field_name )
           {
-            require_once jbk_get_template_path( __DIR__ . "/field_$custom_field_name.php" );
+            require_once jbk_get_template_path( __DIR__ . "/field-$field_name.php" );
           } ?>
         </div>
 
@@ -22,7 +22,8 @@
           <button
             type="button"
             class="button jbk-button_danger"
-            @click="() => deleteBookingCustomField( bookingCustomFieldIndex, filterIndex )"
+            @click="() => deleteBookingField( bookingFieldIndex, filterIndex )"
+            v-if="bookingField.isCustom"
           >
             Delete This Field
           </button>
@@ -30,7 +31,8 @@
           <button
             type="button"
             class="button"
-            @click="() => addBookingCustomFieldSubField( filterIndex, bookingCustomFieldIndex )"
+            @click="() => addBookingFieldSubField( filterIndex, bookingFieldIndex )"
+            v-if="bookingField.isCustom"
           >
             Add Sub Field
           </button>
@@ -42,7 +44,7 @@
       <button
         type="button"
         class="button"
-        @click="() => addBookingCustomField( filterIndex )"
+        @click="() => addBookingField( filterIndex )"
       >
         Add Field
       </button>

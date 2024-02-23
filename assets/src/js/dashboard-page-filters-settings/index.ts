@@ -16,7 +16,14 @@
           booking: {
             isTimeable: true,
             slots: [],
-            customFields: [],
+            fields: [
+              this.createBookingFieldObject({
+                label: 'Bookable Object (not visible to the user)',
+                type: 'pt',
+                isCustom: false,
+                parent: null,
+              })
+            ],
           }
         })
 
@@ -28,18 +35,36 @@
         this.filters.splice( index, 1 )
       },
 
-      addBookingCustomField( filterIndex: number )
+      addBookingField( filterIndex: number )
       {
-        this.filters[ filterIndex ].booking.customFields.push({
+        this.filters[ filterIndex ].booking.fields.push( this.createBookingFieldObject() )
+      },
+
+      createBookingFieldObject( fieldData = {} )
+      {
+        return {
           label: null,
           type: null,
           pt: null,
-        })
+          isCustom: true,
+          numeric: {
+            isNumeric: true,
+            default: 1,
+            isEditable: false,
+            min: 1,
+            max: 100,
+            step: 1,
+            parent: 0,
+            numericParentRelation: 'each',
+          },
+
+          ...fieldData,
+        }
       },
 
-      deleteBookingCustomField( fieldIndex: number, filterIndex: number )
+      deleteBookingField( fieldIndex: number, filterIndex: number )
       {
-        this.filters[ filterIndex ].booking.customFields.splice( fieldIndex, 1 )
+        this.filters[ filterIndex ].booking.fields.splice( fieldIndex, 1 )
       },
 
       addBookingSlot( filterIndex: number )
@@ -85,9 +110,9 @@
         return 'jbk-filter_' + filterIndex + '__' + baseId
       },
 
-      prefixBookingCustomFieldInputId( baseId: string, customFieldIndex: number, filterIndex: number )
+      prefixBookingFieldInputId( baseId: string, fieldIndex: number, filterIndex: number )
       {
-        return this.prefixInputId( 'booking-custom-field_' + customFieldIndex + '__' + baseId,
+        return this.prefixInputId( 'booking-custom-field_' + fieldIndex + '__' + baseId,
           filterIndex )
       },
 
