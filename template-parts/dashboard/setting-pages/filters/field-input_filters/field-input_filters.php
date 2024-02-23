@@ -6,7 +6,7 @@
       :key="filterIndex"
     >
       <div class="jbk-items-list__item__content jbk-filters__filter">
-        <?php require_once jbk_get_template_path( __DIR__ . '/filter-content/filter-content.php' ); ?>
+        <?php require_once jbk_get_template_path( __DIR__ . '/filter/filter.php' ); ?>
       </div>
 
       <div class="jbk-items-list__item__actions">
