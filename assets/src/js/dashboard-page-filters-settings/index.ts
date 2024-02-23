@@ -2,29 +2,15 @@
 {
   const app = Vue.createApp({
     data: () => ({
-      filters: [
-        {
-          label: 'Dummy Filter',
-          itemsPerPage: 12,
-          booking: {
-            isTimeable: true,
-            slots: [],
-            customFields: [
-              {
-                label: 'Dummy Field',
-                type: 'pt',
-                pt: 'dummy_pt_slug',
-              }
-            ],
-          }
-        }
-      ],
+      filters: [],
     }),
 
     methods: {
       addFilter()
       {
-        this.filters.push({
+        const filters = this.filters
+
+        filters.push({
           label: null,
           itemsPerPage: 12,
           booking: {
@@ -33,6 +19,8 @@
             customFields: [],
           }
         })
+
+        this.addBookingSlot( filters.length - 1 )
       },
 
       deleteFilter( index: number )
@@ -56,7 +44,9 @@
 
       addBookingSlot( filterIndex: number )
       {
-        this.filters[ filterIndex ].booking.slots.push({
+        const slots = this.filters[ filterIndex ].booking.slots
+
+        slots.push({
           startTime: {
             h: 0,
             m: 0,
@@ -64,6 +54,8 @@
           repeat: [],
           durationOptions: [],
         })
+
+        this.addBookingSlotDurationOption( slots.length - 1, filterIndex )
       },
 
       deleteBookingSlot( slotIndex: number, filterIndex: number )
