@@ -8,6 +8,7 @@
       <div
         v-for="(slot, slotIndex) in filter.booking.slots"
         :key="slotIndex"
+        class="jbk-items-list__item"
       >
         <div class="jbk-items-list__item__content">
           <?php

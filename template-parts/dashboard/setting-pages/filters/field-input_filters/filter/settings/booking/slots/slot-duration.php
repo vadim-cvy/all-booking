@@ -8,6 +8,7 @@
       <div
         v-for="(slotDurationOption, slotDurationOptionIndex) in slot.durationOptions"
         :key="slotDurationOptionIndex"
+        class="jbk-items-list__item"
       >
         <div class="jbk-items-list__item__content">
           <?php require_once jbk_get_template_path( __DIR__ . "/slot-duration-option.php" ); ?>

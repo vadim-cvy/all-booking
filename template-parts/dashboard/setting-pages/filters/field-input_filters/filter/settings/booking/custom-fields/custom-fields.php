@@ -5,7 +5,7 @@
 
   <div class="jbk-field__value">
     <div class="jbk-items-list">
-      <div class="jbk-items-list__list">
+      <div class="jbk-items-list__items">
         <div
           class="jbk-items-list__item"
           v-for="(bookingCustomField, bookingCustomFieldIndex) in filter.booking.customFields"
