@@ -131,6 +131,65 @@ td
           border: 1px solid #8e8e8e;
         }
       }
+
+      &_booking
+      {
+        &__slots
+        {
+          &__slot
+          {
+            &__repeat
+            {
+              > .jbk-field__value
+              {
+                display: flex;
+              }
+
+              &__day
+              {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                margin-right: 1em;
+                margin-bottom: 0;
+              }
+            }
+
+            &__start-time
+            {
+              .jbk-field__value
+              {
+                display: flex;
+                align-items: center;
+              }
+
+              input
+              {
+                max-width: 4em;
+              }
+            }
+
+            &__duration
+            {
+              &__option
+              {
+                &__time
+                {
+                  > .jbk-field__value
+                  {
+                    display: flex;
+                  }
+
+                  input
+                  {
+                    max-width: 4em;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

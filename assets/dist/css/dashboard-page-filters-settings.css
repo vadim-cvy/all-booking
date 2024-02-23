@@ -84,3 +84,26 @@ td {
   padding: 1em;
   border: 1px solid #8e8e8e;
 }
+.jbk-filters__filter__settings_booking__slots__slot__repeat > .jbk-field__value {
+  display: flex;
+}
+.jbk-filters__filter__settings_booking__slots__slot__repeat__day {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-right: 1em;
+  margin-bottom: 0;
+}
+.jbk-filters__filter__settings_booking__slots__slot__start-time .jbk-field__value {
+  display: flex;
+  align-items: center;
+}
+.jbk-filters__filter__settings_booking__slots__slot__start-time input {
+  max-width: 4em;
+}
+.jbk-filters__filter__settings_booking__slots__slot__duration__option__time > .jbk-field__value {
+  display: flex;
+}
+.jbk-filters__filter__settings_booking__slots__slot__duration__option__time input {
+  max-width: 4em;
+}

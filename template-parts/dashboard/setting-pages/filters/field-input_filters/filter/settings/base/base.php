@@ -1,37 +1,8 @@
-<div class="jbk-field">
-  <label
-    :for="prefixInputId( 'label', filterIndex )"
-    class="jbk-field__label"
-  >
-    Label
-  </label>
-
-  <div class="jbk-field__value">
-    <input
-      type="text"
-      class="jbk-field__input"
-      :id="prefixInputId( 'label', filterIndex )"
-      v-model="filter.label"
-    >
+<?php
+foreach ( [ 'label', 'items-per-page' ] as $base_setting_name )
+{ ?>
+  <div class="jbk-field jbk-filters__filter__settings_base__<?php echo esc_attr( $base_setting_name ); ?>">
+    <?php require_once jbk_get_template_path( __DIR__ . "/$base_setting_name/$base_setting_name.php" ); ?>
   </div>
-</div>
-
-<div class="jbk-field">
-  <label
-    :for="prefixInputId( 'items-per-page', filterIndex )"
-    class="jbk-field__label"
-  >
-    Items Per Page
-  </label>
-
-  <div class="jbk-field__value">
-    <input
-      type="number"
-      min="1"
-      step="1"
-      class="jbk-field__input"
-      :id="prefixInputId( 'items-per-page', filterIndex )"
-      v-model.number="filter.itemsPerPage"
-    >
-  </div>
-</div>
+<?php
+}
