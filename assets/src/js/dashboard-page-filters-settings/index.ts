@@ -8,15 +8,7 @@
           itemsPerPage: 12,
           booking: {
             isTimeable: true,
-            slots: [
-              {
-                startTime: {
-                  h: 15,
-                  m: 30,
-                },
-                durationOptions: [],
-              },
-            ],
+            slots: [],
             customFields: [
               {
                 label: 'Dummy Field',
@@ -69,6 +61,7 @@
             h: 0,
             m: 0,
           },
+          repeat: [],
           durationOptions: [],
         })
       },
