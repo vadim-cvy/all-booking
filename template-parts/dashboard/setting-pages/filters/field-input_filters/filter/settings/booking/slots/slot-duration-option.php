@@ -17,13 +17,6 @@
 </div>
 
 <div class="jbk-field jbk-filters__filter__settings_booking__slots__slot__duration__option__time">
-  <label
-    class="jbk-field__label"
-    :for="prefixBookingSlotDurationOptionInputId( 'time-d', slotDurationOptionIndex, slotIndex, filterIndex )"
-  >
-    Duration
-  </label>
-
   <div class="jbk-field__value">
     <div class="jbk-field">
       <label

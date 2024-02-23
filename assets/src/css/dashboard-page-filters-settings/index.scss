@@ -1,12 +1,5 @@
 .jbk-field
 {
-  margin-bottom: 1.5em;
-
-  &:last-child
-  {
-    margin-bottom: 0;
-  }
-
   &__label
   {
     display: inline-block;
@@ -157,22 +150,34 @@ td
 
             &__start-time
             {
-              .jbk-field__value
+              .jbk-field
               {
-                display: flex;
-                align-items: center;
+                &__value
+                {
+                  display: flex;
+                  align-items: center;
+                }
+
+                &__input
+                {
+                  max-width: 4em;
+                }
               }
 
-              input
-              {
-                max-width: 4em;
-              }
             }
 
             &__duration
             {
               &__option
               {
+                display: flex;
+
+                &__label
+                {
+                  width: 100%;
+                  margin-right: 1em;
+                }
+
                 &__time
                 {
                   > .jbk-field__value
@@ -180,9 +185,10 @@ td
                     display: flex;
                   }
 
-                  input
+                  .jbk-field
                   {
-                    max-width: 4em;
+                    margin-right: .5em;
+                    width: 4em;
                   }
                 }
               }
