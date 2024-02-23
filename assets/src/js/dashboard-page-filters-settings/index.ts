@@ -82,7 +82,7 @@
 
       prefixInputId( baseId: string, filterIndex: number )
       {
-        return 'jbk-filters__filter_' + filterIndex + '__' + baseId
+        return 'jbk-filter_' + filterIndex + '__' + baseId
       },
 
       prefixBookingCustomFieldInputId( baseId: string, customFieldIndex: number, filterIndex: number )

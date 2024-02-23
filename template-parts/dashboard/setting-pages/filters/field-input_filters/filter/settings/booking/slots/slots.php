@@ -9,11 +9,11 @@
       :key="slotIndex"
       class="jbk-items-list__item"
     >
-      <div class="jbk-items-list__item__content jbk-filters__filter__settings_booking__slots__slot">
+      <div class="jbk-items-list__item__content jbk-filter__settings_booking__slot">
         <?php
         foreach ( [ 'repeat', 'start-time', 'duration' ] as $slot_field_name )
         { ?>
-          <div class="jbk-field jbk-filters__filter__settings_booking__slots__slot__<?php echo esc_attr( $slot_field_name ); ?>">
+          <div class="jbk-field jbk-filter__settings_booking__slot__<?php echo esc_attr( $slot_field_name ); ?>">
             <?php require_once jbk_get_template_path( __DIR__ . "/slot-$slot_field_name.php" ); ?>
           </div>
         <?php

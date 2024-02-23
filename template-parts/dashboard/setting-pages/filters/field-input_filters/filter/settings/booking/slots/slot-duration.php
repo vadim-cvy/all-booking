@@ -9,7 +9,7 @@
       :key="slotDurationOptionIndex"
       class="jbk-items-list__item"
     >
-      <div class="jbk-items-list__item__content jbk-field jbk-filters__filter__settings_booking__slots__slot__duration__option">
+      <div class="jbk-items-list__item__content jbk-field jbk-filter__settings_booking__slot__duration__option">
         <?php require_once jbk_get_template_path( __DIR__ . "/slot-duration-option.php" ); ?>
       </div>
 

@@ -1,9 +1,11 @@
 .jbk-field
 {
+  margin-bottom: 1.5em;
+
   &__label
   {
     display: inline-block;
-    margin-bottom: .2em;
+    margin-bottom: .4em;
     font-weight: 600;
 
     &:not([for])
@@ -29,9 +31,6 @@
     margin-top: -1px;
     padding-top: 2em;
     padding-bottom: 2em;
-    border: 1px solid #8e8e8e;
-    border-left: unset;
-    border-right: unset;
 
     &__actions
     {
@@ -78,124 +77,124 @@ td
   padding: 0 !important;
 }
 
-.jbk-filters
+.jbk-filter
 {
-  &__filter
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 2em;
+
+  &__settings
   {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    column-gap: 2em;
+    grid-row: span 2;
+    padding: 1.5em;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #fff;
 
-    &__settings,
-    &__preview
+    &__section
     {
-      padding: 1.5em;
-      border: 1px solid #000;
-      border-radius: 5px;
-      background-color: #fff;
+      margin-bottom: 3em;
 
-      &__section
+      &:last-child
       {
-        margin-bottom: 2em;
+        margin: 0;
+      }
 
-        &:last-child
-        {
-          margin: 0;
-        }
-
-        &__title
-        {
-          display: block;
-          margin-bottom: 1.5em;
-          font-size: 1.2em;
-        }
+      &__title
+      {
+        display: block;
+        margin-bottom: 1em;
+        font-size: 1.2em;
       }
     }
 
-    &__settings
+    .jbk-items-list
     {
-      grid-row: span 2;
-
-      .jbk-items-list
+      &__item
       {
-        &__item
-        {
-          padding: 1em;
-          border: 1px solid #8e8e8e;
-        }
+        padding: 1em;
+        border: 1px solid #8e8e8e;
       }
+    }
 
-      &_booking
+    &_booking
+    {
+      &__slot
       {
-        &__slots
+        &__repeat
         {
-          &__slot
+          > .jbk-field__value
           {
-            &__repeat
+            display: flex;
+          }
+
+          &__day
+          {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            margin-right: 1em;
+            margin-bottom: 0;
+          }
+        }
+
+        &__start-time
+        {
+          .jbk-field
+          {
+            &__value
+            {
+              display: flex;
+              align-items: center;
+            }
+
+            &__input
+            {
+              max-width: 4em;
+            }
+          }
+
+        }
+
+        &__duration
+        {
+          &__option
+          {
+            display: flex;
+
+            .jbk-field
+            {
+              margin-bottom: 0;
+            }
+
+            &__label
+            {
+              width: 100%;
+              margin-right: 1em;
+            }
+
+            &__time
             {
               > .jbk-field__value
               {
                 display: flex;
               }
 
-              &__day
-              {
-                display: flex;
-                flex-direction: row-reverse;
-                align-items: center;
-                margin-right: 1em;
-                margin-bottom: 0;
-              }
-            }
-
-            &__start-time
-            {
               .jbk-field
               {
-                &__value
-                {
-                  display: flex;
-                  align-items: center;
-                }
-
-                &__input
-                {
-                  max-width: 4em;
-                }
-              }
-
-            }
-
-            &__duration
-            {
-              &__option
-              {
-                display: flex;
-
-                &__label
-                {
-                  width: 100%;
-                  margin-right: 1em;
-                }
-
-                &__time
-                {
-                  > .jbk-field__value
-                  {
-                    display: flex;
-                  }
-
-                  .jbk-field
-                  {
-                    margin-right: .5em;
-                    width: 4em;
-                  }
-                }
+                width: 4em;
+                margin-right: .5em;
               }
             }
           }
         }
       }
     }
+  }
+
+  &__preview
+  {
+    padding: 1em;
+    background-color: #fff;
   }
 }

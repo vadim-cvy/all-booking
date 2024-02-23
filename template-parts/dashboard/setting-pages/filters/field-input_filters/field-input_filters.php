@@ -5,7 +5,7 @@
       v-for="(filter, filterIndex) in filters"
       :key="filterIndex"
     >
-      <div class="jbk-items-list__item__content jbk-filters__filter">
+      <div class="jbk-items-list__item__content jbk-filter">
         <?php require_once jbk_get_template_path( __DIR__ . '/filter/filter.php' ); ?>
       </div>
 

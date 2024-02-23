@@ -1,9 +1,9 @@
-<!-- <div class="jbk-filters__filter__preview__section">
-  <strong class="jbk-filters__filter__preview__section__title">
+<!-- <div class="jbk-filter__preview__section">
+  <strong class="jbk-filter__preview__section__title">
     Popup Preview (dummy data)
   </strong>
 
-  <div class="jbk-filters__filter__settings__section__content">
+  <div class="jbk-filter__settings__section__content">
     <div class="jbk-field">
       <label class="jbk-field__label">
         {{ filter.bookingCustomFields[0].label }} (this is a main target object)

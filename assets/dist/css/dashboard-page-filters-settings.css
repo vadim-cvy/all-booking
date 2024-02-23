@@ -1,6 +1,9 @@
+.jbk-field {
+  margin-bottom: 1.5em;
+}
 .jbk-field__label {
   display: inline-block;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.4em;
   font-weight: 600;
 }
 .jbk-field__label:not([for]) {
@@ -14,9 +17,6 @@
   margin-top: -1px;
   padding-top: 2em;
   padding-bottom: 2em;
-  border: 1px solid #8e8e8e;
-  border-left: unset;
-  border-right: unset;
 }
 .jbk-items-list__item__actions {
   margin-top: 1.5em;
@@ -49,63 +49,68 @@ td {
   padding: 0 !important;
 }
 
-.jbk-filters__filter {
+.jbk-filter {
   display: grid;
   grid-template-columns: 2fr 1fr;
   column-gap: 2em;
 }
-.jbk-filters__filter__settings, .jbk-filters__filter__preview {
+.jbk-filter__settings {
+  grid-row: span 2;
   padding: 1.5em;
   border: 1px solid #000;
   border-radius: 5px;
   background-color: #fff;
 }
-.jbk-filters__filter__settings__section, .jbk-filters__filter__preview__section {
-  margin-bottom: 2em;
+.jbk-filter__settings__section {
+  margin-bottom: 3em;
 }
-.jbk-filters__filter__settings__section:last-child, .jbk-filters__filter__preview__section:last-child {
+.jbk-filter__settings__section:last-child {
   margin: 0;
 }
-.jbk-filters__filter__settings__section__title, .jbk-filters__filter__preview__section__title {
+.jbk-filter__settings__section__title {
   display: block;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   font-size: 1.2em;
 }
-.jbk-filters__filter__settings {
-  grid-row: span 2;
-}
-.jbk-filters__filter__settings .jbk-items-list__item {
+.jbk-filter__settings .jbk-items-list__item {
   padding: 1em;
   border: 1px solid #8e8e8e;
 }
-.jbk-filters__filter__settings_booking__slots__slot__repeat > .jbk-field__value {
+.jbk-filter__settings_booking__slot__repeat > .jbk-field__value {
   display: flex;
 }
-.jbk-filters__filter__settings_booking__slots__slot__repeat__day {
+.jbk-filter__settings_booking__slot__repeat__day {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   margin-right: 1em;
   margin-bottom: 0;
 }
-.jbk-filters__filter__settings_booking__slots__slot__start-time .jbk-field__value {
+.jbk-filter__settings_booking__slot__start-time .jbk-field__value {
   display: flex;
   align-items: center;
 }
-.jbk-filters__filter__settings_booking__slots__slot__start-time .jbk-field__input {
+.jbk-filter__settings_booking__slot__start-time .jbk-field__input {
   max-width: 4em;
 }
-.jbk-filters__filter__settings_booking__slots__slot__duration__option {
+.jbk-filter__settings_booking__slot__duration__option {
   display: flex;
 }
-.jbk-filters__filter__settings_booking__slots__slot__duration__option__label {
+.jbk-filter__settings_booking__slot__duration__option .jbk-field {
+  margin-bottom: 0;
+}
+.jbk-filter__settings_booking__slot__duration__option__label {
   width: 100%;
   margin-right: 1em;
 }
-.jbk-filters__filter__settings_booking__slots__slot__duration__option__time > .jbk-field__value {
+.jbk-filter__settings_booking__slot__duration__option__time > .jbk-field__value {
   display: flex;
 }
-.jbk-filters__filter__settings_booking__slots__slot__duration__option__time .jbk-field {
-  margin-right: 0.5em;
+.jbk-filter__settings_booking__slot__duration__option__time .jbk-field {
   width: 4em;
+  margin-right: 0.5em;
+}
+.jbk-filter__preview {
+  padding: 1em;
+  background-color: #fff;
 }

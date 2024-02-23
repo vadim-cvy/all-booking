@@ -9,7 +9,7 @@
     $input_id_cb = "prefixBookingSlotInputId( 'repeat_' + " . $day_index . ", slotIndex, filterIndex )";
     ?>
 
-    <div class="jbk-field jbk-field jbk-filters__filter__settings_booking__slots__slot__repeat__day">
+    <div class="jbk-field jbk-field jbk-filter__settings_booking__slot__repeat__day">
       <label
         class="jbk-field__label"
         :for="<?php echo esc_attr( $input_id_cb ); ?>"

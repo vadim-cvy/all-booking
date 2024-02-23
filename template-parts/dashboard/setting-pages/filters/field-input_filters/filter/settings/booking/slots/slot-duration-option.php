@@ -1,4 +1,4 @@
-<div class="jbk-field jbk-filters__filter__settings_booking__slots__slot__duration__option__label">
+<div class="jbk-field jbk-filter__settings_booking__slot__duration__option__label">
   <label
     class="jbk-field__label"
     :for="prefixBookingSlotDurationOptionInputId( 'label', slotDurationOptionIndex, slotIndex, filterIndex )"
@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div class="jbk-field jbk-filters__filter__settings_booking__slots__slot__duration__option__time">
+<div class="jbk-field jbk-filter__settings_booking__slot__duration__option__time">
   <div class="jbk-field__value">
     <div class="jbk-field">
       <label
