@@ -11,6 +11,7 @@
       >
         <div class="jbk-items-list__item__content">
           <?php
+          require_once jbk_get_template_path( __DIR__ . "/slot-repeat.php" );
           require_once jbk_get_template_path( __DIR__ . "/slot-start-time.php" );
           require_once jbk_get_template_path( __DIR__ . "/slot-duration.php" );
           ?>

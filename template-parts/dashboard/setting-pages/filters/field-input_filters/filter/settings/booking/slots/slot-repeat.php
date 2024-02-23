@@ -1,39 +1,35 @@
 <div class="jbk-field">
   <label class="jbk-field__label">
-    Duration Options
+    Repeat
   </label>
 
-  <div class="jbk-field__value jbk-items-list">
-    <div class="jbk-items-list__items">
-      <div
-        v-for="(slotDurationOption, slotDurationOptionIndex) in slot.durationOptions"
-        :key="slotDurationOptionIndex"
-      >
-        <div class="jbk-items-list__item__content">
-          <?php require_once jbk_get_template_path( __DIR__ . "/slot-duration-option.php" ); ?>
-        </div>
+  <div class="jbk-field__value">
+    <?php
+    foreach ( [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ] as $day_index => $day_label )
+    {
+      $input_id_cb = "prefixBookingSlotInputId( 'repeat_' + " . $day_index . ", slotIndex, filterIndex )";
+      ?>
 
-        <div class="jbk-items-list__item__actions">
-          <button
-            type="button"
-            class="button jbk-button_danger"
-            @click="() => deleteBookingSlotDurationOption( slotDurationOptionIndex, slotIndex, filterIndex )"
+      <div class="jbk-field">
+        <label
+          class="jbk-field__label"
+          :for="<?php echo esc_attr( $input_id_cb ); ?>"
+        >
+          <?php echo esc_html( $day_label ); ?>
+        </label>
+
+        <div class="jbk-field__value">
+          <input
+            type="checkbox"
+            :id="<?php echo esc_attr( $input_id_cb ); ?>"
+            class="jbk-field__input"
+            v-model="slot.repeat[<?php echo esc_attr( $day_index ); ?>]"
+            value="<?php echo esc_attr( $day_index ); ?>"
           >
-            Delete This Duraton Option
-          </button>
         </div>
       </div>
-    </div>
-
-    <div class="jbk-items-list__actions">
-      <button
-        @click="() => addBookingSlotDurationOption( slotIndex, filterIndex )"
-        type="button"
-        class="button"
-      >
-        Add Duration Option
-      </button>
-    </div>
+    <?php
+    } ?>
   </div>
 </div>
 
