@@ -3,15 +3,39 @@
     Slots
   </label>
 
-  <div class="jbk-field__value">
-    <div
-      v-for="(slot, slotIndex) in filter.booking.slots"
-      :key="slotIndex"
-    >
-      <?php
-      require_once jbk_get_template_path( __DIR__ . "/slot-start-time.php" );
-      require_once jbk_get_template_path( __DIR__ . "/slot-duration.php" );
-      ?>
+  <div class="jbk-field__value jbk-items-list">
+    <div class="jbk-items-list__items">
+      <div
+        v-for="(slot, slotIndex) in filter.booking.slots"
+        :key="slotIndex"
+      >
+        <div class="jbk-items-list__item__content">
+          <?php
+          require_once jbk_get_template_path( __DIR__ . "/slot-start-time.php" );
+          require_once jbk_get_template_path( __DIR__ . "/slot-duration.php" );
+          ?>
+        </div>
+
+        <div class="jbk-items-list__item__actions">
+          <button
+            type="button"
+            class="button jbk-button_danger"
+            @click="() => deleteBookingSlot( slotIndex, filterIndex )"
+          >
+            Delete This Slot
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="jbk-items-list__actions">
+      <button
+        @click="() => addBookingSlot( filterIndex )"
+        type="button"
+        class="button"
+      >
+        Add Slot
+      </button>
     </div>
   </div>
 </div>
