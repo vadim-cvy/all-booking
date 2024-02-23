@@ -6,14 +6,25 @@
         {
           label: 'Dummy Filter',
           itemsPerPage: 12,
-          hasTimeSlots: false,
-          popupFields: [
-            {
-              label: 'Dummy Field',
-              type: 'pt',
-              pt: 'dummy_pt_slug',
-            }
-          ],
+          booking: {
+            isTimeable: true,
+            slots: [
+              {
+                startTime: {
+                  h: 15,
+                  m: 30,
+                },
+                durationOptions: [],
+              },
+            ],
+            customFields: [
+              {
+                label: 'Dummy Field',
+                type: 'pt',
+                pt: 'dummy_pt_slug',
+              }
+            ],
+          }
         }
       ],
     }),
@@ -23,9 +34,12 @@
       {
         this.filters.push({
           label: null,
-          itemsPerPage: null,
-          hasTimeSlots: false,
-          popupFields: [],
+          itemsPerPage: 12,
+          booking: {
+            isTimeable: true,
+            slots: [],
+            customFields: [],
+          }
         })
       },
 
@@ -34,37 +48,82 @@
         this.filters.splice( index, 1 )
       },
 
-      addPopupField( filterIndex: number )
+      addBookingCustomField( filterIndex: number )
       {
-        const filter = this.filters[ filterIndex ]
-
-        filter.popupFields.push({
+        this.filters[ filterIndex ].booking.customFields.push({
           label: null,
           type: null,
           pt: null,
         })
-
-        filter.activePopupFieldIndex = filter.popupFields.length - 1
       },
 
-      deletePopupField( fieldIndex: number, filterIndex: number )
+      deleteBookingCustomField( fieldIndex: number, filterIndex: number )
       {
-        this.filters[ filterIndex ].popupFields.splice( fieldIndex, 1 )
+        this.filters[ filterIndex ].booking.customFields.splice( fieldIndex, 1 )
       },
 
-      prefixInputId( baseId: string, filterIndex: number, fieldIndex?: number )
+      addBookingSlot( filterIndex: number )
       {
-        let prefix = 'jbk-filters-setting__filter_' + filterIndex + '__'
+        this.filters[ filterIndex ].booking.slots.push({
+          startTime: {
+            h: 0,
+            m: 0,
+          },
+          durationOptions: [],
+        })
+      },
 
-        if ( typeof fieldIndex !== undefined )
-        {
-          prefix += 'popup-field_' + fieldIndex + '__'
-        }
+      deleteBookingSlot( slotIndex: number, filterIndex: number )
+      {
+        this.filters[ filterIndex ].booking.slots.splice( slotIndex, 1 )
+      },
 
-        return prefix + baseId
+      addBookingSlotDurationOption( slotIndex: number, filterIndex: number )
+      {
+        this.filters[ filterIndex ].booking.slots[ slotIndex ].durationOptions.push({
+          label: '',
+          time: {
+            d: 0,
+            h: 0,
+            m: 0,
+          },
+        })
+      },
+
+      deleteBookingSlotDurationOption( optionIndex: number, slotIndex: number, filterIndex: number )
+      {
+        this.filters[ filterIndex ].booking.slots[ slotIndex ].durationOptions.splice( optionIndex, 1 )
+      },
+
+      prefixInputId( baseId: string, filterIndex: number )
+      {
+        return 'jbk-filters__filter_' + filterIndex + '__' + baseId
+      },
+
+      prefixBookingCustomFieldInputId( baseId: string, customFieldIndex: number, filterIndex: number )
+      {
+        return this.prefixInputId( 'booking-custom-field_' + customFieldIndex + '__' + baseId,
+          filterIndex )
+      },
+
+      prefixBookingSlotInputId( baseId: string, slotIndex: number, filterIndex: number )
+      {
+        return this.prefixInputId( 'booking-slot_' + slotIndex + '__' + baseId,
+          filterIndex )
+      },
+
+      prefixBookingSlotDurationOptionInputId(
+        baseId: string,
+        durationOptionIndex: number,
+        slotIndex: number,
+        filterIndex: number
+      )
+      {
+        return this.prefixBookingSlotInputId( 'duration_' + durationOptionIndex + '__' + baseId,
+          slotIndex, filterIndex )
       },
     }
   })
 
-  app.mount( '#jbk-filters-setting' )
+  app.mount( '#jbk-filters' )
 })()

@@ -59,7 +59,7 @@ final class SettingsPage extends SubPage
 
   protected function enqueue_footer_js() : void
   {
-    wp_enqueue_script( 'jbk-vue', 'https://unpkg.com/vue@3/dist/vue.global.js' );
+    wp_enqueue_script( 'jbk-vue', 'https://unpkg.com/vue@3.4.19/dist/vue.global.js' );
 
     (new JS( 'dashboard-page-filters-settings/index.dev.js', [ 'jbk-vue' ] ))->enqueue();
   }

@@ -1,4 +1,4 @@
-<div class="jbk-field" v-show="popupField.type === 'pt'">
+<div class="jbk-field" v-show="bookingCustomField.type === 'pt'">
   <label class="jbk-field__label">
     Price
   </label>

@@ -16,6 +16,36 @@
   width: 100%;
 }
 
+.jbk-items-list__item {
+  margin-top: -1px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  border: 1px solid #8e8e8e;
+  border-left: 0;
+  border-right: 0;
+}
+.jbk-items-list__item__actions {
+  margin-top: 1.5em;
+}
+.jbk-items-list__item__actions > * {
+  margin-right: 1em !important;
+}
+.jbk-items-list__item__actions > *:last-child {
+  margin-right: 0;
+}
+.jbk-items-list__actions {
+  margin-top: 2em;
+}
+
+.jbk-button {
+  display: inline-block;
+  cursor: pointer;
+}
+.jbk-button_danger {
+  color: red !important;
+  border-color: currentColor !important;
+}
+
 h2,
 th {
   display: none;
@@ -25,66 +55,40 @@ td {
   padding: 0 !important;
 }
 
-.jbk-filters-setting__filter {
+.jbk-filters__filter {
   display: grid;
-  grid-template-columns: auto 30em;
+  grid-template-columns: 2fr 1fr;
   column-gap: 2em;
-  margin-bottom: 2em;
 }
-.jbk-filters-setting__filter__settings, .jbk-filters-setting__filter__preview {
+.jbk-filters__filter__settings, .jbk-filters__filter__preview {
   padding: 1.5em;
   border: 1px solid #000;
   border-radius: 5px;
   background-color: #fff;
 }
-.jbk-filters-setting__filter__settings__section, .jbk-filters-setting__filter__preview__section {
+.jbk-filters__filter__settings__section, .jbk-filters__filter__preview__section {
   margin-bottom: 2em;
 }
-.jbk-filters-setting__filter__settings__section:last-child, .jbk-filters-setting__filter__preview__section:last-child {
+.jbk-filters__filter__settings__section:last-child, .jbk-filters__filter__preview__section:last-child {
   margin: 0;
 }
-.jbk-filters-setting__filter__settings__section__title, .jbk-filters-setting__filter__preview__section__title {
+.jbk-filters__filter__settings__section__title, .jbk-filters__filter__preview__section__title {
   display: block;
   margin-bottom: 1.5em;
   font-size: 1.2em;
 }
-.jbk-filters-setting__filter__settings__popup-fields__actions {
-  margin-top: 1.5em;
-  text-align: right;
+.jbk-filters__filter__settings {
+  grid-row: 1/3;
 }
-.jbk-filters-setting__filter__settings__popup-field {
-  margin-top: -1px;
-  padding: 1.5em;
-  border: 1px solid rgb(192, 192, 192);
-  border-right: none;
-  border-left: none;
+.jbk-filters__filter__settings .jbk-items-list__item {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
-.jbk-filters-setting__filter__settings__popup-field__settings {
+.jbk-filters__filter__settings .jbk-items-list__item__content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 3em;
-  row-gap: 1.5em;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2em;
 }
-.jbk-filters-setting__filter__settings__popup-field__actions {
-  text-align: right;
-  margin-top: 1.5em;
-}
-.jbk-filters-setting__filter__settings__popup-field__actions .button {
-  margin-right: 1.5em;
-}
-.jbk-filters-setting__filter__settings__popup-field__actions .button:last-child {
-  margin-right: 0;
-}
-.jbk-filters-setting__filter__preview__section__title {
+.jbk-filters__filter__preview__section__title {
   text-align: center;
-}
-.jbk-filters-setting__actions {
-  text-align: right;
-}
-.jbk-filters-setting button {
-  cursor: pointer;
-}
-.jbk-filters-setting button.jbk-button_delete {
-  color: red;
-  border-color: currentColor;
 }

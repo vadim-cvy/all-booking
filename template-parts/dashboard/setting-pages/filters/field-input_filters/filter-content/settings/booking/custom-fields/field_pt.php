@@ -1,6 +1,6 @@
-<div class="jbk-field" v-show="popupField.type === 'pt'">
+<div class="jbk-field" v-show="bookingCustomField.type === 'pt'">
   <label
-    :for="prefixInputId( 'pt', filterIndex, popupFieldIndex )"
+    :for="prefixBookingCustomFieldInputId( 'pt', bookingCustomFieldIndex, filterIndex )"
     class="jbk-field__label"
   >
     Post Type
@@ -8,8 +8,8 @@
 
   <div class="jbk-field__value">
     <select
-      :id="prefixInputId( 'pt', filterIndex, popupFieldIndex )"
-      v-model="popupField.pt"
+      :id="prefixBookingCustomFieldInputId( 'pt', bookingCustomFieldIndex, filterIndex )"
+      v-model="bookingCustomField.pt"
     >
       <option value="" selected="selected" disabled="disabled"></option>
 
