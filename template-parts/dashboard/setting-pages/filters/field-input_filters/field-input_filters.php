@@ -36,9 +36,6 @@
         </div>
       <?php
       } ?>
-
-      // todo: add filter page preview
-      // todo: add filter popup preview
     </template>
   </jbk-items-list>
 </div>

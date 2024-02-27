@@ -12,14 +12,12 @@ final class Settings extends ComplexOption
 
 	protected function __construct()
 	{
-		parent::__construct( 'jbk_filter_settings' );
+		parent::__construct( 'jbk_filters_settings' );
 	}
 
   protected function get_defaults() : array
 	{
-		return [
-			// todo
-		];
+		return [];
 	}
 
 	protected function sanitize( array $value ) : array

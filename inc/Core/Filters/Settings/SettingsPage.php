@@ -2,15 +2,13 @@
 namespace JBK\Core\Filters\Settings;
 
 use \Cvy\DesignPatterns\tSingleton;
-use \JBK\Core\Utils\Dashboard\SettingPages\SubPage;
-use \JBK\Core\Pts\PostTypes;
-use \JBK\Core\GlobalSettings\SettingsPage as GlobalSettingsPage;
+use \JBK\Core\Utils\Dashboard\SettingPages\TopPage;
 use \Cvy\WP\Assets\JS;
 use \Cvy\WP\Assets\CSS;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-final class SettingsPage extends SubPage
+final class SettingsPage extends TopPage
 {
   use tSingleton;
 
@@ -20,6 +18,11 @@ final class SettingsPage extends SubPage
 
     // todo: make it work for specific page only
     $this->enqueue_css();
+  }
+
+  protected function get_menu_position() : int
+  {
+    return 25;
   }
 
   protected function get_menu_label() : string
@@ -35,11 +38,6 @@ final class SettingsPage extends SubPage
   public function get_slug() : string
   {
     return 'jbk_filter_settings';
-  }
-
-  protected function get_parent_page_slug() : string
-  {
-    return GlobalSettingsPage::get_instance()->get_slug();
   }
 
   protected function get_sections_structure() : array
