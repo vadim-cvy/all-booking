@@ -1,34 +1,43 @@
 .jbk-field {
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
+}
+.jbk-field:last-child {
+  margin-bottom: 0;
+}
+.jbk-field label {
+  display: flex;
+  align-items: center;
+}
+.jbk-field label input {
+  margin-right: 0.3em !important;
 }
 .jbk-field__label {
   display: inline-block;
   margin-bottom: 0.4em;
   font-weight: 600;
 }
-.jbk-field__label:not([for]) {
-  cursor: default;
+.jbk-field input,
+.jbk-field select,
+.jbk-field textarea {
+  max-width: 100%;
+  box-sizing: border-box;
 }
-.jbk-field__value > input:not([type=checkbox]), .jbk-field__value > select {
-  width: 100%;
+.jbk-field input[type=checkbox],
+.jbk-field input[type=radio] {
+  margin: 0;
+}
+.jbk-field input[type=number] {
+  width: 5em;
+}
+.jbk-field input[type=text],
+.jbk-field select {
+  width: 20em;
 }
 
-.jbk-items-list__item {
-  margin-top: -1px;
-  padding-top: 2em;
-  padding-bottom: 2em;
-}
 .jbk-items-list__item__actions {
+  display: flex;
+  gap: 1em;
   margin-top: 1.5em;
-}
-.jbk-items-list__item__actions > * {
-  margin-right: 1em !important;
-}
-.jbk-items-list__item__actions > *:last-child {
-  margin-right: 0;
-}
-.jbk-items-list__actions {
-  margin-top: 2em;
 }
 
 .jbk-button {
@@ -49,68 +58,61 @@ td {
   padding: 0 !important;
 }
 
-.jbk-filter {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  column-gap: 2em;
-}
-.jbk-filter__settings {
-  grid-row: span 2;
-  padding: 1.5em;
+.jbk-filter-instance {
   border: 1px solid #000;
-  border-radius: 5px;
+  padding: 1.5em;
+  border-radius: 10px;
   background-color: #fff;
-}
-.jbk-filter__settings__section {
   margin-bottom: 3em;
 }
-.jbk-filter__settings__section:last-child {
-  margin: 0;
+.jbk-filter-instance__section {
+  padding: 2em 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.jbk-filter__settings__section__title {
-  display: block;
-  margin-bottom: 1em;
-  font-size: 1.2em;
+.jbk-filter-instance__section:first-child {
+  padding-top: 0;
 }
-.jbk-filter__settings .jbk-items-list__item {
-  padding: 1em;
-  border: 1px solid #8e8e8e;
+.jbk-filter-instance__section:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
-.jbk-filter__settings_booking__slot__repeat > .jbk-field__value {
-  display: flex;
+.jbk-filter-instance__section__title {
+  margin-top: 0;
 }
-.jbk-filter__settings_booking__slot__repeat__day {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  margin-right: 1em;
+.jbk-filter-instance .jbk-field__input-wrapper > .jbk-field, .jbk-filter-instance .jbk-field__input-wrapper > .jbk-items-list {
+  margin-top: 1em;
+  margin-left: 1em;
+}
+.jbk-filter-instance .jbk-field__input-wrapper .jbk-items-list__item {
+  padding-left: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.jbk-filter-instance .jbk-field__input-wrapper .jbk-items-list__item .jbk-items-list__item {
+  padding: 2em 0;
+  border-left: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.jbk-filter-instance .jbk-field__input-wrapper .jbk-items-list__item .jbk-items-list__item:first-child {
+  padding-top: 0;
+}
+.jbk-filter-instance .jbk-field__input-wrapper .jbk-items-list__item .jbk-items-list__item:not(:last-child) {
   margin-bottom: 0;
 }
-.jbk-filter__settings_booking__slot__start-time .jbk-field__value {
+.jbk-filter-instance__global-stettings__timing__slots-group__days .jbk-field__input-wrapper {
   display: flex;
-  align-items: center;
+  gap: 1.3em;
 }
-.jbk-filter__settings_booking__slot__start-time .jbk-field__input {
-  max-width: 4em;
-}
-.jbk-filter__settings_booking__slot__duration__option {
-  display: flex;
-}
-.jbk-filter__settings_booking__slot__duration__option .jbk-field {
+.jbk-filter-instance__global-stettings__timing__slots-group__slot .jbk-field {
   margin-bottom: 0;
 }
-.jbk-filter__settings_booking__slot__duration__option__label {
-  width: 100%;
-  margin-right: 1em;
-}
-.jbk-filter__settings_booking__slot__duration__option__time > .jbk-field__value {
+.jbk-filter-instance__global-stettings__timing__slots-group__slot .jbk-items-list__item__content {
   display: flex;
+  gap: 4em;
 }
-.jbk-filter__settings_booking__slot__duration__option__time .jbk-field {
-  width: 4em;
-  margin-right: 0.5em;
-}
-.jbk-filter__preview {
-  padding: 1em;
-  background-color: #fff;
+.jbk-filter-instance__global-stettings__timing__slots-group__slot__duration .jbk-field__input-wrapper {
+  display: flex;
+  gap: 1em;
 }

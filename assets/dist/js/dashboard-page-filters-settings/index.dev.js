@@ -10,24 +10,68 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./assets/src/js/dashboard-page-filters-settings/components/JbkField.ts":
+/*!******************************************************************************!*\
+  !*** ./assets/src/js/dashboard-page-filters-settings/components/JbkField.ts ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.JbkField = void 0;\nexports.JbkField = Vue.defineComponent({\n    props: {\n        class: {\n            type: String,\n            required: true,\n        },\n        label: {\n            type: String,\n            required: true,\n        },\n        isLabelClickable: {\n            type: Boolean,\n            required: false,\n            default: true,\n        },\n    },\n    computed: {\n        inputId() {\n            return this.class + '__input';\n        },\n        wrapperClass() {\n            return 'jbk-field ' + this.class;\n        }\n    },\n    template: `<div :class=\"wrapperClass\">\r\n      <label class=\"jbk-field__label\" :for=\"isLabelClickable ? inputId : ''\">\r\n        {{ label }}\r\n      </label>\r\n\r\n      <div class=\"jbk-field__input-wrapper\">\r\n        <slot :input-id=\"isLabelClickable ? inputId : ''\"></slot>\r\n      </div>\r\n    </div>`,\n});\n\n\n//# sourceURL=webpack:///./assets/src/js/dashboard-page-filters-settings/components/JbkField.ts?");
+
+/***/ }),
+
+/***/ "./assets/src/js/dashboard-page-filters-settings/components/JbkItemsList.ts":
+/*!**********************************************************************************!*\
+  !*** ./assets/src/js/dashboard-page-filters-settings/components/JbkItemsList.ts ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.JbkItemsList = void 0;\nexports.JbkItemsList = Vue.defineComponent({\n    props: {\n        items: {\n            type: Array,\n            required: true,\n        },\n        itemGeneralLabel: {\n            type: String,\n            required: true,\n        },\n        itemCssClass: {\n            type: String,\n            required: false,\n        },\n        newItemDataCb: {\n            type: Function,\n            required: true,\n        },\n    },\n    methods: {\n        deleteItem(itemIndex) {\n            const confirmMsg = `Are you sure you want to delete this ${this.itemGeneralLabel.toLocaleLowerCase()}?`;\n            if (confirm(confirmMsg)) {\n                this.items.splice(itemIndex, 1);\n            }\n        },\n    },\n    template: `<div class=\"jbk-items-list\">\r\n      <div class=\"jbk-items-list__items\" v-show=\"items.length !== 0\">\r\n        <div\r\n          :class=\"[\r\n            'jbk-items-list__item',\r\n            itemCssClass,\r\n            itemCssClass + '_' + itemIndex\r\n          ]\"\r\n          v-for=\"(item, itemIndex) in items\"\r\n          :key=\"itemIndex\"\r\n        >\r\n          <div class=\"jbk-items-list__item__content\">\r\n            <slot :item=\"item\" :itemIndex=\"itemIndex\"></slot>\r\n          </div>\r\n\r\n          <div class=\"jbk-items-list__item__actions\">\r\n            <button\r\n              type=\"button\"\r\n              class=\"button jbk-button_danger\"\r\n              @click=\"() => deleteItem( itemIndex )\"\r\n            >\r\n              Remove this {{ itemGeneralLabel }}\r\n            </button>\r\n\r\n            <slot name=\"item-actions\" :item=\"item\" :itemIndex=\"itemIndex\"></slot>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"jbk-items-list__actions\">\r\n        <button\r\n          @click=\"() => items.push(newItemDataCb())\"\r\n          type=\"button\"\r\n          class=\"button\"\r\n        >\r\n          Add {{ itemGeneralLabel }}\r\n        </button>\r\n      </div>\r\n    </div>`,\n});\n\n\n//# sourceURL=webpack:///./assets/src/js/dashboard-page-filters-settings/components/JbkItemsList.ts?");
+
+/***/ }),
+
 /***/ "./assets/src/js/dashboard-page-filters-settings/index.ts":
 /*!****************************************************************!*\
   !*** ./assets/src/js/dashboard-page-filters-settings/index.ts ***!
   \****************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\n(() => {\n    const app = Vue.createApp({\n        data: () => ({\n            filters: [],\n        }),\n        methods: {\n            addFilter() {\n                const filters = this.filters;\n                filters.push({\n                    label: null,\n                    itemsPerPage: 12,\n                    booking: {\n                        isTimeable: true,\n                        slots: [],\n                        fields: [\n                            this.createBookingFieldObject({\n                                label: 'Bookable Object (not visible to the user)',\n                                type: 'pt',\n                                isCustom: false,\n                                parent: null,\n                            })\n                        ],\n                    }\n                });\n                this.addBookingSlot(filters.length - 1);\n            },\n            deleteFilter(index) {\n                this.filters.splice(index, 1);\n            },\n            addBookingField(filterIndex) {\n                this.filters[filterIndex].booking.fields.push(this.createBookingFieldObject());\n            },\n            createBookingFieldObject(fieldData = {}) {\n                return Object.assign({ label: null, type: null, pt: null, isCustom: true, numeric: {\n                        isNumeric: true,\n                        default: 1,\n                        isEditable: false,\n                        min: 1,\n                        max: 100,\n                        step: 1,\n                        parent: 0,\n                        numericParentRelation: 'each',\n                    } }, fieldData);\n            },\n            deleteBookingField(fieldIndex, filterIndex) {\n                this.filters[filterIndex].booking.fields.splice(fieldIndex, 1);\n            },\n            addBookingSlot(filterIndex) {\n                const slots = this.filters[filterIndex].booking.slots;\n                slots.push({\n                    startTime: {\n                        h: 0,\n                        m: 0,\n                    },\n                    repeat: [],\n                    durationOptions: [],\n                });\n                this.addBookingSlotDurationOption(slots.length - 1, filterIndex);\n            },\n            deleteBookingSlot(slotIndex, filterIndex) {\n                this.filters[filterIndex].booking.slots.splice(slotIndex, 1);\n            },\n            addBookingSlotDurationOption(slotIndex, filterIndex) {\n                this.filters[filterIndex].booking.slots[slotIndex].durationOptions.push({\n                    label: '',\n                    time: {\n                        d: 0,\n                        h: 0,\n                        m: 0,\n                    },\n                });\n            },\n            deleteBookingSlotDurationOption(optionIndex, slotIndex, filterIndex) {\n                this.filters[filterIndex].booking.slots[slotIndex].durationOptions.splice(optionIndex, 1);\n            },\n            prefixInputId(baseId, filterIndex) {\n                return 'jbk-filter_' + filterIndex + '__' + baseId;\n            },\n            prefixBookingFieldInputId(baseId, fieldIndex, filterIndex) {\n                return this.prefixInputId('booking-custom-field_' + fieldIndex + '__' + baseId, filterIndex);\n            },\n            prefixBookingSlotInputId(baseId, slotIndex, filterIndex) {\n                return this.prefixInputId('booking-slot_' + slotIndex + '__' + baseId, filterIndex);\n            },\n            prefixBookingSlotDurationOptionInputId(baseId, durationOptionIndex, slotIndex, filterIndex) {\n                return this.prefixBookingSlotInputId('duration_' + durationOptionIndex + '__' + baseId, slotIndex, filterIndex);\n            },\n        }\n    });\n    app.mount('#jbk-filters');\n})();\n\n\n//# sourceURL=webpack:///./assets/src/js/dashboard-page-filters-settings/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst JbkItemsList_1 = __webpack_require__(/*! ./components/JbkItemsList */ \"./assets/src/js/dashboard-page-filters-settings/components/JbkItemsList.ts\");\nconst JbkField_1 = __webpack_require__(/*! ./components/JbkField */ \"./assets/src/js/dashboard-page-filters-settings/components/JbkField.ts\");\n(() => {\n    const app = Vue.createApp({\n        data: () => ({\n            filters: [],\n            pts: [\n                {\n                    slug: 'dummyPT',\n                    label: 'Dummy PT',\n                }\n            ]\n        }),\n        methods: {\n        // createBookingFieldObject( fieldData = {} )\n        // {\n        //   return {\n        //     label: null,\n        //     type: null,\n        //     pt: null,\n        //     numeric: {\n        //       isNumeric: true,\n        //       default: 1,\n        //       isEditable: false,\n        //       min: 1,\n        //       max: 100,\n        //       step: 1,\n        //       parent: 0,\n        //       numericParentRelation: 'each',\n        //     },\n        //     ...fieldData,\n        //   }\n        // },\n        }\n    });\n    app.component('jbk-items-list', JbkItemsList_1.JbkItemsList);\n    app.component('jbk-field', JbkField_1.JbkField);\n    app.mount('#jbk-filters');\n})();\n\n\n//# sourceURL=webpack:///./assets/src/js/dashboard-page-filters-settings/index.ts?");
 
 /***/ })
 
 /******/ 	});
 /************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./assets/src/js/dashboard-page-filters-settings/index.ts"]();
+/******/ 	var __webpack_exports__ = __webpack_require__("./assets/src/js/dashboard-page-filters-settings/index.ts");
 /******/ 	
 /******/ })()
 ;

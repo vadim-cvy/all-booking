@@ -1,33 +1,44 @@
-<div id="jbk-filters" class="jbk-filters jbk-items-list">
-  <div class="jbk-items-list__items">
-    <div
-      class="jbk-items-list__item"
-      v-for="(filter, filterIndex) in filters"
-      :key="filterIndex"
-    >
-      <div class="jbk-items-list__item__content jbk-filter">
-        <?php require_once jbk_get_template_path( __DIR__ . '/filter/filter.php' ); ?>
-      </div>
+<div id="jbk-filters">
+  <jbk-items-list
+    :items="filters"
+    item-css-class="jbk-filter-instance"
+    item-general-label="Filter"
+    :new-item-data-cb="() => ({
+      label: '',
+      timing: [],
+      filterPage: {
+        itemsPerPage: 12,
+      },
+      popup: {
+        fields: [],
+      },
+    })"
+  >
+    <template #default="{ item: filterInstance }">
+      <?php
+      foreach ( [ 'global', 'filter-page', 'popup' ] as $settings_group )
+      { ?>
+        <div class="jbk-filter-instance__section">
+          <h3 class="jbk-filter-instance__section__title">
+            <?php echo [
+              'global' => 'Global',
+              'filter-page' => 'Filter Page',
+              'popup' => 'Popup',
+            ][ $settings_group ]; ?>
+          </h3>
 
-      <div class="jbk-items-list__item__actions">
-        <button
-          type="button"
-          class="button jbk-button_danger"
-          @click="() => deleteFilter( filterIndex )"
-        >
-          Delete This Filter
-        </button>
-      </div>
-    </div>
-  </div>
+          <div class="
+            jbk-filter-instance__<?php echo esc_attr( $settings_group ); ?>-settings
+            jbk-filter-instance__section__content
+          ">
+            <?php require jbk_get_template_path( __DIR__ . "/$settings_group-settings/$settings_group-settings.php" ); ?>
+          </div>
+        </div>
+      <?php
+      } ?>
 
-  <div class="jbk-items-list__actions">
-    <button
-      @click="() => addFilter()"
-      type="button"
-      class="button"
-    >
-      Add Filter
-    </button>
-  </div>
+      // todo: add filter page preview
+      // todo: add filter popup preview
+    </template>
+  </jbk-items-list>
 </div>
