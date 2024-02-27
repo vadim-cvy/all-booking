@@ -1,41 +1,18 @@
 import { JbkItemsList } from "./components/JbkItemsList"
 import { JbkField } from "./components/JbkField"
 
+declare const jbkDashboardPageFiltersSettingsIndexData: {
+  filters: any[],
+  pts: any[],
+}
+
 (()=>
 {
   const app = Vue.createApp({
     data: () => ({
-      filters: [],
-      pts: [
-        {
-          slug: 'dummyPT',
-          label: 'Dummy PT',
-        }
-      ]
+      filters: jbkDashboardPageFiltersSettingsIndexData.filters,
+      pts: jbkDashboardPageFiltersSettingsIndexData.pts,
     }),
-
-    methods: {
-      // createBookingFieldObject( fieldData = {} )
-      // {
-      //   return {
-      //     label: null,
-      //     type: null,
-      //     pt: null,
-      //     numeric: {
-      //       isNumeric: true,
-      //       default: 1,
-      //       isEditable: false,
-      //       min: 1,
-      //       max: 100,
-      //       step: 1,
-      //       parent: 0,
-      //       numericParentRelation: 'each',
-      //     },
-
-      //     ...fieldData,
-      //   }
-      // },
-    }
   })
 
   app.component('jbk-items-list', JbkItemsList)

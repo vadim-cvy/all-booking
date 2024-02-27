@@ -38,4 +38,6 @@
       } ?>
     </template>
   </jbk-items-list>
+
+  <input type="hidden" name="jbk_filters_settings" :value="JSON.stringify( filters )">
 </div>

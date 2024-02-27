@@ -37,7 +37,7 @@ final class SettingsPage extends TopPage
 
   public function get_slug() : string
   {
-    return 'jbk_filter_settings';
+    return 'jbk_filters_settings';
   }
 
   protected function get_sections_structure() : array
@@ -59,7 +59,28 @@ final class SettingsPage extends TopPage
   {
     wp_enqueue_script( 'jbk-vue', 'https://unpkg.com/vue@3.4.19/dist/vue.global.js' );
 
-    (new JS( 'dashboard-page-filters-settings/index.dev.js', [ 'jbk-vue' ] ))->enqueue();
+    (new JS( 'dashboard-page-filters-settings/index.dev.js', [ 'jbk-vue' ] ))->enqueue( $this->get_js_data() );
+  }
+
+  private function get_js_data() : array
+  {
+    $pts = array_values(get_post_types([
+      'public' => true,
+      '_builtin' => false,
+    ]));
+
+    foreach ( $pts as $i => $pt_slug )
+    {
+      $pts[ $i ] = [
+        'label' => get_post_type_object( $pt_slug )->label,
+        'slug' => $pt_slug,
+      ];
+    }
+
+    return [
+      'filters' => $this->settings->get_all(),
+      'pts' => $pts,
+    ];
   }
 
   private function enqueue_css() : void

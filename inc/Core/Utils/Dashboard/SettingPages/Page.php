@@ -164,14 +164,14 @@ abstract class Page
   //   }
   // }
 
-  final protected function get_success_notice() : array
-  {
-    return [
-      'slug_base' => 'success',
-      'message' => 'Settings are successfully updated!',
-      'type' => 'updated',
-    ];
-  }
+  // final protected function get_success_notice() : array
+  // {
+  //   return [
+  //     'slug_base' => 'success',
+  //     'message' => 'Settings are successfully updated!',
+  //     'type' => 'updated',
+  //   ];
+  // }
 
   private function get_notices_slug() : string
   {
