@@ -116,3 +116,6 @@ td {
   display: flex;
   gap: 1em;
 }
+.jbk-filter-instance__popup-stettings__fields__field_0 .jbk-items-list__item__actions__remove {
+  display: none !important;
+}

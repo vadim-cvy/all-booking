@@ -13,6 +13,22 @@ declare const jbkDashboardPageFiltersSettingsIndexData: {
       filters: jbkDashboardPageFiltersSettingsIndexData.filters,
       pts: jbkDashboardPageFiltersSettingsIndexData.pts,
     }),
+
+    watch: {
+      filters: {
+        deep: true,
+        handler: function (newVal, oldVal)
+        {
+          for ( const [ filterIndex, filter ] of newVal.entries() )
+          {
+            if ( filter.source_pt !== oldVal[ filterIndex ].source_pt )
+            {
+              filter.popup.fields[0].pt = filter.source_pt
+            }
+          }
+        },
+      },
+    },
   })
 
   app.component('jbk-items-list', JbkItemsList)

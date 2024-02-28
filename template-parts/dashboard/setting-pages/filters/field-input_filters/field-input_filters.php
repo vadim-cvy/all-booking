@@ -12,7 +12,12 @@
         items_per_page: 12,
       },
       popup: {
-        fields: [],
+        fields: [
+          {
+            type: 'pt',
+            is_selectable: true,
+          }
+        ],
       },
     })"
   >
