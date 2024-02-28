@@ -1,11 +1,12 @@
 <jbk-field
-  class="jbk-filter-instance__global-stettings__label"
+  class="jbk-filter-instance__global-stettings__state"
   label="State"
 >
   <template #default="{ inputId }">
     <select
       :id="inputId"
       v-model="filterInstance.state"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][state]`"
     >
       <option value="enabled">Visible for users</option>
       <option value="under_development">Under development (is hidden for users but related post metaboxes still appear)</option>

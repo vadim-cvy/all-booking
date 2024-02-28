@@ -7,6 +7,7 @@
       :id="inputId"
       v-model="field.label"
       type="text"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][label]`"
     >
   </template>
 </jbk-field>
@@ -21,6 +22,12 @@
       v-model="field.is_required"
       type="checkbox"
       :disabled="filterInstance.popup.fields[0] === field"
+    >
+
+    <input
+      v-model="field.is_required"
+      type="hidden"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][is_required]`"
     >
   </template>
 </jbk-field>
@@ -39,6 +46,18 @@
       <option value="true_false">True/false</option>
       <option value="number">Number</option>
     </select>
+
+    <input
+      v-model="field.type"
+      type="hidden"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][type]`"
+    >
+
+    <p>
+      // todo: pt > add terms conditions (only in terms/not in terms)
+      // todo: pt > add option (for end users) to select not exactly a specific post but a trem of post type and post to be selected automatically
+      // todo: pt > add swap option for different fields
+    </p>
   </template>
 </jbk-field>
 
@@ -61,6 +80,12 @@
         {{ pt.label }}
       </option>
     </select>
+
+    <input
+      v-model="field.pt"
+      type="hidden"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][pt]`"
+    >
   </template>
 </jbk-field>
 
@@ -74,6 +99,7 @@
       :id="inputId"
       v-model="field.is_selectable"
       type="checkbox"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][is_selectable]`"
     >
   </template>
 </jbk-field>
@@ -88,6 +114,7 @@
       :id="inputId"
       v-model="field.is_number_adjustable"
       type="checkbox"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][is_number_adjustable]`"
     >
   </template>
 </jbk-field>
@@ -107,6 +134,7 @@
       type="number"
       :min="field.is_number_adjustable ? 0 : 1"
       step="1"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][default_number]`"
     >
   </template>
 </jbk-field>
@@ -123,13 +151,14 @@
       type="number"
       :min="1"
       step="1"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][max_number]`"
     >
   </template>
 </jbk-field>
 
 <jbk-field
   v-if="(field.type === 'pt' && field.is_number_adjustable) || field.type === 'number'"
-  class="jbk-filter-instance__popup-stettings__fields__field__max-number"
+  class="jbk-filter-instance__popup-stettings__fields__field__min-number"
   :label="'Min' + ( field.type === 'pt' ? 'Number of Items' : '' )"
 >
   <template #default="{ inputId }">
@@ -139,6 +168,7 @@
       type="number"
       :min="1"
       step="1"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][min_number]`"
     >
   </template>
 </jbk-field>
@@ -155,30 +185,19 @@
   "
 >
   <template #default="{ inputId }">
-    <div v-if="field.type === 'pt' && field.is_selectable">
-      $ <input
-        :id="inputId"
-        v-model="field.default_price"
-        type="text"
-        min="0"
-        step="0.01"
-      >
-      <p>
-        You are able to set custom price for each post on their edit pages after filter is saved.
-      </p>
+    $ <input
+      :id="inputId"
+      v-model="field.price"
+      type="number"
+      min="0"
+      step="0.01"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][popup][fields][${fieldIndex}][price]`"
+    >
 
+    <p v-if="field.type === 'pt' && field.is_selectable">
+      You are able to set custom price for each post on their edit pages after filter is saved.
       // todo: show list of posts missing the price settings
-    </div>
-
-    <div v-else>
-      $ <input
-        :id="inputId"
-        v-model="field.price"
-        type="number"
-        min="0"
-        step="0.01"
-      >
-    </div>
+    </p>
   </template>
 </jbk-field>
 

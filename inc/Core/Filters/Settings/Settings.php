@@ -20,14 +20,9 @@ final class Settings extends ComplexOption
 		return [];
 	}
 
-	protected function sanitize( array | string $value ) : array
+	protected function sanitize( array $value ) : array
 	{
 		// todo: implement sanitization & errors handling
-
-		if ( is_string( $value ) )
-		{
-			$value = json_decode( $value, true );
-		}
 
 		// $error = true;
 

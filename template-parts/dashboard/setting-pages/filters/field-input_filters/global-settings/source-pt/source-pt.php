@@ -5,7 +5,7 @@
   <template #default="{ inputId }">
     <select
       :id="inputId"
-      v-model="filterInstance.sourcePt"
+      v-model="filterInstance.popup.fields[0].pt"
     >
       <option
         v-for="pt in pts"

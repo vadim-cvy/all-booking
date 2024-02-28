@@ -12,7 +12,7 @@
       slots: [],
     })"
   >
-    <template #default="{ item: slotsGroup }">
+    <template #default="{ item: slotsGroup, itemIndex: slotsGroupIndex }">
       <jbk-field
         class="jbk-filter-instance__global-stettings__timing__slots-group__days"
         label="Days"
@@ -26,10 +26,16 @@
               <input
                 type="checkbox"
                 v-model="slotsGroup.days"
-                value="<?php echo esc_attr( $day_index ); ?>"
+                value="<?php echo (int) $day_index; ?>"
               >
               <?php echo esc_html( $day_name ); ?>
             </label>
+
+            <input
+              type="hidden"
+              :name="`jbk_filters_settings[${filterInstanceIndex}][timing][${slotsGroupIndex}][days]`"
+              :value="JSON.stringify( slotsGroup.days )"
+            >
           <?php
           } ?>
         </template>
@@ -49,7 +55,7 @@
             duration: { d: 0, h: 0, m: 0 },
           })"
         >
-          <template #default="{ item: slot }">
+          <template #default="{ item: slot, itemIndex: slotIndex }">
             <jbk-field
               class="jbk-filter-instance__global-stettings__timing__slots-group__slot__start"
               label="Start Time"
@@ -59,6 +65,7 @@
                   :id="inputId"
                   v-model="slot.start"
                   type="time"
+                  :name="`jbk_filters_settings[${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][start]`"
                 >
               </template>
             </jbk-field>
@@ -75,6 +82,7 @@
                     min="0"
                     step="1"
                     v-model.number="slot.duration.d"
+                    :name="`jbk_filters_settings[${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][d]`"
                   >
                   days
                 </label>
@@ -86,6 +94,7 @@
                     max="23"
                     step="1"
                     v-model.number="slot.duration.h"
+                    :name="`jbk_filters_settings[${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][h]`"
                   >
                   hours
                 </label>
@@ -97,6 +106,7 @@
                     max="59"
                     step="1"
                     v-model.number="slot.duration.m"
+                    :name="`jbk_filters_settings[${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][m]`"
                   >
                   minutes
               </template>

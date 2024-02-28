@@ -7,6 +7,7 @@
       :id="inputId"
       v-model="filterInstance.label"
       type="text"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][label]`"
     >
   </template>
 </jbk-field>

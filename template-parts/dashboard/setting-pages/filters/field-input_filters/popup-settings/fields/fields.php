@@ -12,7 +12,7 @@
       subFields: [],
     })"
   >
-    <template #default="{ item: field }">
+    <template #default="{ item: field, itemIndex: fieldIndex }">
       <?php require_once __DIR__ . '/field-settings.php'; ?>
     </template>
   </jbk-items-list>

@@ -9,6 +9,7 @@
       type="number"
       min="1"
       step="1"
+      :name="`jbk_filters_settings[${filterInstanceIndex}][filter_page][items_per_page]`"
     >
   </template>
 </jbk-field>
