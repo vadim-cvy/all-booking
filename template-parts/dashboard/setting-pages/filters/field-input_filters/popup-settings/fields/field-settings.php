@@ -12,6 +12,20 @@
 </jbk-field>
 
 <jbk-field
+  class="jbk-filter-instance__popup-stettings__fields__field__is-required"
+  label="Is Required?"
+>
+  <template #default="{ inputId }">
+    <input
+      :id="inputId"
+      v-model="field.is_required"
+      type="checkbox"
+      :disabled="filterInstance.popup.fields[0] === field"
+    >
+  </template>
+</jbk-field>
+
+<jbk-field
   class="jbk-filter-instance__popup-stettings__fields__field__type"
   label="Type"
 >

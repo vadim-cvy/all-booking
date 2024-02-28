@@ -16,6 +16,7 @@
           {
             type: 'pt',
             is_selectable: true,
+            is_required: true,
           }
         ],
       },
