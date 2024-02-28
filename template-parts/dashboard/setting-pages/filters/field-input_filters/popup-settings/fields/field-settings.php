@@ -45,7 +45,7 @@
     >
       <input
         :id="inputId"
-        v-model="field.priceFormula"
+        v-model="field.price_formula"
         type="text"
         pattern="[0-9\(\)\-\+\/\*\$\.]*"
       >
@@ -74,7 +74,7 @@
   <template #default="{ inputId }">
     <input
       :id="inputId"
-      v-model="field.isSelectable"
+      v-model="field.is_selectable"
       type="checkbox"
     >
   </template>
@@ -83,12 +83,12 @@
 <jbk-field
   v-if="field.type === 'pt'"
   class="jbk-filter-instance__popup-stettings__fields__field__is-number-adjustable"
-  :label="'Can user adjust the number of items ' + ( field.isSelectable ? 'of the selected type' : '' ) + ' they want to book?'"
+  :label="'Can user adjust the number of items ' + ( field.is_selectable ? 'of the selected type' : '' ) + ' they want to book?'"
 >
   <template #default="{ inputId }">
     <input
       :id="inputId"
-      v-model="field.isNumberAdjustable"
+      v-model="field.is_number_adjustable"
       type="checkbox"
     >
   </template>

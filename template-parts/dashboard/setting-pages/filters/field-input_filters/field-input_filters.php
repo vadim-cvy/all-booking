@@ -4,10 +4,12 @@
     item-css-class="jbk-filter-instance"
     item-general-label="Filter"
     :new-item-data-cb="() => ({
+      state: 'under_development',
       label: '',
+      source_pt: '',
       timing: [],
-      filterPage: {
-        itemsPerPage: 12,
+      filter_page: {
+        items_per_page: 12,
       },
       popup: {
         fields: [],

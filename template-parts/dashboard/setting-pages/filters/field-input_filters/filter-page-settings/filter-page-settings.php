@@ -5,7 +5,7 @@
   <template #default="{ inputId }">
     <input
       :id="inputId"
-      v-model="filterInstance.filterPage.itemsPerPage"
+      v-model="filterInstance.filter_page.items_per_page"
       type="number"
       min="1"
       step="1"
