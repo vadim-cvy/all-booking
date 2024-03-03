@@ -1,17 +1,22 @@
 <?php
-namespace Jab\Utils\Dashboard\SettingPages\SubmissionHandler;
+namespace Jab\Utils\Settings\SettingPages\SubmissionHandler;
+
+use Jab\Utils\Settings\SettingPages\Page;
+use \Jab\Utils\Hooks\iHookable;
 
 use Exception;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
+abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton implements iHookable
 {
+  use \Jab\Utils\Hooks\tHookable;
+
   const VALUE_REQUIRED_MSG = 'Value required';
 
   private $validation_errors = [];
 
-  protected function __construct()
+  final protected function __construct()
   {
     if ( empty( $_POST ) )
     {
@@ -20,7 +25,11 @@ abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
 
     try
     {
+      $this->do_action( 'before-handle' );
+
       $this->handle_submission( $this->get_submitted_data() );
+
+      $this->do_action( 'after-handle' );
     }
     catch ( ValidationError $e ) {}
 
@@ -44,19 +53,19 @@ abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
 
     array_walk_recursive( $submitted_data, fn( &$value ) => $value = stripslashes( $value ) );
 
-    return $submitted_data;
+    return $this->apply_filters( 'submitted_data', $submitted_data );
   }
 
-  abstract protected function get_POST_key() : string;
+  abstract static protected function get_POST_key() : string;
 
-  protected function throw_validation_error( $msg, array $field_key_chain = [] ) : void
+  final protected function throw_validation_error( $msg, array $field_key_chain = [] ) : void
   {
     $this->add_validation_error( $msg, $field_key_chain );
 
     throw new ValidationError();
   }
 
-  protected function add_validation_error( $msg, array $field_key_chain = [] ) : void
+  final protected function add_validation_error( $msg, array $field_key_chain = [] ) : void
   {
     if ( empty( $field_key_chain ) )
     {
@@ -73,17 +82,17 @@ abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
     $this->validation_errors = array_merge_recursive( $this->validation_errors, $error );
   }
 
-  protected function has_validation_errors() : bool
+  final protected function has_validation_errors() : bool
   {
-    return ! empty( $this->validation_errors );
+    return ! empty( $this->get_validation_errors() );
   }
 
-  protected function get_validation_errors() : array
+  final protected function get_validation_errors() : array
   {
-    return $this->validation_errors;
+    return $this->apply_filters( 'validation_errors', $this->validation_errors );
   }
 
-  protected function validate_sanitize_string_field(
+  final protected function validate_sanitize_string_field(
     mixed $field_value,
     array $field_key_chain,
     array $modifiers = []
@@ -143,7 +152,7 @@ abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
     return $field_value;
   }
 
-  protected function validate_sanitize_number_field(
+  final protected function validate_sanitize_number_field(
     mixed $field_value,
     array $field_key_chain,
     array $modifiers = [],
@@ -204,7 +213,7 @@ abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
     return $field_value;
   }
 
-  protected function validate_sanitize_array_field(
+  final protected function validate_sanitize_array_field(
     mixed $field_value,
     array $field_key_chain,
     array $modifiers = [],
@@ -265,5 +274,15 @@ abstract class SubmissionHandler extends \Jab\Utils\DesignPatterns\Singleton
     }
 
     return $field_value;
+  }
+
+  final static protected function get_hook_base_args() : array
+  {
+    return [ static::get_POST_key() ];
+  }
+
+  final static protected function get_hook_name_prefix() : string
+  {
+    return 'submission/';
   }
 }

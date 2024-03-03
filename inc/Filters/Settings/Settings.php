@@ -3,11 +3,11 @@ namespace Jab\Filters\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Settings
+final class Settings extends \Jab\Utils\Settings\Option
 {
-  static public function get() : array
+  static protected function get_default_value_raw() : array
   {
-    return get_option( static::get_option_name(), [] );
+    return [];
   }
 
   static public function get_option_name() : string

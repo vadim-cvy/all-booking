@@ -1,13 +1,14 @@
 <?php
 namespace Jab\Filters\Settings;
 
-use Jab\Utils\Dashboard\SettingPages\SubmissionHandler\ValidationError;
+use Jab\Utils\Settings\SettingPages\SubmissionHandler\ValidationError;
+use Jab\Utils\Hooks\iHookable;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class SubmissionHandler extends \Jab\Utils\Dashboard\SettingPages\SubmissionHandler\SubmissionHandler
+final class SubmissionHandler extends \Jab\Utils\Settings\SettingPages\SubmissionHandler\SubmissionHandler
 {
-  protected function get_POST_key() : string
+  static protected function get_POST_key() : string
   {
     return 'jab_filters_settings';
   }
@@ -33,7 +34,7 @@ class SubmissionHandler extends \Jab\Utils\Dashboard\SettingPages\SubmissionHand
       $submitted_data[ $filter_key ] = $filter_data;
     }
 
-    echo'<pre>';var_dump( $submitted_data );echo'</pre>';exit();
+    $submitted_data = $this->apply_filters( 'validate_sanitize_data', $submitted_data );
 
     Settings::update( $submitted_data );
   }
@@ -259,5 +260,10 @@ class SubmissionHandler extends \Jab\Utils\Dashboard\SettingPages\SubmissionHand
     );
 
     return $field;
+  }
+
+  static protected function get_parent_hookable() : iHookable | null
+  {
+    return SettingsPage::get_instance();
   }
 }

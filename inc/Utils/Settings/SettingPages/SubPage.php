@@ -1,11 +1,11 @@
 <?php
-namespace Jab\Utils\Dashboard\SettingPages;
+namespace Jab\Utils\Settings\SettingPages;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 abstract class SubPage extends Page
 {
-  protected function register() : void
+  final protected function register() : void
   {
     add_submenu_page(
       $this->get_parent_page_slug(),

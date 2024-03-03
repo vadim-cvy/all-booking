@@ -1,10 +1,14 @@
 <?php
-namespace Jab\Utils\Dashboard\SettingPages;
+namespace Jab\Utils\Settings\SettingPages;
+
+use \Jab\Utils\Hooks\iHookable;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class Page extends \Jab\Utils\DesignPatterns\Singleton
+abstract class Page extends \Jab\Utils\DesignPatterns\Singleton implements iHookable
 {
+  use \Jab\Utils\Hooks\tHookable;
+
   protected function __construct()
   {
     add_action( 'admin_menu', fn() => $this->register() );
@@ -20,6 +24,8 @@ abstract class Page extends \Jab\Utils\DesignPatterns\Singleton
     )
     {
       $this->on_is_current();
+
+      $this->do_action( 'on_is_current' );
     }
   }
 
@@ -32,21 +38,26 @@ abstract class Page extends \Jab\Utils\DesignPatterns\Singleton
 
   abstract protected function register() : void;
 
-  abstract protected function get_menu_label() : string;
+  abstract static protected function get_menu_label() : string;
 
-  abstract public function get_page_title() : string;
+  abstract static public function get_page_title() : string;
 
-  public function get_url() : string
+  final static public function get_url() : string
   {
-    return menu_page_url( $this->get_slug(), false );
+    return menu_page_url( static::get_slug(), false );
   }
 
-  protected function get_user_capability() : string
+  final static protected function get_user_capability() : string
+  {
+    return static::apply_filters( 'user_capability', static::get_user_capability_raw() );
+  }
+
+  static protected function get_user_capability_raw() : string
   {
     return 'manage_options';
   }
 
-  abstract public function get_slug() : string;
+  abstract static public function get_slug() : string;
 
   final protected function render() : void
 	{
@@ -70,17 +81,33 @@ abstract class Page extends \Jab\Utils\DesignPatterns\Singleton
 
   private function render_fields() : void
   {
-    $page_file_name = str_replace( [ 'jab_', '_' ], [ '', '-' ], $this->get_slug() );
+    $template_name = str_replace( [ 'jab_', '_' ], [ '', '-' ], $this->get_slug() );
 
     $template_args = $this->get_template_args();
 
     require_once jab_resolve_path(sprintf( JAB_TEMPLATES_PATH . 'dashboard/setting-pages/%s/%s.php',
-      $page_file_name,
-      $page_file_name
+      $template_name,
+      $template_name
     ));
   }
 
   abstract protected function get_template_args() : array;
 
-  abstract protected function instansiate_submission_handlers();
+  abstract
+   protected function instansiate_submission_handlers() : void;
+
+  static protected function get_hook_base_args() : array
+  {
+    return [ static::get_slug() ];
+  }
+
+  static protected function get_hook_name_prefix() : string
+  {
+    return 'settings-page/';
+  }
+
+  static protected function get_parent_hookable() : iHookable | null
+  {
+    return null;
+  }
 }

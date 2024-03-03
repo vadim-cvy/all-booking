@@ -1,5 +1,5 @@
 <?php
-namespace Jab\Utils\Dashboard\SettingPages\SubmissionHandler;
+namespace Jab\Utils\Settings\SettingPages\SubmissionHandler;
 
 use Exception;
 
@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class ValidationError extends Exception
 {
-  public function __construct( $message = '' )
+  final public function __construct( $message = '' )
   {
     if ( ! empty( $message ) )
     {

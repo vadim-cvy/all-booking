@@ -1,5 +1,5 @@
-import { JabField } from "./components/JbkField"
-import { JabItemsList } from "./components/JbkItemsList"
+import { JabField } from "./components/JabField"
+import { JabItemsList } from "./components/JabItemsList"
 
 declare const jabFiltersSettingsPage: {
   filters: any[],

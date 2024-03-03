@@ -3,44 +3,42 @@ namespace Jab\Filters\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class SettingsPage extends \Jab\Utils\Dashboard\SettingPages\TopPage
+final class SettingsPage extends \Jab\Utils\Settings\SettingPages\TopPage
 {
   static public function get_available_filter_states() : array
   {
-    // todo: add hooks
-    return [
+    return $this->apply_filters( 'available_filter_states', [
       'enabled',
       'under_development',
       'disabled',
-    ];
+    ]);
   }
 
   static public function get_available_popup_field_types() : array
   {
-    // todo: add hooks
-    return [
+    return $this->apply_filters( 'available_popup_field_types', [
       'pt',
       'number',
       'true_false',
-    ];
+    ]);
   }
 
-  protected function get_menu_position() : int
+  static protected function get_menu_position() : int
   {
     return 25;
   }
 
-  protected function get_menu_label() : string
+  static protected function get_menu_label() : string
   {
     return 'Filters';
   }
 
-  public function get_page_title() : string
+  static public function get_page_title() : string
   {
     return jab_get_plugin_name() . ': Filters Settings';
   }
 
-  public function get_slug() : string
+  static public function get_slug() : string
   {
     return 'jab_filters';
   }
@@ -85,7 +83,7 @@ class SettingsPage extends \Jab\Utils\Dashboard\SettingPages\TopPage
     ];
   }
 
-  protected function instansiate_submission_handlers()
+  protected function instansiate_submission_handlers() : void
   {
     SubmissionHandler::get_instance();
   }

@@ -1,11 +1,11 @@
 <?php
-namespace Jab\Utils\Dashboard\SettingPages;
+namespace Jab\Utils\Settings\SettingPages;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 abstract class TopPage extends Page
 {
-  protected function register() : void
+  final protected function register() : void
   {
     add_menu_page(
 			$this->get_page_title(),
