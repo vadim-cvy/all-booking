@@ -27,10 +27,7 @@ abstract class Page extends \Jab\Utils\DesignPatterns\Singleton
   {
     add_action( 'admin_enqueue_scripts', fn() => $this->enqueue_assets() );
 
-    if ( ! empty( $_POST ) )
-    {
-      $this->handle_submission();
-    }
+    $this->instansiate_submission_handlers();
   }
 
   abstract protected function register() : void;
@@ -85,33 +82,5 @@ abstract class Page extends \Jab\Utils\DesignPatterns\Singleton
 
   abstract protected function get_template_args() : array;
 
-	private function handle_submission() : void
-	{
-    echo'<pre>';var_dump( 'handling submission' );echo'</pre>';exit();
-    // todo
-
-    // foreach ( $notices as $notice )
-    // {
-    //   add_settings_error(
-    //     $this->get_notices_slug(),
-    //     $notice['slug_base'],
-    //     $notice['message'],
-    //     $notice['type'],
-    //   );
-    // }
-  }
-
-  // protected function get_success_notice() : array
-  // {
-  //   return [
-  //     'slug_base' => 'success',
-  //     'message' => 'Settings are successfully updated!',
-  //     'type' => 'updated',
-  //   ];
-  // }
-
-  // private function get_notices_slug() : string
-  // {
-  //   return $this->get_slug() . '_messages';
-  // }
+  abstract protected function instansiate_submission_handlers();
 }

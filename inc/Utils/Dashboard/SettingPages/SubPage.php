@@ -3,7 +3,6 @@ namespace Jab\Utils\Dashboard\SettingPages;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// todo: maybe remove
 abstract class SubPage extends Page
 {
   protected function register() : void

@@ -1,12 +1,30 @@
 <?php
-namespace Jab\Filters;
-
-use \Jab\Utils\Dashboard\SettingPages\TopPage;
+namespace Jab\Filters\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class SettingsPage extends TopPage
+class SettingsPage extends \Jab\Utils\Dashboard\SettingPages\TopPage
 {
+  static public function get_available_filter_states() : array
+  {
+    // todo: add hooks
+    return [
+      'enabled',
+      'under_development',
+      'disabled',
+    ];
+  }
+
+  static public function get_available_popup_field_types() : array
+  {
+    // todo: add hooks
+    return [
+      'pt',
+      'number',
+      'true_false',
+    ];
+  }
+
   protected function get_menu_position() : int
   {
     return 25;
@@ -65,5 +83,10 @@ class SettingsPage extends TopPage
       'filters' => Settings::get(),
       'pts' => $pts,
     ];
+  }
+
+  protected function instansiate_submission_handlers()
+  {
+    SubmissionHandler::get_instance();
   }
 }

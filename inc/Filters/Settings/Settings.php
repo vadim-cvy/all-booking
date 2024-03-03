@@ -1,5 +1,5 @@
 <?php
-namespace Jab\Filters;
+namespace Jab\Filters\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

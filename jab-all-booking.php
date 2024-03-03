@@ -84,7 +84,7 @@ function jab_get_asset_url( string $rel_path, string $asset_type ) : string
 /**
  * Init plugin functionality
  */
-\Jab\Filters\SettingsPage::get_instance();
+\Jab\Filters\Settings\SettingsPage::get_instance();
 
 
 // todo: move to class
