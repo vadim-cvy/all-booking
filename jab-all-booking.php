@@ -84,59 +84,6 @@ function jab_get_asset_url( string $rel_path, string $asset_type ) : string
 /**
  * Init plugin functionality
  */
-\Jab\Filters\Settings\SettingsPage::get_instance();
-
-
-// todo: move to class
-add_action( 'add_meta_boxes', function()
-{
-  $screen = get_current_screen();
-
-  if ( $screen->base !== 'post' )
-  {
-    return;
-  }
-
-  $current_pt = $screen->post_type;
-
-  foreach ( \Jab\Filters\Settings\Settings::get_instance()->get_all() as $filter_index => $filter )
-  {
-    if ( $filter['state'] === 'disabled' )
-    {
-      continue;
-    }
-
-    $filter_fields = $filter['popup']['fields'];
-
-    // todo: do this recursively
-    foreach ( $filter_fields as $field )
-    {
-      if ( $field['type'] !== 'pt' || $field['pt'] !== $current_pt )
-      {
-        continue;
-      }
-
-      // todo: id should be assigned to the filter on filter creation as indexing will break the things
-      $filter_id = $filter_index;
-
-      add_meta_box(
-        'jab_filter_' . $filter_id . '_settings',
-        sprintf( '"%s" Filter Settings', $filter['label'] ),
-        function() use ( $filter_fields, $current_pt )
-        {
-          // todo: do this recursively
-          foreach ( $filter_fields as $field )
-          {
-            if ( $field['type'] !== 'pt' || $field['pt'] !== $current_pt )
-            {
-              continue;
-            }
-
-            echo'<pre>';var_dump( $field );echo'</pre>';exit();
-          }
-        },
-        $screen
-      );
-    }
-  }
-});
+Jab\Dashboard\Dashboard::get_instance();
+Jab\Dashboard\SettingsPages\Global\Page::get_instance();
+Jab\Dashboard\Metaboxes\PtMetabox::get_instance();

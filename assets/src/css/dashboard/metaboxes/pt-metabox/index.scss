@@ -1,0 +1,48 @@
+@use './../../dashboard-vars.scss';
+
+// todo: styles are not completed - complete them
+.jab-metabox
+{
+  &__section
+  {
+    padding: 1.5em 0;
+    border-bottom: dashboard-vars.$separator-border;
+
+    &:first-child
+    {
+      padding-top: 0;
+    }
+
+    &:last-child
+    {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    &__title
+    {
+      margin-bottom: 1em !important;
+      padding: 0 !important;
+      font-size: 1.2em !important;
+      font-weight: 700 !important;
+    }
+  }
+
+  &__filter-overrides
+  {
+    &__title
+    {
+      font-size: 1.1em !important;
+    }
+
+    .jab-field
+    {
+      padding-left: 1em;
+    }
+  }
+
+  p:last-child
+  {
+    margin-bottom: 0;
+  }
+}

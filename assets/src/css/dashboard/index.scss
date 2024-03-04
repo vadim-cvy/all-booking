@@ -1,0 +1,82 @@
+.jab-field
+{
+  margin-bottom: 2em;
+
+  &:last-child
+  {
+    margin-bottom: 0;
+  }
+
+  label
+  {
+    display: flex;
+    align-items: center;
+
+    input
+    {
+      margin-right: .3em !important;
+    }
+  }
+
+  &__label
+  {
+    display: inline-block;
+    margin-bottom: .4em;
+    font-weight: 600;
+  }
+
+  input,
+  select,
+  textarea
+  {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"]
+  {
+    margin: 0;
+  }
+
+  input[type="number"]
+  {
+    width: 5em;
+  }
+
+  input[type="text"],
+  select
+  {
+    width: 20em;
+  }
+}
+
+.jab-items-list
+{
+  &__item
+  {
+    &__actions
+    {
+      display: flex;
+      gap: 1em;
+      margin-top: 1.5em;
+    }
+  }
+}
+
+.jab-button
+{
+  display: inline-block;
+  cursor: pointer;
+
+  &_danger
+  {
+    color: red !important;
+    border-color: currentColor !important;
+  }
+}
+
+.jab-text-secondary
+{
+  opacity: .7;
+}

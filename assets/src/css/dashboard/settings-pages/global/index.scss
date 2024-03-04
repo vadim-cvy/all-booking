@@ -1,0 +1,126 @@
+@use './../../dashboard-vars.scss';
+
+.jab-filter-instance
+{
+  border: 1px solid #000;
+  padding: 1.5em;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 3em;
+
+  &__warning
+  {
+    margin-bottom: 0;
+    font-weight: 700;
+    color: red;
+  }
+
+  &__section
+  {
+    padding: 2em 0;
+    border-bottom: dashboard-vars.$separator-border;
+
+    &:first-child
+    {
+      padding-top: 0;
+    }
+
+    &:last-child
+    {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    &__title
+    {
+      margin-top: 0;
+    }
+  }
+
+  .jab-field__input-wrapper
+  {
+    & > .jab-field,
+    & > .jab-items-list
+    {
+      margin-top: 1em;
+      margin-left: 1em;
+    }
+
+    .jab-items-list__item
+    {
+      padding-left: 2em;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      margin-bottom: 2em;
+      border-left: dashboard-vars.$separator-border;
+
+      .jab-items-list__item
+      {
+        padding: 2em 0;
+        border-left: none;
+        border-bottom: dashboard-vars.$separator-border;
+
+        &:first-child
+        {
+          padding-top: 0;
+        }
+
+        &:not(:last-child)
+        {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &__global-stettings__timing__slots-group
+  {
+    &__days
+    {
+      .jab-field__input-wrapper
+      {
+        display: flex;
+        gap: 1.3em;
+      }
+    }
+
+    &__slot
+    {
+      .jab-field
+      {
+        margin-bottom: 0;
+      }
+
+      .jab-items-list__item__content
+      {
+        display: flex;
+        gap: 4em;
+      }
+
+      &__duration
+      {
+        .jab-field__input-wrapper
+        {
+          display: flex;
+          gap: 1em;
+        }
+      }
+    }
+  }
+
+  &__popup-stettings__fields__field
+  {
+    &_0
+    {
+      .jab-items-list__item__actions__remove
+      {
+        display: none !important;
+      }
+    }
+
+    &__header
+    {
+      margin-bottom: 1.5em;
+    }
+  }
+}
