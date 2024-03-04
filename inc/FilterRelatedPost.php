@@ -23,12 +23,24 @@ final class FilterRelatedPost
     return $this->get_meta( 'limit' );
   }
 
+  public function update_limit( int | null $limit ) : void
+  {
+    if ( $limit === null || $limit === 0 )
+    {
+      $this->delete_meta( 'limit' );
+    }
+    else
+    {
+      $this->update_meta( 'limit', $limit );
+    }
+  }
+
   public function get_popup_field_overrides( int $field_id ) : array
   {
     return $this->get_meta( 'popup_field_overrides_' . $field_id ) ?? [];
   }
 
-  public function update_popup_field_overrides( int $field_id, array $overrides ) : array
+  public function update_popup_field_overrides( int $field_id, array $overrides ) : void
   {
     $meta_key = 'popup_field_overrides_' . $field_id;
 

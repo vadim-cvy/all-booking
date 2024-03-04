@@ -15,6 +15,7 @@
           :id="inputId"
           min="0"
           step="1"
+          name="jab[limit]"
         >
 
         <p>

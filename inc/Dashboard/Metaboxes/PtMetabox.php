@@ -95,9 +95,12 @@ final class PtMetabox extends \Jab\Utils\DesignPatterns\Singleton
     }
   }
 
+  // todo: add validation
   private function handle_submission() : void
   {
-    // todo: add validation
+    $current_post = $this->get_current_post();
+
+    $current_post->update_limit( (int) $_POST['jab']['limit'] );
 
     foreach ( $_POST['jab']['filters'] as $filter )
     {
@@ -105,7 +108,7 @@ final class PtMetabox extends \Jab\Utils\DesignPatterns\Singleton
       {
         $field_original = Filters::get_popup_field( $submitted_field_data['id'] );
 
-        $this->get_current_post()->update_popup_field_overrides(
+        $current_post->update_popup_field_overrides(
           $submitted_field_data['id'],
           array_diff_assoc( $submitted_field_data, $field_original )
         );
