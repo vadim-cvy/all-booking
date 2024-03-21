@@ -49,12 +49,12 @@
               <?php
               foreach ( [ 'default-number', 'max-number', 'min-number' ] as $field_setting_name )
               {
-                require_once jab_resolve_path(
+                require jab_resolve_path(
                   JAB_TEMPLATES_PATH . "/dashboard/settings-pages/global/popup/field-setting_$field_setting_name.php" );
               } ?>
             </div>
 
-            <?php require_once jab_resolve_path(
+            <?php require jab_resolve_path(
               JAB_TEMPLATES_PATH . "/dashboard/settings-pages/global/popup/field-setting_price.php" ); ?>
 
             <input

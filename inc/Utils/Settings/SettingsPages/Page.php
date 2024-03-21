@@ -82,7 +82,7 @@ abstract class Page extends \Jab\Utils\DesignPatterns\Singleton implements iHook
 
     $template_args = $this->get_template_args();
 
-    require_once jab_resolve_path(sprintf( JAB_TEMPLATES_PATH . 'dashboard/settings-pages/%s/%s.php',
+    require jab_resolve_path(sprintf( JAB_TEMPLATES_PATH . 'dashboard/settings-pages/%s/%s.php',
       $template_name,
       $template_name
     ));

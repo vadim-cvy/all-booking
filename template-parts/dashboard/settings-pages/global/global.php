@@ -54,7 +54,7 @@ $setting_groups = [
           jab-filter-instance__<?php echo esc_attr( $setting_group_key ); ?>-settings
           jab-filter-instance__section__content
         ">
-          <?php require_once jab_resolve_path( __DIR__ . "/$setting_group_key/$setting_group_key.php" ); ?>
+          <?php require jab_resolve_path( __DIR__ . "/$setting_group_key/$setting_group_key.php" ); ?>
         </div>
       </div>
     <?php

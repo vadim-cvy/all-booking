@@ -2,11 +2,11 @@
   v-show="areAdvancedControlsVisible"
   class="jab-filter__sidebar__advanced-controls__popup jab-filter__popup"
 >
-  <?php require_once jab_resolve_path( __DIR__ . '/../../common/popup/close.php' ); ?>
+  <?php require jab_resolve_path( __DIR__ . '/../../common/popup/close.php' ); ?>
 
   <div class="jab-filter__popup__content">
     <div class="jab-filter__popup__booking-fields">
-      <?php require_once jab_resolve_path( __DIR__ . '/../../common/popup/booking-fields.php' ); ?>
+      <?php require jab_resolve_path( __DIR__ . '/../../common/popup/booking-fields.php' ); ?>
     </div>
 
     <div>
@@ -15,7 +15,7 @@
   </div>
 
   <div class="jab-filter__popup__actions">
-    <?php require_once jab_resolve_path( __DIR__ . '/../../common/popup/action-button-close.php' ); ?>
+    <?php require jab_resolve_path( __DIR__ . '/../../common/popup/action-button-close.php' ); ?>
 
     // todo: add onclick - close popup and update results
     // todo: disable if no items match the filter

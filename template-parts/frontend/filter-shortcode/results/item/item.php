@@ -7,10 +7,10 @@
   ]"
 >
   <?php
-  require_once jab_resolve_path( __DIR__ . '/img.php' );
-  require_once jab_resolve_path( __DIR__ . '/title.php' );
-  require_once jab_resolve_path( __DIR__ . '/status.php' );
-  require_once jab_resolve_path( __DIR__ . '/excerpt.php' );
-  require_once jab_resolve_path( __DIR__ . '/popup-triggers.php' );
+  require jab_resolve_path( __DIR__ . '/img.php' );
+  require jab_resolve_path( __DIR__ . '/title.php' );
+  require jab_resolve_path( __DIR__ . '/status.php' );
+  require jab_resolve_path( __DIR__ . '/excerpt.php' );
+  require jab_resolve_path( __DIR__ . '/popup-triggers.php' );
   ?>
 </div>

@@ -7,5 +7,5 @@
     Click for more options
   </a>
 
-  <?php require_once jab_resolve_path( __DIR__ . '/popup.php' ); ?>
+  <?php require jab_resolve_path( __DIR__ . '/popup.php' ); ?>
 </div>

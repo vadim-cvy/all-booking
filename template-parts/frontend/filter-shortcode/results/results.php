@@ -10,7 +10,7 @@
     v-else-if="results.length"
     class="jab-filter__items"
   >
-    <?php require_once jab_resolve_path( __DIR__ . '/item/item.php' ); ?>
+    <?php require jab_resolve_path( __DIR__ . '/item/item.php' ); ?>
   </div>
 
   <p
@@ -22,5 +22,5 @@
 
   <!-- todo: pagination -->
 
-  <?php require_once jab_resolve_path( __DIR__ . '/item-popup/item-popup.php' ); ?>
+  <?php require jab_resolve_path( __DIR__ . '/item-popup/item-popup.php' ); ?>
 </div>

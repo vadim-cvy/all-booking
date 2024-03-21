@@ -23,14 +23,14 @@
       <?php
       foreach ( [ 'label', 'is-required', 'type' ] as $field_setting_name )
       {
-        require_once jab_resolve_path( __DIR__ . "/field-setting_$field_setting_name.php" );
+        require jab_resolve_path( __DIR__ . "/field-setting_$field_setting_name.php" );
       } ?>
 
       <div v-if="field.type">
         <?php
         foreach ( [ 'pt', 'number', 'true-false' ] as $popup_field_settings_group )
         {
-          require_once jab_resolve_path( __DIR__ . "/field-settings_$popup_field_settings_group.php" );
+          require jab_resolve_path( __DIR__ . "/field-settings_$popup_field_settings_group.php" );
         } ?>
       </div>
 
