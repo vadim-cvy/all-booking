@@ -1,6 +1,10 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__price"
-  label="Price"
+  :label="
+    field.type === 'pt' && field.is_number_adjustable ? 'Default Price per 1 Item' :
+    field.type === 'pt' ? 'Post Default Price' :
+    'Price'
+  "
 >
   <template #default="{ inputId }">
     $ <input

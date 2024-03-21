@@ -1,6 +1,6 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__max-number"
-  label="Max Number"
+  label="Max Value"
 >
   <template #default="{ inputId }">
     <input

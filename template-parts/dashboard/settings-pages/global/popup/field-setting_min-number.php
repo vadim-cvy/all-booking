@@ -1,6 +1,6 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__min-number"
-  label="Min Number"
+  label="Min Value"
 >
   <template #default="{ inputId }">
     <input

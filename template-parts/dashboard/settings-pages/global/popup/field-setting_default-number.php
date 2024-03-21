@@ -1,6 +1,6 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__default-number"
-  label="Default Number"
+  label="Default Value"
 >
   <template #default="{ inputId }">
     <input
