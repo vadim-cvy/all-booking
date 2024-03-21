@@ -1,6 +1,6 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__min-number"
-  label="Min Value"
+  :label="field.type === 'pt' ? 'Min Number of Items' : 'Min Value'"
 >
   <template #default="{ inputId }">
     <input

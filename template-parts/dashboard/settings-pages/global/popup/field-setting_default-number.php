@@ -1,6 +1,6 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__default-number"
-  label="Default Value"
+  :label="field.type === 'pt' ? 'Default Number of Items' : 'Default Value'"
 >
   <template #default="{ inputId }">
     <input

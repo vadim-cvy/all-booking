@@ -3,6 +3,7 @@
   :label="
     field.type === 'pt' && field.is_number_adjustable ? 'Default Price per 1 Item' :
     field.type === 'pt' ? 'Post Default Price' :
+    field.type === 'number' ? 'Price per 1' :
     'Price'
   "
 >
@@ -15,6 +16,8 @@
       step="0.01"
       :name="`jab[filters][${filterInstanceIndex}][popup][fields][${fieldIndex}][price]`"
     >
+
+    // todo: implement formula for number field like val*10
 
     <p v-if="field.type === 'pt' && field.is_selectable">
       You are able to set custom price for each post on their edit pages after filter is saved.

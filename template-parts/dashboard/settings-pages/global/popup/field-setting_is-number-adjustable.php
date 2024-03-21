@@ -1,6 +1,6 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__is-number-adjustable"
-  label="Can user adjust the number of posts to book?"
+  label="Can user adjust the number of items to book?"
 >
   <template #default="{ inputId }">
     <input
