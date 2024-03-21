@@ -1,9 +1,7 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__price"
   :label="
-    field.type === 'pt' && field.is_number_adjustable ? 'Default Price per 1 Item' :
-    field.type === 'pt' ? 'Post Default Price' :
-    field.type === 'number' ? 'Price per 1' :
+    field.type === 'pt' && field.is_number_adjustable ? 'Price per 1 Item' :
     'Price'
   "
 >
@@ -18,6 +16,7 @@
     >
 
     // todo: implement formula for number field like val*10
+    // todo: also implement price formulas for all fields like field_x_val*val*10. Only fields from above can be used in the formula to prevent recursions
 
     <p v-if="field.type === 'pt' && field.is_selectable">
       You are able to set custom price for each post on their edit pages after filter is saved.
