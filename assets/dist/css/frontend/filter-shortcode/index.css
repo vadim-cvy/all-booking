@@ -1,0 +1,1 @@
+.jab-filter{display:grid;grid-template-columns:max-content 1fr;gap:2em}.jab-filter__sidebar{grid-row:span 2}.jab-filter__items{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:2.5em}

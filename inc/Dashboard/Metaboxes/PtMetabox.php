@@ -32,6 +32,7 @@ final class PtMetabox extends \Jab\Utils\DesignPatterns\Singleton
   {
     return is_admin()
       && get_current_screen()->base === 'post'
+      && isset( $_GET['post'] )
       && current_user_can( 'manage_options' )
       && $this->get_current_post()->has_related_popup_fields();
   }

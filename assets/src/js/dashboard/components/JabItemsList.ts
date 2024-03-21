@@ -37,7 +37,7 @@ export const JabItemsList = Vue.defineComponent({
           :class="[
             'jab-items-list__item',
             itemCssClass,
-            itemCssClass + '_' + itemIndex
+            itemCssClass + '--index-' + itemIndex
           ]"
           v-for="(item, itemIndex) in items"
           :key="itemIndex"

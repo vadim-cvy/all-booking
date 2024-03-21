@@ -1,30 +1,33 @@
 <?php
 namespace Jab;
 
+use Jab\FilterPopupField\Field;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 final class Filters
 {
   static public function get_all() : array
   {
-    return Settings::get_filters();
+    $filters = [];
+
+    foreach ( Settings::get()['filters'] as $filter_data )
+    {
+      $filters[] = new Filter( $filter_data['id'], $filter_data );
+    }
+
+    return $filters;
   }
 
-  static public function get_by_id( int $id ) : array | null
-  {
-    return array_filter( static::get_all(), fn( $filter ) => $filter['id'] === $id )[0] ?? null;
-  }
-
-  static public function get_popup_field( int $field_id ) : array | null
+  static public function get_popup_field( int $field_id ) : Field | null
   {
     foreach ( static::get_all() as $filter )
     {
-      foreach ( $filter['popup']['fields'] as $field )
+      $field = $filter->get_popup_field( $field_id );
+
+      if ( $field )
       {
-        if ( $field['id'] === $field_id )
-        {
-          return $field;
-        }
+        return $field;
       }
     }
 
