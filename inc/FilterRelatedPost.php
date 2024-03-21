@@ -1,6 +1,8 @@
 <?php
 namespace Jab;
 
+use \Jab\FilterPopupFields\PTField;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // todo: add hooks
@@ -87,14 +89,13 @@ final class FilterRelatedPost
 
     foreach ( Filters::get_all() as $filter )
     {
-      $filter_related_fields = array_filter( $filter['popup']['fields'], fn( $field ) =>
-        $field['type'] === 'pt'
-        && $field['pt'] === get_post_type( $this->id )
+      $filter_related_fields = array_filter( $filter->get_popup_fields(), fn( $field ) =>
+        is_a( $field, PTField::class ) && $field->get_pt() === get_post_type( $this->id )
       );
 
       $related_fields_ids = array_merge(
         $related_fields_ids,
-        array_map( fn( $field ) => $field['id'], $filter_related_fields )
+        array_map( fn( $field ) => $field->get_id(), $filter_related_fields )
       );
     }
 

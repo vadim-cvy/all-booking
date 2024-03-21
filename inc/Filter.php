@@ -26,6 +26,11 @@ final class Filter
     return $this->id;
   }
 
+  public function get_label() : string
+  {
+    return $this->raw_data['label'];
+  }
+
   public function get_popup_fields() : array
   {
     if ( ! isset( $this->popup_field_instances ) )

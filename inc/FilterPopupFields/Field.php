@@ -7,7 +7,7 @@ class Field
 {
   private int $id;
 
-  protected array $raw_data;
+  private array $raw_data;
 
   public function __construct( int $id, array $raw_data = [] )
   {
@@ -21,24 +21,29 @@ class Field
     return $this->id;
   }
 
+  public function get_raw_data() : array
+  {
+    return $this->raw_data;
+  }
+
   public function get_label() : string
   {
-    return $this->raw_data['label'];
+    return $this->get_raw_data()['label'];
   }
 
   public function get_type() : string
   {
-    return $this->raw_data['type'];
+    return $this->get_raw_data()['type'];
   }
 
   public function is_required() : bool
   {
-    return ! empty( $this->raw_data['is_required'] );
+    return ! empty( $this->get_raw_data()['is_required'] );
   }
 
   public function is_hidden() : bool
   {
-    return ! empty( $this->raw_data['is_hidden'] );
+    return ! empty( $this->get_raw_data()['is_hidden'] );
   }
 
   private function load_raw_data() : array

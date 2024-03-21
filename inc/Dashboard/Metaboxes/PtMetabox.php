@@ -58,21 +58,19 @@ final class PtMetabox extends \Jab\Utils\DesignPatterns\Singleton
     {
       $filter_fields_overrides = [];
 
-      foreach ( $filter['popup']['fields'] as $field )
+      foreach ( $filter->get_popup_fields() as $field )
       {
-        if ( in_array( $field['id'], $current_post->get_related_popopup_field_ids() ) )
+        if ( in_array( $field->get_id(), $current_post->get_related_popopup_field_ids() ) )
         {
-          $filter_fields_overrides[] = array_merge(
-            $field,
-            $current_post->get_popup_field_overrides( $field['id'] )
-          );
+          $filter_fields_overrides[] = array_merge( $field->get_raw_data(),
+            $current_post->get_popup_field_overrides( $field->get_id() ) );
         }
       }
 
       if ( ! empty( $filter_fields_overrides ) )
       {
         $overrides[] = [
-          'filterLabel' => $filter['label'],
+          'filterLabel' => $filter->get_label(),
           'fields' => $filter_fields_overrides,
         ];
       }
