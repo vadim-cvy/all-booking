@@ -7,6 +7,11 @@
   &__sidebar
   {
     grid-row: span 2;
+
+    .jab-filter__booking-field__required-mark
+    {
+      display: none;
+    }
   }
 
   &__items
