@@ -8,6 +8,12 @@
   background-color: #fff;
   margin-bottom: 3em;
 
+  code
+  {
+    cursor: pointer;
+    user-select: none;
+  }
+
   &__warning
   {
     margin-bottom: 0;

@@ -33,9 +33,15 @@ $setting_groups = [
 >
   <template #default="{ item: filterInstance, itemIndex: filterInstanceIndex }">
     <div class="jab-filter-instance__header">
-      <span class="jab-text-secondary">
+      <p class="jab-text-secondary">
         Filter ID: {{ filterInstance.id }}
-      </span>
+      </p>
+
+      <p class="jab-text-secondary">
+        Shortcode: <code @click="e => copyTextOnClick( e )">[jab_filter id="{{ filterInstance.id }}"]</code>
+        <br>
+        Hint: add this shortcode to a page you want this filter to be displayed on. You can add this shortcode to as many pages you want.
+      </p>
 
       <p class="jab-filter-instance__warning" v-if="filterInstance.state === 'under_development'">
         Note: this filter is hidden from users at the moment.
