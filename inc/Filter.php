@@ -55,7 +55,7 @@ final class Filter
     return $this->popup_field_instances;
   }
 
-  public function get_popup_field( int $field_id ) : FilterPopupField | null
+  public function get_popup_field( int $field_id ) : Field | null
   {
     foreach ( $this->get_popup_fields() as $field )
     {
