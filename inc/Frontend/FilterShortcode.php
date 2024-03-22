@@ -8,6 +8,28 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 final class FilterShortcode extends \Jab\Utils\Shortcode
 {
+  protected function __construct()
+  {
+    parent::__construct();
+
+    $this->register_ajax_actions();
+  }
+
+  private function register_ajax_actions() : void
+  {
+    $action_names = [ 'search' ];
+
+    foreach ( $action_names as $action_name )
+    {
+      $action_full_name = 'jab_filter_' . $action_name;
+
+      $cb = fn() => $this->handle_ajax( $action_name );
+
+      add_action( 'wp_ajax_' . $action_full_name, $cb );
+      add_action( 'wp_ajax_nopriv_' . $action_full_name, $cb );
+    }
+  }
+
   static protected function get_name_base() : string
   {
     return 'filter';
@@ -52,8 +74,15 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
   protected function enqueue_js() : void
   {
     $vue_handle = jab_enqueue_vue();
+    $axios_handle = jab_enqueue_axios();
 
-    jab_enqueue_local_js( 'filter-shortcode', 'frontend/filter-shortcode/index.dev.js', [ $vue_handle ] );
+    $local_script_handle = jab_enqueue_local_js( 'filter-shortcode', 'frontend/filter-shortcode/index.dev.js',
+      [ $vue_handle, $axios_handle ] );
+
+    wp_localize_script( $local_script_handle, 'jabFilterData', [
+      'ajaxUrl' => admin_url('admin-ajax.php'),
+      'id' => $this->get_att( 'id' ),
+    ]);
   }
 
   protected function enqueue_css() : void
@@ -86,5 +115,46 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
       ...parent::get_wrapper_tag_atts(),
       'data-jab-filter-id' => $this->get_att( 'id' ),
     ];
+  }
+
+  private function handle_ajax( string $action_name ) : void
+  {
+    $filter = new Filter( $_POST['filter_id'] ?? 0 );
+
+    if ( ! $filter->exists() )
+    {
+      $this->send_ajax_error( 'Filter does not exist!' );
+    }
+
+    // todo
+    $items = [
+      [
+        'id' => 1,
+        'title' => 'Result 1',
+        'excerpt' => 'Excerpt 1',
+        'img' => [
+          'src' => 'https://via.placeholder.com/150',
+          'alt' => 'Placeholder',
+        ],
+        'status' => [
+          'slug' => 'available',
+          'label' => 'Available',
+        ],
+      ],
+    ];
+
+    $this->send_ajax_success([
+      'items' => $items,
+    ]);
+  }
+
+  private function send_ajax_error( string $err_msg ) : void
+  {
+    wp_send_json_error([ 'errMsg' => $err_msg ]);
+  }
+
+  private function send_ajax_success( array $data ) : void
+  {
+    wp_send_json_success( $data );
   }
 }

@@ -8,7 +8,7 @@
   {
     if ( $field->is_visible_in_filter_controls() )
     {
-      $field_vue_values_object = 'controlValues.popupRelated';
+      $field_vue_values_object = 'controlValues';
 
       require jab_resolve_path( __DIR__ . '/../common/booking-field.php' );
     }

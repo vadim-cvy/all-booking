@@ -17,7 +17,7 @@ abstract class Shortcode extends \Jab\Utils\DesignPatterns\Singleton implements 
 
   private array $att_validation_errors = [];
 
-  private bool $are_assets_enqueued = false;
+  private bool $is_css_enqueued = false;
 
   protected function __construct()
   {
@@ -26,7 +26,7 @@ abstract class Shortcode extends \Jab\Utils\DesignPatterns\Singleton implements 
       fn( array | string $atts, string $user_content = '' ) => $this->handle( $atts, $user_content )
     );
 
-    add_action( 'wp_enqueue_scripts', fn() => $this->maybe_enqueue_assets_automatically() );
+    add_action( 'wp_enqueue_scripts', fn() => $this->maybe_enqueue_css_automatically() );
   }
 
   static public function get_name() : string
@@ -125,9 +125,9 @@ abstract class Shortcode extends \Jab\Utils\DesignPatterns\Singleton implements 
 
     ob_start();
 
-    if ( ! $this->are_assets_enqueued )
+    if ( ! $this->is_css_enqueued )
     {
-      echo $this->get_render_error_html( 'Assets are not enequeued!' );
+      echo $this->get_render_error_html( 'CSS is not enequeued!' );
     }
     else if ( ! empty( $this->att_validation_errors ) )
     {
@@ -144,6 +144,10 @@ abstract class Shortcode extends \Jab\Utils\DesignPatterns\Singleton implements 
         ob_clean();
 
         echo $this->get_render_error_html( $render_result->get_error_message() );
+      }
+      else
+      {
+        $this->enqueue_js();
       }
     }
 
@@ -201,28 +205,27 @@ abstract class Shortcode extends \Jab\Utils\DesignPatterns\Singleton implements 
 
   abstract protected function render() : WP_Error | null;
 
-  private function maybe_enqueue_assets_automatically() : void
+  private function maybe_enqueue_css_automatically() : void
   {
-    if ( $this->should_enqueue_assets_automatically() )
+    if ( $this->should_enqueue_css_automatically() )
     {
-      $this->enqueue_assets();
+      $this->_enqueue_css();
     }
   }
 
-  protected function should_enqueue_assets_automatically() : bool
+  protected function should_enqueue_css_automatically() : bool
   {
     return is_singular() && has_shortcode( get_the_content(), $this->get_name() );
   }
 
-  public function enqueue_assets() : void
+  abstract protected function enqueue_js() : void;
+
+  private function _enqueue_css() : void
   {
-    $this->enqueue_js();
     $this->enqueue_css();
 
-    $this->are_assets_enqueued = true;
+    $this->is_css_enqueued = true;
   }
-
-  abstract protected function enqueue_js() : void;
 
   abstract protected function enqueue_css() : void;
 

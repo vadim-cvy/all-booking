@@ -42,6 +42,15 @@ function jab_enqueue_vue() : string
   return $handle;
 }
 
+function jab_enqueue_axios() : string
+{
+  $handle = 'jab-axios';
+
+  wp_enqueue_script( $handle, 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js', [], null, true );
+
+  return $handle;
+}
+
 function jab_enqueue_local_css( string $handle_base, string $rel_path ) : string
 {
   $handle = jab_prefix_asset_handle( $handle_base );

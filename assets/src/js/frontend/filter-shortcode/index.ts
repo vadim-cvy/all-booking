@@ -1,3 +1,8 @@
+declare const jabFilterData: {
+  id: number,
+  ajaxUrl: string,
+}
+
 (() =>
 {
   const filterIdDataPropName = 'data-jab-filter-id'
@@ -14,9 +19,7 @@
         results: [],
         isLoadingResults: true,
 
-        controlValues: {
-          popupRelated: {},
-        },
+        controlValues: {},
 
         bookingRequestData: {},
       }),
@@ -37,64 +40,47 @@
         async updateResults()
         {
           this.isLoadingResults = true
+
+          const requestData = new FormData()
+
+          requestData.append('action', 'jab_filter_search')
+          requestData.append('filter_id', String( jabFilterData.id ) )
+
+          Object.entries( this.controlValues ).forEach( val => requestData.append( val[0], String( val[1] ) ) )
+
+          axios.post(jabFilterData.ajaxUrl, requestData )
+          .then( (resp: {
+            data: {
+              success: boolean,
+              data: {
+                items: {}[],
+                errMsg: string,
+              },
+            }
+          }) =>
+          {
+            if ( ! resp.data.success )
+            {
+              // todo
+              throw new Error( resp.data.data.errMsg )
+            }
+
+            this.results = resp.data.data.items
+          })
           // todo
+          .catch(() => alert( 'Something goes wrong' ) )
+          .finally(() => this.isLoadingResults = false)
+        },
+      },
 
-          this.results = [
-            {
-              id: 1,
-              title: 'Result 1',
-              excerpt: 'Excerpt 1',
-              img: {
-                src: 'https://via.placeholder.com/150',
-                alt: 'Placeholder',
-              },
-              status: {
-                slug: 'available',
-                label: 'Available',
-              },
-            },
-            {
-              id: 2,
-              title: 'Result 2',
-              excerpt: 'Excerpt 2',
-              img: {
-                src: 'https://via.placeholder.com/150',
-                alt: 'Placeholder',
-              },
-              status: {
-                slug: 'unavailable',
-                label: 'Unavailable',
-              },
-            },
-            {
-              id: 3,
-              title: 'Result 3',
-              excerpt: 'Excerpt 3',
-              img: {
-                src: 'https://via.placeholder.com/150',
-                alt: 'Placeholder',
-              },
-              status: {
-                slug: 'unavailable',
-                label: 'Unavailable',
-              },
-            },
-            {
-              id: 4,
-              title: 'Result 4',
-              excerpt: 'Excerpt 4',
-              img: {
-                src: 'https://via.placeholder.com/150',
-                alt: 'Placeholder',
-              },
-              status: {
-                slug: 'unavailable',
-                label: 'Unavailable',
-              },
-            },
-          ]
-
-          this.isLoadingResults = false
+      watch: {
+        controlValues: {
+          handler()
+          {
+            // todo: do with delay
+            this.updateResults()
+          },
+          deep: true,
         },
       },
 
