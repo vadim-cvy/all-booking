@@ -52,7 +52,12 @@
           item-general-label="Slot"
           :new-item-data-cb="() => ({
             start: { h: 0, m: 0 },
-            duration: { d: 0, h: 0, m: 0 },
+            duration: {
+              default: { d: 0, h: 0, m: 0 },
+              max: { d: 0, h: 0, m: 0 },
+              min: { d: 0, h: 0, m: 0 },
+              step: { d: 0, h: 0, m: 0 },
+            },
           })"
         >
           <template #default="{ item: slot, itemIndex: slotIndex }">
@@ -70,45 +75,57 @@
               </template>
             </jab-field>
 
-            <jab-field
-              class="jab-filter-instance__global-stettings__timing__slots-group__slot__duration"
-              label="Duration"
-              :is-label-clickable="false"
+            <div
+              v-for="(slotDurationSettingData, slotDurationSettingName ) in slot.duration"
+              :key="slotDurationSettingName"
+              class="jab-filter-instance__global-stettings__timing__slots-group__slot__duration__setting"
             >
-              <template #default="{ inputId }">
-                <label>
-                  <input
-                    type="number"
-                    min="0"
-                    step="1"
-                    v-model.number="slot.duration.d"
-                    :name="`jab[filters][${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][d]`"
-                  >
-                  days
-                </label>
+              <jab-field
+                :class="'jab-filter-instance__global-stettings__timing__slots-group__slot__duration__' + slotDurationSettingName"
+                :label="{
+                  max: 'Max Duration',
+                  min: 'Min Duration',
+                  default: 'Default Duration',
+                  step: 'Duration Step',
+                }[slotDurationSettingName]"
+              >
+                <template #default="{ inputId }">
+                  <label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      v-model.number="slot.duration[slotDurationSettingName].d"
+                      :name="`jab[filters][${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][${slotDurationSettingName}][d]`"
+                      :id="inputId"
+                    >
+                    days
+                  </label>
 
-                <label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="23"
-                    step="1"
-                    v-model.number="slot.duration.h"
-                    :name="`jab[filters][${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][h]`"
-                  >
-                  hours
-                </label>
+                  <label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="23"
+                      step="1"
+                      v-model.number="slot.duration[slotDurationSettingName].h"
+                      :name="`jab[filters][${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][${slotDurationSettingName}][h]`"
+                    >
+                    hours
+                  </label>
 
-                <label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="59"
-                    step="1"
-                    v-model.number="slot.duration.m"
-                    :name="`jab[filters][${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][m]`"
-                  >
-                  minutes
+                  <label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="59"
+                      step="1"
+                      v-model.number="slot.duration[slotDurationSettingName].m"
+                      :name="`jab[filters][${filterInstanceIndex}][timing][${slotsGroupIndex}][slots][${slotIndex}][duration][${slotDurationSettingName}][m]`"
+                    >
+                    minutes
+                  </label>
+                </div>
               </template>
             </jab-field>
           </template>

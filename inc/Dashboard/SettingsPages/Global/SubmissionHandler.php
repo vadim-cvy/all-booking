@@ -28,7 +28,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
     foreach ( $submitted_data['filters'] as $i => $filter_data )
     {
       $submitted_data['filters'][ $i ] =
-        $this->validate_sanitize_filter( $filter_data, array_merge( $field_keys_chain, [ $i ] ) );
+        $this->validate_sanitize_filter( $filter_data, [ ...$field_keys_chain, $i ] );
     }
 
     return $submitted_data;
@@ -106,7 +106,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     foreach ( $timing as $i => $timing_item )
     {
-      $timing_item_field_keys_chain = array_merge( $field_keys_chain, [ $i ] );
+      $timing_item_field_keys_chain = [ ...$field_keys_chain, $i ];
 
       $timing[ $i ] = $this->validate_sanitize_array_field( $timing_item, $timing_item_field_keys_chain, [
         'is_json' => true,
@@ -141,7 +141,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     foreach ( $slots as $i => $slot )
     {
-      $slot_field_keys_chain = array_merge( $field_keys_chain, [ $i ] );
+      $slot_field_keys_chain = [ ...$field_keys_chain, $i ];
 
       $slots[ $i ] = $this->validate_sanitize_array_field( $slot, $field_keys_chain );
 
@@ -180,19 +180,34 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     $duration = $this->validate_sanitize_array_field( $duration, $field_keys_chain );
 
-    foreach ( [ 'd', 'h', 'm' ] as $unit )
+    foreach ( [ 'default', 'step', 'min', 'max' ] as $duration_setting_name )
     {
-      $unit_field_keys_chain = array_merge( $field_keys_chain, [ $unit ] );
+      $duration_setting_field_keys_chain = [ ...$field_keys_chain, $duration_setting_name ];
 
-      $duration[ $unit ] = $this->validate_sanitize_number_field( $duration[ $unit ], $unit_field_keys_chain, [
-        'min' => 0,
-        'type' => 'int',
-      ]);
-    }
+      $duration[ $duration_setting_name ] = $this->validate_sanitize_array_field( $duration[ $duration_setting_name ],
+        $duration_setting_field_keys_chain );
 
-    if ( $duration['d'] === 0 && $duration['h'] === 0 && $duration['m'] === 0 )
-    {
-      $this->throw_validation_error( static::VALUE_REQUIRED_MSG, $field_keys_chain );
+      foreach ( [ 'd', 'h', 'm' ] as $unit )
+      {
+        $unit_field_keys_chain = [ ...$duration_setting_field_keys_chain, $unit ];
+
+        $duration[ $duration_setting_name ][ $unit ] = $this->validate_sanitize_number_field(
+          $duration[ $duration_setting_name ][ $unit ],
+          $unit_field_keys_chain,
+          [
+            'min' => 0,
+            'type' => 'int',
+          ]
+        );
+      }
+
+      if (
+        $duration[ $duration_setting_name ]['d'] === 0
+        && $duration[ $duration_setting_name ]['h'] === 0
+        && $duration[ $duration_setting_name ]['m'] === 0 )
+      {
+        $this->throw_validation_error( static::VALUE_REQUIRED_MSG, $duration_setting_field_keys_chain );
+      }
     }
 
     return $duration;
@@ -217,7 +232,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     foreach ( $fields as $i => $field )
     {
-      $field_field_keys_chain = array_merge( $field_keys_chain, [ $i ] );
+      $field_field_keys_chain = [ ...$field_keys_chain, $i ];
 
       $fields[ $i ] = $this->validate_sanitize_filter__popup__field( $field, $field_field_keys_chain );
     }
@@ -231,7 +246,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     $field['id'] = $this->validate_sanitize_number_field(
       $field['id'],
-      array_merge( $field_keys_chain, [ 'id' ] ),
+      [ ...$field_keys_chain, 'id' ],
       [
         'is_required' => true,
         'min' => 1,
@@ -241,7 +256,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     $field['label'] = $this->validate_sanitize_string_field(
       $field['label'],
-      array_merge( $field_keys_chain, [ 'label' ] ),
+      [ ...$field_keys_chain, 'label' ],
       [ 'is_required' => true ]
     );
 
@@ -249,7 +264,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     $field['type'] = $this->validate_sanitize_string_field(
       $field['type'],
-      array_merge( $field_keys_chain, [ 'type' ] ),
+      [ ...$field_keys_chain, 'type' ],
       [
         'is_required' => true,
         'allowed_values' => array_keys( Page::get_available_popup_field_types() ),
@@ -268,7 +283,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
       {
         $field[ $number_key ] = $this->validate_sanitize_number_field(
           $field[ $number_key ],
-          array_merge( $field_keys_chain, [ $number_key ] ),
+          [ ...$field_keys_chain, $number_key ],
           [
             'is_required' => false,
             'min' => 1,
@@ -280,7 +295,7 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     $field['price'] = $this->validate_sanitize_number_field(
       $field['price'],
-      array_merge( $field_keys_chain, [ 'price' ] ),
+      [ ...$field_keys_chain, 'price' ],
       [
         'is_required' => false,
         'min' => 0,
