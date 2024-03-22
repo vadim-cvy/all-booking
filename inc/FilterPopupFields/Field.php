@@ -55,4 +55,10 @@ class Field
   {
     // todo
   }
+
+  public function is_visible_in_filter_controls() : bool
+  {
+    // todo: go through subfields and check if there are any fields that return true for is_visible_in_filter_controls
+    return false;
+  }
 }

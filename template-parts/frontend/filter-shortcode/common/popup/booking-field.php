@@ -1,13 +1,7 @@
 <?php
-foreach ( $template_args['filter']->get_popup_fields() as $field )
+if ( ! $field->is_hidden() )
 {
-  if ( $field->is_hidden() )
-  {
-    continue;
-  }
-
-  $field_attr_id = 'jab-filter__popup__booking-field--' . $field->get_id();
-  ?>
+  $field_attr_id = 'jab-filter__popup__booking-field--' . $field->get_id(); ?>
 
   <div class="
     jab-filter__popup__booking-field

@@ -31,4 +31,9 @@ class PtField extends Field
   }
 
   // todo: is selectable
+
+  public function is_visible_in_filter_controls() : bool
+  {
+    return true;
+  }
 }
