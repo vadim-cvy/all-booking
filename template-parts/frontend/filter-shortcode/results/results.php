@@ -22,5 +22,5 @@
 
   <!-- todo: pagination -->
 
-  <?php require jab_resolve_path( __DIR__ . '/item-popup/item-popup.php' ); ?>
+  <?php require jab_resolve_path( __DIR__ . '/popup/popup.php' ); ?>
 </div>

@@ -14,7 +14,11 @@
         results: [],
         isLoadingResults: true,
 
-        areAdvancedControlsVisible: false,
+        controlValues: {
+          popupRelated: {},
+        },
+
+        bookingRequestData: {},
       }),
 
       computed: {
