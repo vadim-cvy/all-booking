@@ -62,8 +62,11 @@ final class PtMetabox extends \Jab\Utils\DesignPatterns\Singleton
       {
         if ( in_array( $field->get_id(), $current_post->get_related_popopup_field_ids() ) )
         {
-          $filter_fields_overrides[] = array_merge( $field->get_raw_data(),
-            $current_post->get_popup_field_overrides( $field->get_id() ) );
+          $filter_fields_overrides[] = [
+            'id' => $field->get_id(),
+            ...$field->get_raw_data(),
+            ...$current_post->get_popup_field_overrides( $field->get_id() )
+          ];
         }
       }
 
@@ -105,7 +108,12 @@ final class PtMetabox extends \Jab\Utils\DesignPatterns\Singleton
     {
       foreach ( $filter['popup']['fields'] as $submitted_field_data )
       {
-        $field_original = Filters::get_popup_field( $submitted_field_data['id'] );
+        $field = Filters::get_popup_field( $submitted_field_data['id'] );
+
+        $field_original = [
+          'id' => $field->get_id(),
+          ...$field->get_raw_data(),
+        ];
 
         $current_post->update_popup_field_overrides(
           $submitted_field_data['id'],
