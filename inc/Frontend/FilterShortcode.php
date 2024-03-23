@@ -82,6 +82,7 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
     wp_localize_script( $local_script_handle, 'jabFilterData', [
       'ajaxUrl' => admin_url('admin-ajax.php'),
       'id' => $this->get_att( 'id' ),
+      'maxEndDate' => '20241231',// todo: add dashboard filter setting like "Max Days From Now"
     ]);
   }
 

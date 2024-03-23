@@ -1,9 +1,35 @@
 declare const jabFilterData: {
   id: number,
   ajaxUrl: string,
+  maxEndDate: string,
 }
 
-(() =>
+const parseStrDate = ( strDate: string ) =>
+{
+  const date = new Date()
+
+  date.setFullYear( Number( strDate.substring( 0, 4 ) ) )
+  date.setMonth( Number( strDate.substring( 4, 6 ) ) - 1 )
+  date.setDate( Number( strDate.substring( 6, 8 ) ) )
+
+  return date
+}
+
+const stringifyDate = ( date: Date ) =>
+{
+  const y = String( date.getFullYear() )
+
+  let
+    m = String( date.getMonth() + 1 ),
+    d = String( date.getDate() )
+
+  m = m.length === 1 ? '0' + m : m
+  d = d.length === 1 ? '0' + d : d
+
+  return y + m + d
+}
+
+;(() =>
 {
   const filterIdDataPropName = 'data-jab-filter-id'
 
@@ -12,17 +38,39 @@ declare const jabFilterData: {
     const filterId = element.getAttribute( filterIdDataPropName )
 
     const app = Vue.createApp({
-      data: () => ({
-        startTime: Date.now(),
-        // todo: endTime
+      data: () =>
+      {
+        const controlValues: { [key: string]: string|number|Date } = {}
 
-        results: [],
-        isLoadingResults: true,
+        const GETParams = (new URLSearchParams(window.location.search))
 
-        controlValues: {},
+        GETParams.forEach((controlValue, controlKey) =>
+        {
+          switch ( controlKey )
+          {
+            case 'startDate':
+            case 'endDate':
+              controlValues[ controlKey ] = parseStrDate( controlValue )
+              break
 
-        bookingRequestData: {},
-      }),
+            default:
+              controlValues[ controlKey ] = controlValue
+              break
+          }
+        })
+
+        controlValues.startDate = controlValues.startDate || new Date()
+        controlValues.endDate = controlValues.endDate || parseStrDate( jabFilterData.maxEndDate )
+
+        return {
+          controlValues,
+
+          results: [],
+          isLoadingResults: true,
+
+          bookingRequestData: {},
+        }
+      },
 
       computed: {
         filterId()
@@ -71,12 +119,35 @@ declare const jabFilterData: {
           .catch(() => alert( 'Something goes wrong' ) )
           .finally(() => this.isLoadingResults = false)
         },
+
+        printDate( date: Date )
+        {
+          return date.getDate() + '/' + ( date.getMonth() + 1 ) + '/' + date.getFullYear()
+        },
       },
 
       watch: {
         controlValues: {
-          handler()
+          handler( controlValues )
           {
+            const GETParams = new URLSearchParams(window.location.search);
+
+            Object.entries( controlValues ).forEach( control =>
+            {
+              const [ key, val ] = control
+
+              if ( val instanceof Date )
+              {
+                GETParams.set( key, stringifyDate( val ) )
+              }
+              else
+              {
+                GETParams.set( key, String( val ) )
+              }
+            })
+
+            history.pushState(null, '', '?' + GETParams.toString())
+
             // todo: do with delay
             this.updateResults()
           },
