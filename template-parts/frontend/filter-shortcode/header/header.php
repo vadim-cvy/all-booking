@@ -1,3 +1,3 @@
 <div class="jab-filter__header">
-  Availability for {{ printDate( controlValues.startDate ) }} - {{ printDate( controlValues.endDate ) }}
+  Availability for {{ printDate( controlValues.start_date ) }} - {{ printDate( controlValues.end_date ) }}
 </div>

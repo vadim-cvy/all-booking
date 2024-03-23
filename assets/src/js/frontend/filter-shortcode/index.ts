@@ -44,23 +44,23 @@ const stringifyDate = ( date: Date ) =>
 
         const GETParams = (new URLSearchParams(window.location.search))
 
-        GETParams.forEach((controlValue, controlKey) =>
+        GETParams.forEach((controlVal, controlKey) =>
         {
           switch ( controlKey )
           {
-            case 'startDate':
-            case 'endDate':
-              controlValues[ controlKey ] = parseStrDate( controlValue )
+            case 'start_date':
+            case 'end_date':
+              controlValues[ controlKey ] = parseStrDate( controlVal )
               break
 
             default:
-              controlValues[ controlKey ] = controlValue
+              controlValues[ controlKey ] = controlVal
               break
           }
         })
 
-        controlValues.startDate = controlValues.startDate || new Date()
-        controlValues.endDate = controlValues.endDate || parseStrDate( jabFilterData.maxEndDate )
+        controlValues.start_date = controlValues.start_date || new Date()
+        controlValues.end_date = controlValues.end_date || parseStrDate( jabFilterData.maxEndDate )
 
         return {
           controlValues,
@@ -94,7 +94,20 @@ const stringifyDate = ( date: Date ) =>
           requestData.append('action', 'jab_filter_search')
           requestData.append('filter_id', String( jabFilterData.id ) )
 
-          Object.entries( this.controlValues ).forEach( val => requestData.append( val[0], String( val[1] ) ) )
+          Object.entries( this.controlValues ).forEach( ([ controlKey, controlVal ]) =>
+          {
+            switch ( controlKey )
+            {
+              case 'start_date':
+              case 'end_date':
+                requestData.append( controlKey, stringifyDate( controlVal as Date ) )
+                break
+
+              default:
+                requestData.append( controlKey, String( controlVal ) )
+                break
+            }
+          })
 
           axios.post(jabFilterData.ajaxUrl, requestData )
           .then( (resp: {
