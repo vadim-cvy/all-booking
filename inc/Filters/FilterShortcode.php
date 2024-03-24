@@ -1,8 +1,7 @@
 <?php
-namespace Jab\Frontend;
+namespace Jab\Filters;
 
 use WP_Error;
-use Jab\Filter;
 use DateTime;
 
 if ( ! defined( 'ABSPATH' ) ) exit;

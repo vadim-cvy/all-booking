@@ -1,5 +1,5 @@
 <?php
-namespace Jab\Dashboard;
+namespace Jab;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

@@ -1,8 +1,8 @@
 <?php
-namespace Jab\Dashboard\Metaboxes;
+namespace Jab\Metaboxes;
 
-use Jab\Filters;
-use Jab\FilterRelatedPost;
+use Jab\Filters\Filters;
+use Jab\FilterRelatedPosts\FilterRelatedPost;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

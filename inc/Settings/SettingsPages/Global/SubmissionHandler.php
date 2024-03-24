@@ -1,9 +1,9 @@
 <?php
-namespace Jab\Dashboard\SettingsPages\Global;
+namespace Jab\Settings\SettingsPages\Global;
 
 use Jab\Utils\Settings\SettingsPages\SubmissionHandler\ValidationError;
 use Jab\Utils\Hooks\iHookable;
-use Jab\Settings;
+use Jab\Settings\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

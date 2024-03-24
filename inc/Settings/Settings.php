@@ -1,5 +1,5 @@
 <?php
-namespace Jab;
+namespace Jab\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

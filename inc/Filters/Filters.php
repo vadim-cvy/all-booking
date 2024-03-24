@@ -1,7 +1,7 @@
 <?php
-namespace Jab;
+namespace Jab\Filters;
 
-use Jab\FilterPopupFields\Field;
+use Jab\Filters\PopupFields\Field;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
