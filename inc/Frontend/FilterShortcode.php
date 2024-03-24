@@ -3,6 +3,7 @@ namespace Jab\Frontend;
 
 use WP_Error;
 use Jab\Filter;
+use DateTime;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -82,7 +83,7 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
     wp_localize_script( $local_script_handle, 'jabFilterData', [
       'ajaxUrl' => admin_url('admin-ajax.php'),
       'id' => $this->get_att( 'id' ),
-      'maxEndDate' => '20241231',// todo: add dashboard filter setting like "Max Days From Now"
+      'maxEndDate' => $this->stringify_date( new DateTime( '31-12-2024' ) ),// todo: add dashboard filter setting like "Max Days From Now"
     ]);
   }
 
@@ -127,6 +128,94 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
       $this->send_ajax_error( 'Filter does not exist!' );
     }
 
+    $control_values = $this->get_submitted_control_values();
+
+    echo'<pre>';var_dump( $control_values );echo'</pre>';exit();
+
+    $limited_posts_query =
+      'SELECT
+        p.ID AS post_id,
+        p.post_type AS post_type,
+        m.meta_value AS `limit`,
+      FROM
+        {$wpdb->posts} AS p
+      LEFT JOIN
+        {$wpdb->postmeta} AS m
+      WHERE
+        p.post_type IN ( {post types passed in controls} )
+        AND m.meta_key = "jab_limit"
+        AND m.meta_value IS NOT NULL';
+
+    // todo: if no limited posts than all items are available
+
+    $format = 'ymdHi';
+
+    $slots = [];
+
+    foreach ( slots generator as $slot )
+    {
+      $slot_index = $slot->get_time()->format( $format );
+
+      $slots[ $slot_index ] = [];
+
+      foreach ( $limited_posts_query as $row )
+      {
+        if ( ! isset( $slots[ $slot_index ][ $row->post_type ] ) )
+        {
+          $slots[ $slot_index ][ $row->post_type ] = [];
+        }
+
+        $slots[ $slot_index ][ $row->post_type ][ $row->post_id ] = $row->limit ?? -1;
+      }
+    }
+
+    // todo: foreach submitted post type field starting from main
+    $bookings_query_result =
+      'SELECT
+        p.ID AS post_id,
+        b.start_time AS slot_min_index, -- todo: format this as $format
+        b.end_time AS slot_max_index, -- todo: format this as $format
+        SUM(pbr.items_number) AS times_booked -- todo: this should return the number of grouped rows
+      FROM
+        {$wpdb->posts} AS p
+      JOIN
+        {$wpdb->prefix}_jab_post_bookings_relations AS pbr
+          ON pbr.post_id = p.ID
+      JOIN
+        {$wpdb->prefix}_jab_bookings AS b
+          ON pbr.booking_id = b.id
+      WHERE
+        p.ID IN ({limited post ids queried before})
+        AND (
+          ( b.start_time < {start} AND B.end_time > {start} ) OR ( b.start_time < {end} AND B.end_time > {end} )
+        )
+      GROUP BY
+        p.ID,
+        b.start_time,
+        b.end_time';
+
+    foreach ( $bookings_query_result as $row )
+    {
+      foreach ( $slots as $slot_index => $slot )
+      {
+        if ( $slot_index < $row->slot_min_index || $slot_index > $row->slot_max_index )
+        {
+          continue;
+        }
+
+        $items_left = $slot[ $row->post_id ] - $row->items_booked;
+
+        if ( $items_left < $requested_min_number_of_items )
+        {
+          unset( $slots[ $slot_index ] );
+        }
+        else
+        {
+          $slots[ $slot_index ][ $row->post_id ] = $items_left;
+        }
+      }
+    }
+
     // todo
     $items = [
       [
@@ -149,6 +238,39 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
     ]);
   }
 
+  private function get_submitted_control_values() : array
+  {
+    $control_values_json = stripslashes( $_POST['control_values'] );
+    $control_values = json_decode( $control_values_json, true );
+
+    $today = new DateTime( date( 'Y-m-d 00:00:00' ) );
+    $max_date = new DateTime( '2024-12-31 23:59:59' ); // todo: get from filter settings
+
+    $control_values['start_date'] = $this->parse_date( $control_values['start_date'], '00:00:00' );
+
+    if ( $control_values['start_date'] < $today )
+    {
+      $control_values['start_date'] = $today;
+    }
+
+    $control_values['end_date'] = $this->parse_date( $control_values['end_date'], '23:59:59' );
+
+    if ( $control_values['end_date'] > $max_date || $control_values['end_date'] < $control_values['start_date'] )
+    {
+      $control_values['end_date'] = $max_date;
+    }
+
+    foreach ( $control_values as $key => $value )
+    {
+      if ( is_numeric( $key ) )
+      {
+        // todo: parse fields and call something like $field->get_search_items_sql_where
+      }
+    }
+
+    return $control_values;
+  }
+
   private function send_ajax_error( string $err_msg ) : void
   {
     wp_send_json_error([ 'errMsg' => $err_msg ]);
@@ -157,5 +279,15 @@ final class FilterShortcode extends \Jab\Utils\Shortcode
   private function send_ajax_success( array $data ) : void
   {
     wp_send_json_success( $data );
+  }
+
+  private function parse_date( string $date_str, string $time ) : DateTime
+  {
+    return DateTime::createFromFormat( 'Ymd H:i:s', $date_str . $time );
+  }
+
+  private function stringify_date( DateTime $date ) : string
+  {
+    return $date->format( 'Ymd' );
   }
 }

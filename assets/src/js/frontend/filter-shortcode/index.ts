@@ -4,7 +4,7 @@ declare const jabFilterData: {
   maxEndDate: string,
 }
 
-const parseStrDate = ( strDate: string ) =>
+const parseDate = ( strDate: string ) =>
 {
   const date = new Date()
 
@@ -50,7 +50,7 @@ const stringifyDate = ( date: Date ) =>
           {
             case 'start_date':
             case 'end_date':
-              controlValues[ controlKey ] = parseStrDate( controlVal )
+              controlValues[ controlKey ] = parseDate( controlVal )
               break
 
             default:
@@ -60,7 +60,7 @@ const stringifyDate = ( date: Date ) =>
         })
 
         controlValues.start_date = controlValues.start_date || new Date()
-        controlValues.end_date = controlValues.end_date || parseStrDate( jabFilterData.maxEndDate )
+        controlValues.end_date = controlValues.end_date || parseDate( jabFilterData.maxEndDate )
 
         return {
           controlValues,
@@ -94,20 +94,24 @@ const stringifyDate = ( date: Date ) =>
           requestData.append('action', 'jab_filter_search')
           requestData.append('filter_id', String( jabFilterData.id ) )
 
+          const requestControlValues: {[key: string]: string|number} = {}
+
           Object.entries( this.controlValues ).forEach( ([ controlKey, controlVal ]) =>
           {
             switch ( controlKey )
             {
               case 'start_date':
               case 'end_date':
-                requestData.append( controlKey, stringifyDate( controlVal as Date ) )
+                requestControlValues[ controlKey ] = stringifyDate( controlVal as Date )
                 break
 
               default:
-                requestData.append( controlKey, String( controlVal ) )
+                requestControlValues[ controlKey ] = String( controlVal )
                 break
             }
           })
+
+          requestData.append( 'control_values', JSON.stringify( requestControlValues ) )
 
           axios.post(jabFilterData.ajaxUrl, requestData )
           .then( (resp: {
@@ -128,8 +132,8 @@ const stringifyDate = ( date: Date ) =>
 
             this.results = resp.data.data.items
           })
-          // todo
-          .catch(() => alert( 'Something goes wrong' ) )
+          // todo: uncomment
+          // .catch(() => alert( 'Something goes wrong' ) )
           .finally(() => this.isLoadingResults = false)
         },
 
