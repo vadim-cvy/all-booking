@@ -1,5 +1,5 @@
 <?php
-namespace Jab;
+namespace Jab\FilterRelatedPosts;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
