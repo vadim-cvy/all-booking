@@ -45,7 +45,7 @@
       >
         <jab-field class="" :label="field.label">
           <template #default>
-            <div v-if="field.is_number_adjustable">
+            <div v-if="field.is_qty_adjustable">
               <?php
               foreach ( [ 'default-number', 'max-number', 'min-number' ] as $field_setting_name )
               {

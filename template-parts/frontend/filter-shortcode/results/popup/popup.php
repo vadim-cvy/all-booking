@@ -11,13 +11,7 @@
 
   <div class="jab-filter__popup__content">
     <div class="jab-filter__popup__booking-fields">
-      <?php
-      foreach ( $template_args['filter']->get_popup_fields() as $field )
-      {
-        $field_vue_values_object = 'bookingRequestData';
-
-        require jab_resolve_path( __DIR__ . '/../../common/booking-field.php' );
-      } ?>
+      fields
     </div>
   </div>
 

@@ -273,11 +273,11 @@ final class SubmissionHandler extends \Jab\Utils\Settings\SettingsPages\Submissi
 
     if ( $field['type'] === 'pt' )
     {
-      $field['is_number_adjustable'] = ! empty( $field['is_number_adjustable'] );
+      $field['is_qty_adjustable'] = ! empty( $field['is_qty_adjustable'] );
     }
     // todo else: delete unneded keys in vue
 
-    if ( ! empty( $field['is_number_adjustable'] ) )
+    if ( ! empty( $field['is_qty_adjustable'] ) )
     {
       foreach ( [ 'default_number', 'max_number', 'min_number' ] as $number_key )
       {

@@ -5,7 +5,7 @@
     require jab_resolve_path( __DIR__ . "/field-setting_$field_setting_name.php" );
   } ?>
 
-  <div v-if="field.is_number_adjustable">
+  <div v-if="field.is_qty_adjustable">
     <?php
     foreach ( [ 'default-number', 'max-number', 'min-number' ] as $field_setting_name )
     {

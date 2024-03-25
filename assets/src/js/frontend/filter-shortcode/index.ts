@@ -94,24 +94,20 @@ const stringifyDate = ( date: Date ) =>
           requestData.append('action', 'jab_filter_search')
           requestData.append('filter_id', String( jabFilterData.id ) )
 
-          const requestControlValues: {[key: string]: string|number} = {}
-
           Object.entries( this.controlValues ).forEach( ([ controlKey, controlVal ]) =>
           {
             switch ( controlKey )
             {
               case 'start_date':
               case 'end_date':
-                requestControlValues[ controlKey ] = stringifyDate( controlVal as Date )
+                requestData.append( controlKey, stringifyDate( controlVal as Date ) )
                 break
 
               default:
-                requestControlValues[ controlKey ] = String( controlVal )
+                requestData.append( controlKey, String( controlVal ) )
                 break
             }
           })
-
-          requestData.append( 'control_values', JSON.stringify( requestControlValues ) )
 
           axios.post(jabFilterData.ajaxUrl, requestData )
           .then( (resp: {

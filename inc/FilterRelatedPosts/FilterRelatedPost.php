@@ -1,6 +1,8 @@
 <?php
 namespace Jab\FilterRelatedPosts;
 
+use \Jab\Filters\Filters;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // todo: add hooks

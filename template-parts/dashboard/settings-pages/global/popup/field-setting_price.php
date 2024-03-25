@@ -1,7 +1,7 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__price"
   :label="
-    field.type === 'pt' && field.is_number_adjustable ? 'Price per 1 Item' :
+    field.type === 'pt' && field.is_qty_adjustable ? 'Price per 1 Item' :
     'Price'
   "
 >

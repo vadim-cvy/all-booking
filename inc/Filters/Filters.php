@@ -2,6 +2,7 @@
 namespace Jab\Filters;
 
 use Jab\Filters\PopupFields\Field;
+use Jab\Settings\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 

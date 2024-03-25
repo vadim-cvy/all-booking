@@ -96,4 +96,4 @@ function jab_get_asset_url( string $rel_path, string $asset_type ) : string
 Jab\Dashboard::get_instance();
 Jab\Settings\SettingsPages\Global\Page::get_instance();
 Jab\Metaboxes\PtMetabox::get_instance();
-Jab\Filters\FilterShortcode::get_instance();
+Jab\Filters\FilterShortcode\Shortcode::get_instance();

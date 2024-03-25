@@ -4,6 +4,7 @@ namespace Jab\Filters;
 use Jab\Filters\PopupFields\Field;
 use Jab\Filters\PopupFields\PtField;
 use Jab\Settings\Settings;
+use DateTime;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -86,5 +87,38 @@ final class Filter
     // todo
 
     // todo: dont save popup fields from raw data but rather use each($this->get_popup_fields())->save()
+  }
+
+  public function get_slots( DateTime $start_date, DateTime $end_date ) : array
+  {
+    $slots = [];
+
+    do
+    {
+      $cur_iteration_date = $start_date;
+
+      foreach ( $this->get_timing() as $timing_group )
+      {
+
+
+
+
+
+
+
+
+
+
+        // todo if not in timing group days - skip
+
+        foreach ( $timing_group['slots'] as $slot_data )
+        {
+          $slots[] = new Slot( $slot_data );
+        }
+      }
+
+    } while ( $cur_iteration_date->format( 'Ymd' ) < $end_date->format( 'Ymd' ) );
+
+    return $slots;
   }
 }

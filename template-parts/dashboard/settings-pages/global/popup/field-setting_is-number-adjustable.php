@@ -1,13 +1,13 @@
 <jab-field
   class="jab-filter-instance__popup-stettings__fields__field__is-number-adjustable"
-  label="Can user adjust the number of items to book?"
+  label="Can user adjust quantity?"
 >
   <template #default="{ inputId }">
     <input
       :id="inputId"
-      v-model="field.is_number_adjustable"
+      v-model="field.is_qty_adjustable"
       type="checkbox"
-      :name="`jab[filters][${filterInstanceIndex}][popup][fields][${fieldIndex}][is_number_adjustable]`"
+      :name="`jab[filters][${filterInstanceIndex}][popup][fields][${fieldIndex}][is_qty_adjustable]`"
     >
   </template>
 </jab-field>

@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class PtField extends Field
 {
-  public function is_number_adjustable() : bool
+  public function is_qty_adjustable() : bool
   {
-    return $this->get_raw_data()['is_number_adjustable'];
+    return $this->get_raw_data()['is_qty_adjustable'];
   }
 
   public function get_default_number() : int
